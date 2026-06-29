@@ -663,12 +663,19 @@ footer {
   z-index: 1;
 }
 
-/* ── Top bar ─────────────────────────────────────────────────────────── */
+/* ── Top bar (sticky so "Home" is always reachable while scrolling) ──── */
 .ps-topbar {
   align-items: center;
   display: flex;
   justify-content: space-between;
-  padding: 1.25rem clamp(1.25rem, 5vw, 4rem);
+  padding: 1rem clamp(1.25rem, 5vw, 4rem);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(11, 34, 44, 0.72);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(243, 244, 234, 0.12);
 }
 
 .ps-back {

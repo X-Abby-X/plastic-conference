@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Manrope:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Manrope:wght@400;500;600;700;800&family=Patrick+Hand&display=swap');
 
 :root {
   color: #172019;
@@ -34,7 +34,7 @@ a {
 .site-shell {
   min-height: 100vh;
   /* `clip` clips the decorative hero orbs like `hidden` did, but unlike `hidden`
-     it does NOT create a scroll container — so the sticky nav can stick to the viewport. */
+     it does NOT create a scroll container, so the sticky nav can stick to the viewport. */
   overflow: clip;
 }
 
@@ -400,7 +400,7 @@ h1 span {
   width: 100%;
 }
 
-/* Trash Team logo ships with a baked-in dark background — match it so it blends. */
+/* Trash Team logo ships with a baked-in dark background; match it so it blends. */
 .partner-card-blue .partner-media {
   background: var(--ink);
 }
@@ -618,5 +618,442 @@ footer {
   *::before,
   *::after {
     transition-duration: 0.01ms !important;
+  }
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+   The Problem page (#/problem): recreates the Instagram carousel aesthetic.
+   Everything is scoped under .ps-page so it can't leak into the landing page.
+   ════════════════════════════════════════════════════════════════════════ */
+
+.ps-page {
+  --ps-pop: #eaf275; /* pale acid-yellow accent from the slides */
+  --ps-red: #7d2128; /* dark-red stat blocks + photo frames */
+  --ps-red-border: #9a2f33;
+  --ps-khaki: rgba(150, 145, 92, 0.6); /* translucent highlight box */
+  --ps-ink: #0c2530;
+
+  color: #f3f4ea;
+  font-family: 'DM Sans', sans-serif;
+  line-height: 1.5;
+  min-height: 100vh;
+  position: relative;
+  /* Layered teal→navy gradient with warm gold corner glows. */
+  background:
+    radial-gradient(circle at 12% 10%, rgba(38, 122, 110, 0.55), transparent 42%),
+    radial-gradient(circle at 88% 6%, rgba(160, 146, 64, 0.28), transparent 40%),
+    radial-gradient(circle at 8% 94%, rgba(168, 142, 52, 0.42), transparent 44%),
+    radial-gradient(circle at 92% 96%, rgba(36, 120, 112, 0.4), transparent 44%),
+    linear-gradient(165deg, #0f3038, #0b2230 58%, #102b30);
+}
+
+/* Fine speckled grain overlaying the gradient. */
+.ps-page::before {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.16) 0.5px, transparent 0.6px);
+  background-size: 4px 4px;
+  content: '';
+  inset: 0;
+  opacity: 0.4;
+  pointer-events: none;
+  position: absolute;
+}
+
+.ps-page > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Top bar ─────────────────────────────────────────────────────────── */
+.ps-topbar {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  padding: 1.25rem clamp(1.25rem, 5vw, 4rem);
+}
+
+.ps-back {
+  align-items: center;
+  border: 1px solid rgba(243, 244, 234, 0.4);
+  border-radius: 999px;
+  display: inline-flex;
+  font-weight: 600;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  transition: background-color 180ms ease;
+}
+
+.ps-back:hover {
+  background: rgba(243, 244, 234, 0.12);
+}
+
+.ps-topbar-tag {
+  color: rgba(243, 244, 234, 0.7);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 560px) {
+  .ps-topbar-tag {
+    display: none;
+  }
+}
+
+/* ── Layout ──────────────────────────────────────────────────────────── */
+.ps-main {
+  margin: 0 auto;
+  max-width: 50rem;
+  padding: clamp(2rem, 6vw, 5rem) clamp(1.25rem, 5vw, 3rem) 6rem;
+}
+
+.ps-hero {
+  padding: clamp(2rem, 6vw, 4rem) 0 clamp(1rem, 4vw, 2rem);
+}
+
+.ps-kicker {
+  color: rgba(243, 244, 234, 0.7);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  margin: 0 0 1rem;
+  text-transform: uppercase;
+}
+
+.ps-display {
+  font-family: 'Manrope', sans-serif;
+  font-size: clamp(2.8rem, 9vw, 5.5rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 0.95;
+  margin: 0;
+}
+
+.ps-lead {
+  font-size: clamp(1.05rem, 2vw, 1.35rem);
+  margin: 1.75rem 0 0;
+  max-width: 40rem;
+}
+
+/* ── Accent + highlight helpers (the core of the slide style) ────────── */
+.ps-pop {
+  color: var(--ps-pop);
+}
+
+.ps-strong {
+  font-weight: 800;
+}
+
+/* Hand-drawn underline used on the divider / accent headings. */
+.ps-underline {
+  background-image: linear-gradient(var(--ps-pop), var(--ps-pop));
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  background-size: 100% 0.16em;
+  padding-bottom: 0.12em;
+}
+
+/* Translucent khaki highlight box behind white bold text. */
+.ps-mark {
+  background: var(--ps-khaki);
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  color: #fff;
+  font-weight: 700;
+  padding: 0.05em 0.28em;
+}
+
+/* Playful handwritten marker words. */
+.ps-hand {
+  color: var(--ps-pop);
+  display: inline-block;
+  font-family: 'Patrick Hand', cursive;
+  font-size: 1.35em;
+  line-height: 1;
+  transform: rotate(-3deg);
+}
+
+/* ── Section dividers ("The Problem…", "Call to Action!") ────────────── */
+.ps-divider {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: clamp(3rem, 9vw, 6rem) 0;
+  text-align: center;
+}
+
+.ps-divider-title {
+  font-family: 'Manrope', sans-serif;
+  font-size: clamp(2.5rem, 8vw, 4.5rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  margin: 0;
+}
+
+.ps-divider svg {
+  fill: #fff;
+  height: 3rem;
+  width: 3rem;
+}
+
+/* ── Narrative content blocks ────────────────────────────────────────── */
+.ps-block {
+  padding: clamp(2rem, 6vw, 3.5rem) 0;
+}
+
+.ps-block + .ps-block,
+.ps-block-media + .ps-block-media {
+  border-top: 1px solid rgba(243, 244, 234, 0.12);
+}
+
+.ps-body {
+  font-family: 'Manrope', sans-serif;
+  font-size: clamp(1.2rem, 2.4vw, 1.6rem);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  margin: 0 0 1rem;
+}
+
+.ps-body:last-child {
+  margin-bottom: 0;
+}
+
+.ps-body-lg {
+  font-size: clamp(1.4rem, 3.2vw, 2.1rem);
+  line-height: 1.3;
+}
+
+.ps-body strong {
+  font-weight: 800;
+}
+
+/* Big text block wrapped in a red frame (slide 7's "contaminants and chemicals"). */
+.ps-framed-text {
+  border: 0.32rem solid var(--ps-red-border);
+  border-radius: 0.4rem;
+  margin: 1.5rem 0;
+  padding: 1.25rem 1.5rem;
+}
+
+/* ── Statistics ──────────────────────────────────────────────────────── */
+.ps-stat-line {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 1.25rem;
+  margin: 1.25rem 0;
+}
+
+.ps-stat {
+  font-family: 'Manrope', sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+.ps-stat-red {
+  background: var(--ps-red);
+  color: #fff;
+  font-size: clamp(3rem, 10vw, 5rem);
+  padding: 0.1em 0.18em;
+}
+
+.ps-stat-xl {
+  font-size: clamp(3.5rem, 13vw, 6.5rem);
+}
+
+.ps-stat-note {
+  font-family: 'Manrope', sans-serif;
+  font-size: clamp(1.1rem, 2.2vw, 1.5rem);
+  font-weight: 500;
+  max-width: 18rem;
+}
+
+.ps-stat-note strong {
+  font-weight: 800;
+}
+
+/* Small inline red chip used inside the style-note prose. */
+.ps-stat-inline {
+  background: var(--ps-red);
+  border-radius: 0.2rem;
+  color: #fff;
+  font-weight: 700;
+  padding: 0.05em 0.35em;
+}
+
+/* ── Photo frames ────────────────────────────────────────────────────── */
+.ps-frame {
+  border: 0.4rem solid var(--ps-red);
+  border-radius: 0.3rem;
+  margin: 0 0 1.75rem;
+  overflow: hidden;
+}
+
+.ps-frame img {
+  display: block;
+  height: auto;
+  width: 100%;
+}
+
+.ps-frame-sm {
+  margin: 1.75rem auto 0;
+  max-width: 30rem;
+}
+
+.ps-block-media .ps-frame {
+  margin-bottom: 1.75rem;
+}
+
+/* ── CTA ─────────────────────────────────────────────────────────────── */
+.ps-cta {
+  border-top: 1px solid rgba(243, 244, 234, 0.12);
+  margin-top: 1rem;
+  padding: clamp(3rem, 8vw, 5rem) 0 clamp(2rem, 6vw, 3rem);
+  text-align: center;
+}
+
+.ps-cta h2 {
+  font-family: 'Manrope', sans-serif;
+  font-size: clamp(2.2rem, 6vw, 3.5rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  margin: 0 0 1rem;
+}
+
+.ps-cta-actions {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.ps-button {
+  align-items: center;
+  border-radius: 999px;
+  display: inline-flex;
+  font-weight: 700;
+  gap: 0.85rem;
+  padding: 0.95rem 1.5rem;
+  transition: transform 180ms ease;
+}
+
+.ps-button:hover {
+  transform: translateY(-2px);
+}
+
+.ps-button svg {
+  fill: none;
+  height: 1.05rem;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.8;
+  width: 1.05rem;
+}
+
+.ps-button-pop {
+  background: var(--ps-pop);
+  color: var(--ps-ink);
+}
+
+.ps-button-ghost {
+  border: 1px solid rgba(243, 244, 234, 0.5);
+  color: #f3f4ea;
+}
+
+.ps-button-ghost:hover {
+  background: rgba(243, 244, 234, 0.12);
+}
+
+/* ── Original-slides gallery + style note ────────────────────────────── */
+.ps-gallery-wrap {
+  border-top: 1px solid rgba(243, 244, 234, 0.12);
+  margin-top: 2rem;
+  padding-top: clamp(3rem, 7vw, 4.5rem);
+}
+
+.ps-section-title {
+  font-family: 'Manrope', sans-serif;
+  font-size: clamp(1.8rem, 5vw, 2.8rem);
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  margin: 0 0 0.5rem;
+}
+
+.ps-gallery-intro {
+  color: rgba(243, 244, 234, 0.75);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1rem;
+  margin: 0 0 2rem;
+}
+
+.ps-gallery {
+  display: grid;
+  gap: 2rem 1.5rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.ps-gallery-item {
+  margin: 0;
+}
+
+.ps-frame-slide {
+  margin: 0 0 0.85rem;
+}
+
+.ps-gallery-caption {
+  color: rgba(243, 244, 234, 0.85);
+  font-size: 0.92rem;
+  line-height: 1.45;
+  margin: 0;
+}
+
+.ps-gallery-num {
+  background: var(--ps-pop);
+  border-radius: 50%;
+  color: var(--ps-ink);
+  display: inline-flex;
+  font-size: 0.75rem;
+  font-weight: 700;
+  height: 1.4rem;
+  align-items: center;
+  justify-content: center;
+  margin-right: 0.5rem;
+  vertical-align: middle;
+  width: 1.4rem;
+}
+
+.ps-style-note {
+  background: rgba(12, 37, 48, 0.55);
+  border: 1px solid rgba(243, 244, 234, 0.14);
+  border-radius: 1.25rem;
+  margin-top: 3rem;
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+}
+
+.ps-style-note h3 {
+  font-family: 'Manrope', sans-serif;
+  font-size: 1.4rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin: 0 0 1rem;
+}
+
+.ps-style-note p {
+  font-size: 1.02rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+@media (max-width: 560px) {
+  .ps-gallery {
+    grid-template-columns: 1fr;
   }
 }

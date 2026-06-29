@@ -1,7 +1,24 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import ProblemStatement from './ProblemStatement'
 import trashTeamLogo from './assets/Logo-final-trash-team_dark_background.webp'
 import schoolOfEnvLogo from './assets/uoft school of the env.DyREpoyV.png'
 import torontoClimateWeekLogo from './assets/toronto-climate-week.png'
+
+// Minimal hash-based "router" (no dependency), and it coexists with the existing
+// in-page anchor links (#about, #program, …) because it only matches the #/problem path.
+function useHashRoute() {
+  const [hash, setHash] = useState(() =>
+    typeof window === 'undefined' ? '' : window.location.hash,
+  )
+
+  useEffect(() => {
+    const onHashChange = () => setHash(window.location.hash)
+    window.addEventListener('hashchange', onHashChange)
+    return () => window.removeEventListener('hashchange', onHashChange)
+  }, [])
+
+  return hash
+}
 
 const sessions = [
   {
@@ -116,6 +133,12 @@ function ShareIcon() {
 
 function App() {
   const [copied, setCopied] = useState(false)
+  const route = useHashRoute()
+
+  // Dedicated problem-statement page lives at #/problem (shareable URL).
+  if (route.startsWith('#/problem')) {
+    return <ProblemStatement />
+  }
 
   const handleShare = async () => {
     // The link to the conference info is simply this page.
@@ -149,6 +172,7 @@ function App() {
         </a>
         <nav aria-label="Main navigation">
           <a href="#about">About</a>
+          <a href="#/problem">The Problem</a>
           <a href="#program">Program</a>
           <a href="#partners">Partners</a>
           <a href="#tickets">Tickets</a>

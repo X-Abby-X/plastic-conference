@@ -5,3 +5,5 @@ dist
 # Keep the large raw slide PNGs out of git; the optimized .jpg versions are committed
 # and are what the site actually imports (see src/ProblemStatement.jsx).
 src/problem-statement/*.png
+!src/problem-statement/great-lakes-map.png
+!src/problem-statement/exposure-pathways.png

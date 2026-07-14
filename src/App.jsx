@@ -184,7 +184,7 @@ function App() {
               <span>plastic.</span>
             </h1>
             <p className="hero-intro">
-              Two days bridging the gap between research, public awareness, and action. 
+              Bridging the gap between research, public awareness, and action. 
             </p>
             <div className="hero-actions">
               <a

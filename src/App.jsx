@@ -223,7 +223,7 @@ function App() {
         <section className="program" id="program">
           <div className="section-heading">
             <div>
-              <p className="section-label">Day one preview</p>
+              <p className="section-label">Preview</p>
               <h2>Ideas in motion</h2>
             </div>
             <a className="text-link" href="#tickets">

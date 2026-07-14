@@ -36,7 +36,7 @@ const sessions = [
     time: '10:00–11:00',
     title: 'Keynote: Plastic Pollution',
     type: 'Keynote',
-    participants: ['Kara Lavender Law'],
+    participants: ['Dr Kara Lavender Law'],
   },
   {
     time: '11:00–11:15',
@@ -47,7 +47,7 @@ const sessions = [
     time: '11:15–11:45',
     title: 'Plastics on the Environment',
     type: 'Speaker',
-    participants: ['Miriam Diamond'],
+    participants: ['Dr Miriam Diamond'],
   },
   {
     time: '11:45–12:15',
@@ -61,21 +61,37 @@ const sessions = [
     type: 'Break',
   },
   {
-    time: '1:00–2:00',
-    title: 'TBC',
+    time: '1:15–1:35',
+    title: 'Scientific solutions',
     type: 'Speaker',
-    participants: ['[TBC]'],
+    participants: ['iGEM Toronto - Petabite'],
   },
   {
-    time: '2:00–3:00',
+    time: '1:35–2:00',
+    title: 'Community solutions',
+    type: 'Speaker',
+    participants: ['UofT Trash Team'],
+  },
+  {
+    time: '2:00–2:45',
     title: 'Poster Presentation',
     type: 'Exhibition',
   },
   {
-    time: '3:00–4:00',
+    time: '2:45–3:00',
+    title: 'Coffee Break',
+    type: 'Break',
+  },
+  {
+    time: '3:00–3:45',
     title: 'The Current Regulatory State of Mitigating Microplastics in the Environment',
     type: 'Panel',
     participants: ['[TBC]'],
+  },
+  {
+    time: '3:45–4:00',
+    title: 'Coffee Break',
+    type: 'Break',
   },
   {
     time: '4:00–5:00',

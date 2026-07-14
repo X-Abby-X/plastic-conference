@@ -395,6 +395,26 @@ h1 span {
   margin: 0;
 }
 
+.session-details {
+  min-width: 0;
+}
+
+.session-participants {
+  color: rgba(8, 53, 129, .72);
+  display: flex;
+  flex-wrap: wrap;
+  font-size: .88rem;
+  font-weight: 600;
+  gap: .35rem 1.5rem;
+  list-style-position: inside;
+  margin: .8rem 0 0;
+  padding: 0;
+}
+
+.session-participants li::marker {
+  color: var(--orange);
+}
+
 .session-time,
 .session-type {
   font-size: 0.85rem;

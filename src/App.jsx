@@ -34,8 +34,9 @@ const sessions = [
   },
   {
     time: '10:00–11:00',
-    title: 'Keynote: Plastic Pollution By Kara Lavender Law',
+    title: 'Keynote: Plastic Pollution',
     type: 'Keynote',
+    participants: ['Kara Lavender Law'],
   },
   {
     time: '11:00–11:15',
@@ -46,11 +47,13 @@ const sessions = [
     time: '11:15–11:45',
     title: 'Plastics on the Environment',
     type: 'Speaker',
+    participants: ['Miriam Diamond'],
   },
   {
     time: '11:45–12:15',
-    title: 'Plastics on Health by Matthew Campen',
+    title: 'Plastics on Health',
     type: 'Speaker',
+    participants: ['[TBC]'],
   },
   {
     time: '12:15–1:00',
@@ -61,6 +64,7 @@ const sessions = [
     time: '1:00–2:00',
     title: 'TBC',
     type: 'Speaker',
+    participants: ['[TBC]'],
   },
   {
     time: '2:00–3:00',
@@ -71,6 +75,7 @@ const sessions = [
     time: '3:00–4:00',
     title: 'The Current Regulatory State of Mitigating Microplastics in the Environment',
     type: 'Panel',
+    participants: ['[TBC]'],
   },
   {
     time: '4:00–5:00',
@@ -226,16 +231,22 @@ function App() {
               <p className="section-label">Preview</p>
               <h2>Ideas in motion</h2>
             </div>
-            <a className="text-link" href="#tickets">
-              View full schedule
-            </a>
           </div>
 
           <div className="session-list">
             {sessions.map((session) => (
               <article className="session" key={session.time}>
                 <span className="session-time">{session.time}</span>
-                <h3>{session.title}</h3>
+                <div className="session-details">
+                  <h3>{session.title}</h3>
+                  {session.participants && (
+                    <ul className="session-participants" aria-label={`${session.title} participants`}>
+                      {session.participants.map((participant) => (
+                        <li key={participant}>{participant}</li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
                 <span className="session-type">{session.type}</span>
               </article>
             ))}

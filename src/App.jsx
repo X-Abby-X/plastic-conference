@@ -70,7 +70,7 @@ const sessions = [
     time: '1:35–2:00',
     title: 'Community solutions',
     type: 'Speaker',
-    participants: ['UofT Trash Team'],
+    participants: ['U of T Trash Team'],
   },
   {
     time: '2:00–2:45',

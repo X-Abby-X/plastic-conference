@@ -36,7 +36,7 @@ const sessions = [
     time: '10:00–11:00',
     title: 'Keynote: Plastic Pollution',
     type: 'Keynote',
-    participants: ['Dr Kara Lavender Law'],
+    participants: ['Dr. Kara Lavender Law'],
   },
   {
     time: '11:00–11:15',
@@ -47,7 +47,7 @@ const sessions = [
     time: '11:15–11:45',
     title: 'Plastics on the Environment',
     type: 'Speaker',
-    participants: ['Dr Miriam Diamond'],
+    participants: ['Dr. Miriam Diamond'],
   },
   {
     time: '11:45–12:15',

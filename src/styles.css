@@ -1748,6 +1748,9 @@ footer {
 .story-hero::after { background: linear-gradient(90deg, transparent, rgba(121,211,242,.09)); bottom: 0; content: ''; height: 1px; left: 5%; right: 5%; }
 .story-hero-copy { align-self: center; position: relative; z-index: 1; }
 .story-kicker { color: var(--story-yellow); font-size: .72rem; font-weight: 800; letter-spacing: .14em; margin: 0 0 1.4rem; text-transform: uppercase; }
+/* On light-background sections the yellow kicker is hard to read; use the brand blue instead. */
+.story-pathway-copy .story-kicker,
+.story-gap-copy .story-kicker { color: var(--story-blue); }
 .story-hero h1 { font: 600 clamp(3.4rem, 6.8vw, 7.4rem)/.93 'Manrope', sans-serif; letter-spacing: -.075em; margin: 0; max-width: 59rem; }
 .story-hero h1 em, .story-cta h2 em { color: var(--story-sky); font-family: Georgia, serif; font-weight: 400; }
 .story-hero-lead { color: rgba(255,255,255,.72); font-size: clamp(1.05rem, 1.5vw, 1.3rem); line-height: 1.65; margin: 2rem 0 0; max-width: 42rem; }

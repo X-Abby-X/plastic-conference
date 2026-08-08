@@ -120,7 +120,7 @@ export default function ProblemStatement() {
         </aside>
 
         <section className="story-section story-freshwater" id="freshwater">
-          <SectionHeading number="01" label="Freshwater at stake" title="The Great Lakes are vast—not invulnerable." intro="They are a globally significant freshwater system and among the most microplastic-contaminated freshwater bodies on Earth." />
+          <SectionHeading number="01" label="Freshwater at stake" title="The Great Lakes are vast—not invulnerable." intro="They are a globally significant freshwater system. Yet now every single of them is contaminated with microplastics." />
 
           <div className="story-stat-layout">
             <article className="story-stat story-stat-primary story-reveal">
@@ -139,11 +139,6 @@ export default function ProblemStatement() {
           <div className="story-aquatic-gallery story-reveal">
             <figure><img src={whalePlastic} alt="Whale swimming among plastic pollution" /></figure>
             <figure><img src={turtlePlastic} alt="Sea turtle encountering plastic pollution" /></figure>
-          </div>
-
-          <div className="story-risk story-reveal">
-            <p className="story-risk-number">90<span>%</span></p>
-            <div><p className="story-kicker">A signal we cannot ignore</p><h3>At least 90% of water samples surpass one or more thresholds for risk to aquatic life.</h3></div>
           </div>
         </section>
 

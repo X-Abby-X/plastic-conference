@@ -81,7 +81,7 @@ const sessions = [
     time: '3:00–3:45',
     title: 'The Current Regulatory State of Mitigating Microplastics in the Environment',
     type: 'Panel',
-    participants: ['[TBC]'],
+    participants: ['Chelsea M. Rochman', 'Karen Wirsig'],
   },
   {
     time: '4:00–5:00',
@@ -116,6 +116,19 @@ const partners = [
     url: 'https://www.tocw.ca/',
   },
 ]
+
+// Anchor-friendly slug so a session participant can deep-link to its partner card.
+const slugify = (value) =>
+  value
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/(^-|-$)/g, '')
+
+// Map partner names to their in-page card anchors, so participants that ARE
+// partners (e.g. "U of T Trash Team") render as links to their card.
+const partnerAnchors = new Map(
+  partners.map((partner) => [partner.name, `#partner-${slugify(partner.name)}`]),
+)
 
 function ArrowIcon() {
   return (
@@ -247,9 +260,18 @@ function App() {
                   <h3>{session.title}</h3>
                   {session.participants && (
                     <ul className="session-participants" aria-label={`${session.title} participants`}>
-                      {session.participants.map((participant) => (
-                        <li key={participant}>{participant}</li>
-                      ))}
+                      {session.participants.map((participant) => {
+                        const partnerHref = partnerAnchors.get(participant)
+                        return (
+                          <li key={participant}>
+                            {partnerHref ? (
+                              <a href={partnerHref}>{participant}</a>
+                            ) : (
+                              participant
+                            )}
+                          </li>
+                        )
+                      })}
                     </ul>
                   )}
                 </div>
@@ -276,6 +298,7 @@ function App() {
               <a
                 className={`partner-card partner-card-${partner.accent}`}
                 key={partner.name}
+                id={`partner-${slugify(partner.name)}`}
                 href={partner.url}
                 target="_blank"
                 rel="noopener noreferrer"

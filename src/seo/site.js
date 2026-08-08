@@ -68,6 +68,8 @@ const eventSchema = {
   performer: [
     { '@type': 'Person', name: 'Dr. Kara Lavender Law' },
     { '@type': 'Person', name: 'Dr. Miriam Diamond' },
+    { '@type': 'Person', name: 'Chelsea M. Rochman' },
+    { '@type': 'Person', name: 'Karen Wirsig' },
   ],
   offers: {
     '@type': 'Offer',

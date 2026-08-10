@@ -211,7 +211,7 @@ function App() {
       <main id="top">
         <section className="hero">
           <div className="hero-copy">
-            <p className="eyebrow">Toronto · September 19, 2026</p>
+            <p className="eyebrow">Toronto · September 19, 2026 · Free to attend</p>
             <h1>
               Rethink
               <span>plastic.</span>
@@ -343,7 +343,7 @@ function App() {
         <section className="ticket-block" id="tickets">
           <p className="section-label">Join the conversation</p>
           <h2>Build what comes next.</h2>
-          <p>Let us know your interest in the event</p>
+          <p>Free to attend, let us know your interest in the event!</p>
           <a
             className="button button-light"
             href="https://forms.gle/rAeggWcDE7nuEp6QA"

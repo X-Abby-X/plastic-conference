@@ -20,7 +20,7 @@ export const SITE_NAME = 'UofT Microplastics Conference'
 export const TITLE = 'UofT Microplastics Conference'
 
 export const DESCRIPTION =
-  'A one-day University of Toronto conference bridging research, public awareness, ' +
+  'A free one-day University of Toronto conference bridging research, public awareness, ' +
   'and action on microplastics and plastic pollution. Toronto, September 19, 2026.'
 
 export const OG_IMAGE = `${SITE_URL}/og-image.jpg`

@@ -64,7 +64,7 @@ const sessions = [
     time: '1:45–2:30',
     title: 'Scientific solutions',
     type: 'Speaker',
-    participants: ['iGEM Toronto - Petabite'],
+    participants: ['iGEM Toronto [Petabite]'],
   },
   {
     time: '2:30–3:15',

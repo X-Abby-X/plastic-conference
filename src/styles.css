@@ -415,6 +415,33 @@ h1 span {
   color: var(--orange);
 }
 
+/* Participants that are also partners link down to their card, flagged by the icon. */
+.participant-link {
+  align-items: center;
+  color: inherit;
+  display: inline-flex;
+  gap: 0.35rem;
+  text-decoration-color: rgba(8, 53, 129, 0.35);
+  text-underline-offset: 0.2em;
+  transition: color 180ms ease;
+}
+
+.participant-link svg {
+  fill: none;
+  flex-shrink: 0;
+  height: 0.85rem;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2;
+  width: 0.85rem;
+}
+
+.participant-link:hover,
+.participant-link:focus-visible {
+  color: var(--orange);
+}
+
 .session-time,
 .session-type {
   font-size: 0.85rem;

@@ -8,7 +8,7 @@ import exposurePathways from './problem-statement/exposure-pathways.png'
 import glwqaArchive from './problem-statement/glwqa-archive.png'
 import conferenceLogo from './problem-statement/conf_logo_text.png'
 
-const REGISTRATION_URL = 'https://forms.gle/XJAg5c3tc1gP4Xzp9'
+const REGISTRATION_URL = 'https://forms.gle/rAeggWcDE7nuEp6QA'
 
 const pathways = [
   {

@@ -213,7 +213,7 @@ function App() {
             <div className="hero-actions">
               <a
                 className="button button-dark"
-                href="https://forms.gle/XJAg5c3tc1gP4Xzp9"
+                href="https://forms.gle/rAeggWcDE7nuEp6QA"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -330,7 +330,7 @@ function App() {
           <p>Let us know your interest in the event</p>
           <a
             className="button button-light"
-            href="https://forms.gle/XJAg5c3tc1gP4Xzp9"
+            href="https://forms.gle/rAeggWcDE7nuEp6QA"
             target="_blank"
             rel="noopener noreferrer"
           >

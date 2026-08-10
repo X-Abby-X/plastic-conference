@@ -25,7 +25,7 @@ export default function ConferenceNav({ current = 'home' }) {
 
       <a
         className="conference-nav-cta"
-        href="https://forms.gle/XJAg5c3tc1gP4Xzp9"
+        href="https://forms.gle/rAeggWcDE7nuEp6QA"
         target="_blank"
         rel="noopener noreferrer"
       >

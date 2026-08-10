@@ -17,7 +17,7 @@ export const CANONICAL_URL = `${SITE_URL}/`
 
 export const SITE_NAME = 'UofT Microplastics Conference'
 
-export const TITLE = 'UofT Microplastics Conference September 19th 2026'
+export const TITLE = 'UofT Microplastics Conference'
 
 export const DESCRIPTION =
   'A one-day University of Toronto conference bridging research, public awareness, ' +

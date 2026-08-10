@@ -94,7 +94,7 @@ const partners = [
   {
     name: 'U of T Trash Team',
     description:
-      'The U of T Trash Team is a science-based community outreach group of students, researchers and volunteers working to increase waste literacy and reduce plastic pollution in our ecosystems.',
+      'The U of T Trash Team is a science-based community outreach organization made up of students, postdocs, researchers, local volunteers and staff working to increase waste literacy in our community and reduce plastic pollution in our ecosystems.',
     image: trashTeamLogo,
     accent: 'blue',
     url: 'https://uofttrashteam.ca/',

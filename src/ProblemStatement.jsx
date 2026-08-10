@@ -106,7 +106,7 @@ export default function ProblemStatement() {
               </div>
               <div className="story-water-stat story-water-stat-world">
                 <span>20%</span>
-                <small>of the world’s surface freshwater<br />is held here.</small>
+                <small>of the world’s surface freshwater<br />is held by the Great Lakes.</small>
               </div>
             </div>
             {Array.from({ length: 18 }, (_, index) => <i key={index} style={{ '--i': index }} />)}
@@ -135,50 +135,7 @@ export default function ProblemStatement() {
               <p>of the world’s surface freshwater is held here.</p>
             </article>
           </div>
-
-          {/* <div className="story-aquatic-gallery story-reveal">
-            <figure><img src={whalePlastic} alt="Whale swimming among plastic pollution" /></figure>
-            <figure><img src={turtlePlastic} alt="Sea turtle encountering plastic pollution" /></figure>
-          </div> */}
         </section>
-
-        {/* <section className="story-section story-pathways" id="pathways">
-          <SectionHeading number="02" label="A moving target" title="Plastic pollution travels through more than water." intro="Explore three connected pathways. The route changes, but the particles remain part of the same environmental system." />
-
-          <div className="story-pathway-shell story-reveal">
-            <div className="story-tabs" role="tablist" aria-label="Microplastic pathways">
-              {pathways.map((pathway) => (
-                <button
-                  aria-selected={activePathway.id === pathway.id}
-                  className={activePathway.id === pathway.id ? 'is-active' : ''}
-                  key={pathway.id}
-                  onClick={() => setActivePathway(pathway)}
-                  role="tab"
-                  type="button"
-                >
-                  <span>0{pathways.indexOf(pathway) + 1}</span>{pathway.label}
-                </button>
-              ))}
-            </div>
-            <div className="story-pathway-panel" role="tabpanel" key={activePathway.id}>
-              <div className="story-pathway-copy">
-                <p className="story-kicker">{activePathway.eyebrow}</p>
-                <h3>{activePathway.title}</h3>
-                <p>{activePathway.text}</p>
-              </div>
-              <div className={`story-pathway-visual story-pathway-${activePathway.visual}`} aria-hidden="true">
-                <span className="story-particle story-particle-one" />
-                <span className="story-particle story-particle-two" />
-                <span className="story-particle story-particle-three" />
-                <div className="story-pathway-symbol">
-                  {activePathway.visual === 'water' && <><b>H₂O</b><small>rivers · drains · litter</small></>}
-                  {activePathway.visual === 'air' && <><b>AIR</b><small>fallout · inhalation</small></>}
-                  {activePathway.visual === 'chemistry' && <><b>MP</b><small>colourants · plasticizers<br />flame retardants</small></>}
-                </div>
-              </div>
-            </div>
-          </div>
-        </section> */}
 
         <section className="story-section story-health" id="health">
           <SectionHeading number="02" label="Human exposure" title="The environment does not end at the body." intro="Research has detected microplastics in human samples, sharpening questions about how exposure occurs and what it may mean." />

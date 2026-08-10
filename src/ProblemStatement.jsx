@@ -120,7 +120,7 @@ export default function ProblemStatement() {
         </aside>
 
         <section className="story-section story-freshwater" id="freshwater">
-          <SectionHeading number="01" label="Freshwater at stake" title="The Great Lakes are vast—not invulnerable." intro="They are a globally significant freshwater system. Yet now every single of them is contaminated with microplastics." />
+          <SectionHeading number="01" label="Freshwater at stake" title="The Great Lakes are vast—not invulnerable." intro="They are a globally significant freshwater system. Yet now every single one of them is contaminated with microplastics." />
 
           <div className="story-stat-layout">
             <article className="story-stat story-stat-primary story-reveal">
@@ -136,13 +136,13 @@ export default function ProblemStatement() {
             </article>
           </div>
 
-          <div className="story-aquatic-gallery story-reveal">
+          {/* <div className="story-aquatic-gallery story-reveal">
             <figure><img src={whalePlastic} alt="Whale swimming among plastic pollution" /></figure>
             <figure><img src={turtlePlastic} alt="Sea turtle encountering plastic pollution" /></figure>
-          </div>
+          </div> */}
         </section>
 
-        <section className="story-section story-pathways" id="pathways">
+        {/* <section className="story-section story-pathways" id="pathways">
           <SectionHeading number="02" label="A moving target" title="Plastic pollution travels through more than water." intro="Explore three connected pathways. The route changes, but the particles remain part of the same environmental system." />
 
           <div className="story-pathway-shell story-reveal">
@@ -178,10 +178,10 @@ export default function ProblemStatement() {
               </div>
             </div>
           </div>
-        </section>
+        </section> */}
 
         <section className="story-section story-health" id="health">
-          <SectionHeading number="03" label="Human exposure" title="The environment does not end at the body." intro="Research has detected microplastics in human samples, sharpening questions about how exposure occurs and what it may mean." />
+          <SectionHeading number="02" label="Human exposure" title="The environment does not end at the body." intro="Research has detected microplastics in human samples, sharpening questions about how exposure occurs and what it may mean." />
           <div className="story-health-grid">
             <div className="story-health-copy story-reveal">
               <p>Microplastics have been detected in</p>
@@ -197,7 +197,7 @@ export default function ProblemStatement() {
         </section>
 
         <section className="story-section story-gap" id="gap">
-          <SectionHeading number="04" label="The response gap" title="Mounting evidence. Fragmented monitoring." intro="The science is moving, but policy and coordinated monitoring have not yet caught up." />
+          <SectionHeading number="03" label="The response gap" title="Mounting evidence. Fragmented monitoring." intro="The science is moving, but policy and coordinated monitoring have not yet caught up." />
           <div className="story-gap-grid">
             <figure className="story-agreement story-reveal">
               <img src={glwqaArchive} alt="Archival image of the Great Lakes Water Quality Agreement" />

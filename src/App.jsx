@@ -53,11 +53,11 @@ const sessions = [
     time: '11:30–12:15',
     title: 'Microplastic in Health',
     type: 'Speaker',
-    participants: ['[TBC]'],
+    participants: ['Madeleine Milne'],
   },
   {
     time: '12:15–1:45',
-    title: 'Lunch + Poster Presentation',
+    title: 'Lunch + Student Poster Session and Judging',
     type: 'Break + Exhibition',
   },
   {
@@ -106,15 +106,7 @@ const partners = [
     image: assuLogo,
     accent: 'orange',
     url: 'https://assu.ca/wp/',
-  },
-  {
-    name: 'Toronto Climate Week',
-    description:
-      'Born from a bold grassroots vision, Toronto Climate Week is a Canadian platform uniting climate action with culture, innovation, and community positioning Toronto and Canada as a globally recognized climate hub.',
-    image: torontoClimateWeekLogo,
-    accent: 'acid',
-    url: 'https://www.tocw.ca/',
-  },
+  }
 ]
 
 // Anchor-friendly slug so a session participant can deep-link to its partner card.
@@ -226,7 +218,7 @@ function App() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Interested in Registering? <ArrowIcon />
+                Register <ArrowIcon />
               </a>
               <a className="text-link" href="#program">
                 Explore the program
@@ -350,7 +342,7 @@ function App() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            Interested in Registering? <ArrowIcon />
+            Register <ArrowIcon />
           </a>
           <button
             type="button"

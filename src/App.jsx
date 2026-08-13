@@ -93,6 +93,7 @@ const sessions = [
 const partners = [
   {
     name: 'U of T Trash Team',
+    relationship: 'In Close Collaboration With',
     description:
       'The U of T Trash Team is a science-based community outreach organization made up of students, postdocs, researchers, local volunteers and staff working to increase waste literacy in our community and reduce plastic pollution in our ecosystems.',
     image: trashTeamLogo,
@@ -101,6 +102,7 @@ const partners = [
   },
   {
     name: 'Arts & Science Students’ Union',
+    relationship: 'Supported By',
     description:
       'ASSU is the academic student union for over 27,000 full-time undergraduate students in the Faculty of Arts & Science at the University of Toronto, organizing through more than 60 course unions to hold events, change policies, and support students.',
     image: assuLogo,
@@ -320,7 +322,7 @@ function App() {
                   )}
                 </div>
                 <div className="partner-content">
-                  <p className="partner-kicker">Partner {index + 1}</p>
+                  <p className="partner-kicker">{partner.relationship}</p>
                   <h3>{partner.name}</h3>
                   <p>{partner.description}</p>
                   <span className="partner-link-label">

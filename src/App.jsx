@@ -124,6 +124,87 @@ const partnerAnchors = new Map(
   partners.map((partner) => [partner.name, `#partner-${slugify(partner.name)}`]),
 )
 
+const bottleHoles = [
+  { x: 156, y: 292, radius: 26 },
+  { x: 352, y: 245, radius: 20 },
+  { x: 325, y: 382, radius: 32 },
+  { x: 190, y: 435, radius: 24 },
+  { x: 388, y: 455, radius: 18 },
+  { x: 250, y: 230, radius: 15 },
+]
+
+const bottleFragments = [
+  { x: 146, y: 285, size: 24, dx: -108, dy: -38, rotation: -58 },
+  { x: 350, y: 238, size: 18, dx: 104, dy: -74, rotation: 76 },
+  { x: 318, y: 374, size: 30, dx: 138, dy: 18, rotation: 110 },
+  { x: 182, y: 430, size: 22, dx: -128, dy: 58, rotation: -92 },
+  { x: 382, y: 448, size: 16, dx: 94, dy: 96, rotation: 66 },
+  { x: 245, y: 224, size: 15, dx: -30, dy: -132, rotation: 120 },
+  { x: 228, y: 492, size: 18, dx: -20, dy: 116, rotation: -48 },
+  { x: 290, y: 310, size: 12, dx: 72, dy: -52, rotation: 98 },
+  { x: 126, y: 355, size: 13, dx: -82, dy: 24, rotation: -76 },
+]
+
+function DegradingBottle({ progress, className = '' }) {
+  const bottleOpacity = 1 - progress * 0.34
+
+  return (
+    <svg className={`degrading-bottle ${className}`} viewBox="0 0 520 600" role="presentation">
+      <defs>
+        <linearGradient id="bottle-fill" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stopColor="#d9edf3" stopOpacity=".92" />
+          <stop offset=".48" stopColor="#79d3f2" stopOpacity=".58" />
+          <stop offset="1" stopColor="#326b99" stopOpacity=".78" />
+        </linearGradient>
+        <mask id="bottle-decay-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="520" height="600">
+          <rect width="520" height="600" fill="white" />
+          {bottleHoles.map((hole) => (
+            <circle
+              cx={hole.x}
+              cy={hole.y}
+              fill="black"
+              key={`${hole.x}-${hole.y}`}
+              r={Math.max(0, progress * hole.radius)}
+            />
+          ))}
+        </mask>
+        <filter id="bottle-shadow" x="-40%" y="-40%" width="180%" height="180%">
+          <feDropShadow dx="0" dy="18" floodColor="#083581" floodOpacity=".2" stdDeviation="18" />
+        </filter>
+      </defs>
+
+      <ellipse className="bottle-ground-shadow" cx="260" cy="552" rx="145" ry="22" opacity={0.22 * (1 - progress)} />
+
+      <g filter="url(#bottle-shadow)" mask="url(#bottle-decay-mask)" opacity={bottleOpacity} transform="rotate(-10 260 310)">
+        <path
+          className="bottle-body"
+          d="M205 142V116h110v26c0 22 9 31 37 53 40 31 58 76 58 132v143c0 43-27 67-70 67H180c-43 0-70-24-70-67V327c0-56 18-101 58-132 28-22 37-31 37-53Z"
+        />
+        <rect className="bottle-cap" height="43" rx="9" width="132" x="194" y="71" />
+        <path className="bottle-cap-line" d="M202 84h116M202 96h116" />
+        <path className="bottle-highlight" d="M171 229c-20 26-29 61-29 105v122c0 24 10 37 31 43" />
+        <path className="bottle-wave" d="M119 382c50-31 88 20 140-5 58-28 92 14 143-13v111c0 36-22 54-61 54H179c-39 0-61-18-61-54Z" />
+      </g>
+
+      <g className="bottle-fragments">
+        {bottleFragments.map((fragment, index) => (
+          <rect
+            fill={index % 3 === 0 ? '#ffda78' : index % 2 === 0 ? '#4d97a9' : '#326b99'}
+            height={fragment.size * .72}
+            key={`${fragment.x}-${fragment.y}`}
+            opacity={Math.min(1, progress * 1.7)}
+            rx="4"
+            transform={`translate(${fragment.dx * progress} ${fragment.dy * progress}) rotate(${fragment.rotation * progress} ${fragment.x} ${fragment.y})`}
+            width={fragment.size}
+            x={fragment.x}
+            y={fragment.y}
+          />
+        ))}
+      </g>
+    </svg>
+  )
+}
+
 function ArrowIcon() {
   return (
     <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -154,7 +235,37 @@ function ShareIcon() {
 
 function App() {
   const [copied, setCopied] = useState(false)
+  const [bottleDecay, setBottleDecay] = useState(0)
   const route = useHashRoute()
+
+  useEffect(() => {
+    if (route.startsWith('#/')) return undefined
+
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (reduceMotion) {
+      setBottleDecay(0)
+      return undefined
+    }
+
+    let frame
+    const updateBottle = () => {
+      window.cancelAnimationFrame(frame)
+      frame = window.requestAnimationFrame(() => {
+        const hero = document.querySelector('.hero')
+        if (!hero) return
+        const distance = Math.max(hero.offsetHeight * .72, 1)
+        setBottleDecay(Math.min(1, Math.max(0, window.scrollY / distance)))
+      })
+    }
+
+    window.addEventListener('scroll', updateBottle, { passive: true })
+    updateBottle()
+
+    return () => {
+      window.cancelAnimationFrame(frame)
+      window.removeEventListener('scroll', updateBottle)
+    }
+  }, [route])
 
   // When leaving the hash-routed Problem page for a homepage anchor, the
   // browser sees the hash before the homepage sections have mounted. Wait for
@@ -233,10 +344,9 @@ function App() {
           </div>
 
           <div className="hero-art" aria-hidden="true">
-            <div className="orb orb-one" />
-            <div className="orb orb-two" />
-            <div className="orb orb-three" />
-            <p>NEW<br />MATERIAL<br />FUTURES</p>
+            <DegradingBottle className="degrading-bottle-one" progress={bottleDecay} />
+            <DegradingBottle className="degrading-bottle-two" progress={Math.max(0, (bottleDecay - .12) / .88)} />
+            <p style={{ opacity: 1 - bottleDecay * .48 }}>NEW<br />MATERIAL<br />FUTURES</p>
           </div>
         </section>
 

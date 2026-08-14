@@ -45,9 +45,9 @@ const sessions = [
   },
   {
     time: '10:45–11:30',
-    title: 'Microplastic in the Environment',
+    title: 'Effect of Microplastics on Environment',
     type: 'Speaker',
-    participants: ['Dr. Miriam Diamond'],
+    participants: ['Dr. Chelsea Rochman'],
   },
   {
     time: '11:30–12:15',
@@ -81,7 +81,7 @@ const sessions = [
     time: '3:00–3:45',
     title: 'The Current Regulatory State of Mitigating Microplastics in the Environment',
     type: 'Panel',
-    participants: ['Chelsea M. Rochman', 'Karen Wirsig'],
+    participants: ['Dr. Miriam Diamond', 'Karen Wirsig', 'Dr. Chelsea Rochman'],
   },
   {
     time: '4:00–5:00',
@@ -205,7 +205,11 @@ function App() {
       <main id="top">
         <section className="hero">
           <div className="hero-copy">
-            <p className="eyebrow">Toronto · September 19, 2026 · Free to attend</p>
+            <p className="eyebrow">September 19, 2026 · Free to attend</p>
+            <address className="hero-location">
+              <strong>University of Toronto · Bahen Centre for Information Technology</strong>
+              <span>40 St George St, Toronto, ON M5S 2E4</span>
+            </address>
             <h1>
               Rethink
               <span>plastic.</span>

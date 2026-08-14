@@ -320,7 +320,7 @@ function PosterSessionDialog({ setOpen }) {
         <div className="poster-submit-panel">
           <div>
             <h3>Ready to submit?</h3>
-            <p>Selected presenters will receive poster-format, logistics, prize, and next-step details.</p>
+            <p>Selected presenters will receive further details on poster format, presentation logistics, prizes, and next steps.</p>
           </div>
           <div className="poster-submit-action">
             <a className="poster-button poster-button-primary" href={POSTER_SUBMISSION_URL} target="_blank" rel="noopener noreferrer">
@@ -329,6 +329,110 @@ function PosterSessionDialog({ setOpen }) {
             <p><strong>Have ready:</strong> a title, author name(s), and 3–5 sentences about your work.</p>
           </div>
         </div>
+      </section>
+    </div>
+  )
+}
+
+function ConferenceWelcomeDialog({ setOpen }) {
+  const dialogRef = useRef(null)
+  const dismissButtonRef = useRef(null)
+
+  useEffect(() => {
+    const previouslyFocused = document.activeElement
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    dismissButtonRef.current?.focus()
+
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape') setOpen(false)
+      if (event.key !== 'Tab') return
+
+      const focusable = dialogRef.current?.querySelectorAll(
+        'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])',
+      )
+      if (!focusable?.length) return
+      const first = focusable[0]
+      const last = focusable[focusable.length - 1]
+
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault()
+        last.focus()
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault()
+        first.focus()
+      }
+    }
+
+    window.addEventListener('keydown', handleKeyDown)
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown)
+      document.body.style.overflow = previousOverflow
+      previouslyFocused?.focus()
+    }
+  }, [setOpen])
+
+  const closeDialog = () => setOpen(false)
+
+  return (
+    <div
+      className="welcome-dialog-backdrop"
+      onMouseDown={(event) => {
+        if (event.target === event.currentTarget) closeDialog()
+      }}
+    >
+      <section
+        className="welcome-dialog"
+        ref={dialogRef}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="welcome-dialog-title"
+        aria-describedby="welcome-dialog-description"
+      >
+        <button
+          className="welcome-dialog-close"
+          type="button"
+          onClick={closeDialog}
+          aria-label="Close welcome message"
+        >
+          ×
+        </button>
+
+        <div className="welcome-dialog-heading">
+          <p>September 19, 2026 · Free to attend</p>
+          <h2 id="welcome-dialog-title"> Get Involved!</h2>
+          <p id="welcome-dialog-description">
+            Registration and student poster submissions are open. Attend, present, or do both.
+          </p>
+          <address className="welcome-dialog-location">
+            <strong>University of Toronto · Bahen Centre for Information Technology</strong>
+            <span>40 St George St, Toronto, ON M5S 2E4</span>
+          </address>
+        </div>
+
+        <div className="welcome-dialog-options">
+          <article>
+            <span>01 · Attend</span>
+            <h3>Register for the conference</h3>
+            <p>Meet researchers, students, community groups, and professionals working across the plastics problem.</p>
+            <a href={REGISTRATION_URL} target="_blank" rel="noopener noreferrer" onClick={closeDialog}>
+              Register <ArrowIcon />
+            </a>
+          </article>
+          <article>
+            <span>02 · Present</span>
+            <h3>Submit a poster abstract</h3>
+            <p>Share plastics-related research at any stage with a multidisciplinary conference audience.</p>
+            <a href={POSTER_SUBMISSION_URL} target="_blank" rel="noopener noreferrer" onClick={closeDialog}>
+              Submit an abstract <ArrowIcon />
+            </a>
+            <small>Prepare a title, author name(s), and 3–5 sentences about your work.</small>
+          </article>
+        </div>
+
+        <button className="welcome-dialog-explore" onClick={closeDialog} ref={dismissButtonRef} type="button">
+          Explore the website first
+        </button>
       </section>
     </div>
   )
@@ -366,7 +470,9 @@ function App() {
   const [copied, setCopied] = useState(false)
   const [bottleDecay, setBottleDecay] = useState(0)
   const [posterInfoOpen, setPosterInfoOpen] = useState(false)
+  const [welcomeOpen, setWelcomeOpen] = useState(true)
   const route = useHashRoute()
+  const initialRouteHandled = useRef(false)
 
   useEffect(() => {
     if (route.startsWith('#/')) return undefined
@@ -403,6 +509,21 @@ function App() {
   useEffect(() => {
     if (!route || route.startsWith('#/')) return
 
+    if (!initialRouteHandled.current) {
+      initialRouteHandled.current = true
+      const navigation = window.performance.getEntriesByType('navigation')[0]
+
+      if (navigation?.type === 'reload') {
+        window.history.replaceState(
+          null,
+          '',
+          `${window.location.pathname}${window.location.search}#top`,
+        )
+        window.scrollTo({ top: 0, behavior: 'auto' })
+        return
+      }
+    }
+
     const frame = window.requestAnimationFrame(() => {
       const target = document.getElementById(route.slice(1))
       target?.scrollIntoView({ behavior: 'smooth', block: 'start' })
@@ -413,7 +534,12 @@ function App() {
 
   // Dedicated problem-statement page lives at #/problem (shareable URL).
   if (route.startsWith('#/problem')) {
-    return <ProblemStatement />
+    return (
+      <>
+        <ProblemStatement />
+        {welcomeOpen && <ConferenceWelcomeDialog setOpen={setWelcomeOpen} />}
+      </>
+    )
   }
 
   const handleShare = async () => {
@@ -627,6 +753,7 @@ function App() {
       </footer>
 
       {posterInfoOpen && <PosterSessionDialog setOpen={setPosterInfoOpen} />}
+      {welcomeOpen && <ConferenceWelcomeDialog setOpen={setWelcomeOpen} />}
     </div>
   )
 }

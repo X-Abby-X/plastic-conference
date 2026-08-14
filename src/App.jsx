@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import ProblemStatement from './ProblemStatement'
 import ConferenceNav from './ConferenceNav'
 import trashTeamLogo from './assets/Logo-final-trash-team_dark_background.webp'
@@ -89,6 +89,18 @@ const sessions = [
     type: 'Closing',
   },
 ]
+
+const posterTopics = [
+  'Environmental and human health impacts of microplastics',
+  'Biodegradation and bioremediation',
+  'Recycling and waste management',
+  'Materials science and sustainable alternatives',
+  'Engineering and technological solutions',
+  'Policy, regulation, and social dimensions of plastics',
+]
+
+const REGISTRATION_URL = 'https://forms.gle/rAeggWcDE7nuEp6QA'
+const POSTER_SUBMISSION_URL = REGISTRATION_URL
 
 const partners = [
   {
@@ -205,6 +217,123 @@ function DegradingBottle({ progress, className = '' }) {
   )
 }
 
+function PosterSessionDialog({ setOpen }) {
+  const closeButtonRef = useRef(null)
+  const dialogRef = useRef(null)
+
+  useEffect(() => {
+    const previouslyFocused = document.activeElement
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    closeButtonRef.current?.focus()
+
+    const closeOnEscape = (event) => {
+      if (event.key === 'Escape') setOpen(false)
+      if (event.key !== 'Tab') return
+
+      const focusable = dialogRef.current?.querySelectorAll(
+        'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])',
+      )
+      if (!focusable?.length) return
+      const first = focusable[0]
+      const last = focusable[focusable.length - 1]
+
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault()
+        last.focus()
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault()
+        first.focus()
+      }
+    }
+
+    window.addEventListener('keydown', closeOnEscape)
+    return () => {
+      window.removeEventListener('keydown', closeOnEscape)
+      document.body.style.overflow = previousOverflow
+      previouslyFocused?.focus()
+    }
+  }, [setOpen])
+
+  return (
+    <div
+      className="poster-dialog-backdrop"
+      onMouseDown={(event) => {
+        if (event.target === event.currentTarget) setOpen(false)
+      }}
+    >
+      <section
+        className="poster-dialog"
+        ref={dialogRef}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="poster-dialog-title"
+        aria-describedby="poster-dialog-intro"
+      >
+        <button
+          className="poster-dialog-close"
+          onClick={() => setOpen(false)}
+          ref={closeButtonRef}
+          type="button"
+          aria-label="Close poster session details"
+        >
+          <span aria-hidden="true">×</span>
+        </button>
+
+        <p className="poster-dialog-kicker">Call for abstracts</p>
+        <h2 id="poster-dialog-title">Research Poster Session</h2>
+        <p className="poster-dialog-intro" id="poster-dialog-intro">
+          Undergraduate and graduate students across disciplines are invited to submit
+          plastics-related research for the opportunity to present at the conference.
+        </p>
+
+        <div className="poster-dialog-facts">
+          <article>
+            <span>Who</span>
+            <p>Undergraduate and graduate students from any discipline.</p>
+          </article>
+          <article>
+            <span>Research stage</span>
+            <p>Ongoing projects, preliminary findings, and completed work are all welcome.</p>
+          </article>
+          <article>
+            <span>Audience</span>
+            <p>Students, researchers, industry professionals, and members of the public.</p>
+          </article>
+        </div>
+
+        <div className="poster-dialog-section">
+          <h3>Topics may include but not limited to</h3>
+          <ul className="poster-topic-list">
+            {posterTopics.map((topic) => <li key={topic}>{topic}</li>)}
+          </ul>
+        </div>
+
+        <div className="poster-dialog-section poster-prizes">
+          <div>
+            <p className="poster-dialog-kicker">Recognition</p>
+            <h3>Attendees will vote for the top three posters.</h3>
+          </div>
+          <p>Additional special community prizes will recognize standout presentations.</p>
+        </div>
+
+        <div className="poster-submit-panel">
+          <div>
+            <h3>Ready to submit?</h3>
+            <p>Selected presenters will receive poster-format, logistics, prize, and next-step details.</p>
+          </div>
+          <div className="poster-submit-action">
+            <a className="poster-button poster-button-primary" href={POSTER_SUBMISSION_URL} target="_blank" rel="noopener noreferrer">
+              Submit an abstract <ArrowIcon />
+            </a>
+            <p><strong>Have ready:</strong> a title, author name(s), and 3–5 sentences about your work.</p>
+          </div>
+        </div>
+      </section>
+    </div>
+  )
+}
+
 function ArrowIcon() {
   return (
     <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -236,6 +365,7 @@ function ShareIcon() {
 function App() {
   const [copied, setCopied] = useState(false)
   const [bottleDecay, setBottleDecay] = useState(0)
+  const [posterInfoOpen, setPosterInfoOpen] = useState(false)
   const route = useHashRoute()
 
   useEffect(() => {
@@ -331,7 +461,7 @@ function App() {
             <div className="hero-actions">
               <a
                 className="button button-dark"
-                href="https://forms.gle/rAeggWcDE7nuEp6QA"
+                href={REGISTRATION_URL}
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -403,6 +533,25 @@ function App() {
               </article>
             ))}
           </div>
+
+          <aside className="poster-callout" id="call-for-abstracts" aria-labelledby="poster-callout-title">
+            <div className="poster-callout-copy">
+              <p className="section-label">Call for abstracts</p>
+              <h3 id="poster-callout-title">Bring your plastics research into the conversation.</h3>
+              <p>Undergraduate and graduate students across disciplines are invited to present during our Research Poster Session.</p>
+            </div>
+            <div className="poster-callout-actions">
+              <button className="poster-button poster-button-secondary" onClick={() => setPosterInfoOpen(true)} type="button">
+                Learn more
+              </button>
+              <div className="poster-submit-action">
+                <a className="poster-button poster-button-primary" href={POSTER_SUBMISSION_URL} target="_blank" rel="noopener noreferrer">
+                  Submit an abstract <ArrowIcon />
+                </a>
+                <p><strong>Have ready:</strong> a title, author name(s), and 3–5 sentences about your work.</p>
+              </div>
+            </div>
+          </aside>
         </section>
 
         <section className="partners" id="partners">
@@ -454,7 +603,7 @@ function App() {
           <p>Free to attend, let us know your interest in the event!</p>
           <a
             className="button button-light"
-            href="https://forms.gle/rAeggWcDE7nuEp6QA"
+            href={REGISTRATION_URL}
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -476,6 +625,8 @@ function App() {
         <span>© 2026 Plastic Conference</span>
         <span>Toronto, Canada</span>
       </footer>
+
+      {posterInfoOpen && <PosterSessionDialog setOpen={setPosterInfoOpen} />}
     </div>
   )
 }

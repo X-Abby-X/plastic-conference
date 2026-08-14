@@ -96,6 +96,7 @@ a {
   color: rgba(255, 255, 255, .7);
   padding: .45rem 0;
   transition: border-color 180ms ease, color 180ms ease;
+  white-space: nowrap;
 }
 
 .conference-nav nav a:hover,
@@ -125,6 +126,11 @@ a {
   stroke-linejoin: round;
   stroke-width: 2;
   width: 1.25rem;
+}
+
+.conference-menu-toggle,
+.conference-mobile-register {
+  display: none;
 }
 
 .site-shell {
@@ -501,6 +507,315 @@ h1 span {
   color: var(--orange);
 }
 
+.poster-callout {
+  align-items: center;
+  background:
+    radial-gradient(circle at 92% 8%, rgba(121, 211, 242, .24), transparent 20rem),
+    var(--ink);
+  border-radius: 2rem;
+  color: white;
+  display: grid;
+  gap: clamp(2.5rem, 6vw, 6rem);
+  grid-template-columns: minmax(0, 1.2fr) minmax(19rem, .8fr);
+  margin-top: clamp(4rem, 8vw, 7rem);
+  overflow: hidden;
+  padding: clamp(2rem, 5vw, 4rem);
+  position: relative;
+  scroll-margin-top: 6rem;
+}
+
+.poster-callout-copy {
+  position: relative;
+  z-index: 1;
+}
+
+.poster-callout .section-label,
+.poster-dialog-kicker {
+  color: var(--acid);
+}
+
+.poster-callout h3 {
+  font: 600 clamp(2rem, 4vw, 4rem)/1.04 'Manrope', sans-serif;
+  letter-spacing: -.055em;
+  margin: 1rem 0 1.25rem;
+  max-width: 43rem;
+}
+
+.poster-callout-copy > p:last-child {
+  color: rgba(255, 255, 255, .7);
+  font-size: 1.05rem;
+  line-height: 1.65;
+  margin: 0;
+  max-width: 39rem;
+}
+
+.poster-callout-actions {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  position: relative;
+  z-index: 1;
+}
+
+.poster-button {
+  align-items: center;
+  border: 0;
+  border-radius: 999px;
+  cursor: pointer;
+  display: inline-flex;
+  font-family: inherit;
+  font-size: .94rem;
+  font-weight: 800;
+  gap: .85rem;
+  justify-content: center;
+  min-height: 3.2rem;
+  padding: .9rem 1.3rem;
+  transition: transform 180ms ease, background-color 180ms ease;
+}
+
+.poster-button:hover {
+  transform: translateY(-2px);
+}
+
+.poster-button:focus-visible,
+.poster-dialog-close:focus-visible {
+  outline: 3px solid var(--acid);
+  outline-offset: 3px;
+}
+
+.poster-button svg {
+  fill: none;
+  height: 1rem;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2;
+  width: 1rem;
+}
+
+@media (max-width: 1100px) {
+  .conference-nav {
+    gap: 1rem;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+
+  .conference-brand-logo {
+    width: 8rem;
+  }
+
+  .conference-nav nav {
+    font-size: .75rem;
+    gap: clamp(.75rem, 1.5vw, 1.1rem);
+  }
+
+  .conference-nav-cta {
+    font-size: .76rem;
+    gap: .45rem;
+    padding: .7rem .9rem;
+    white-space: nowrap;
+  }
+}
+
+.poster-button-primary {
+  background: var(--acid);
+  color: var(--ink);
+}
+
+.poster-button-secondary {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, .48);
+  color: white;
+}
+
+.poster-button-secondary:hover {
+  background: rgba(255, 255, 255, .1);
+}
+
+.poster-submit-action {
+  max-width: 22rem;
+}
+
+.poster-submit-action > p {
+  color: rgba(255, 255, 255, .68);
+  font-size: .78rem;
+  line-height: 1.5;
+  margin: .75rem .5rem 0;
+}
+
+.poster-submit-action > p strong {
+  color: white;
+}
+
+.poster-dialog-backdrop {
+  align-items: center;
+  background: rgba(4, 22, 58, .76);
+  display: flex;
+  inset: 0;
+  justify-content: center;
+  padding: clamp(1rem, 3vw, 2rem);
+  position: fixed;
+  z-index: 200;
+}
+
+.poster-dialog {
+  background: var(--paper);
+  border-radius: 2rem;
+  box-shadow: 0 2rem 7rem rgba(0, 0, 0, .32);
+  color: var(--ink);
+  max-height: calc(100vh - 2rem);
+  max-width: 68rem;
+  overflow-y: auto;
+  padding: clamp(2rem, 5vw, 4.5rem);
+  position: relative;
+  width: 100%;
+}
+
+.poster-dialog-close {
+  align-items: center;
+  background: var(--ink);
+  border: 0;
+  border-radius: 50%;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  font-size: 1.7rem;
+  height: 2.75rem;
+  justify-content: center;
+  position: absolute;
+  right: 1.25rem;
+  top: 1.25rem;
+  width: 2.75rem;
+}
+
+.poster-dialog-close span {
+  line-height: 1;
+  transform: translateY(-1px);
+}
+
+.poster-dialog-kicker {
+  font-size: .72rem;
+  font-weight: 800;
+  letter-spacing: .14em;
+  margin: 0 0 1rem;
+  text-transform: uppercase;
+}
+
+.poster-dialog > h2 {
+  color: var(--ink);
+  font: 600 clamp(2.7rem, 6vw, 5.5rem)/.95 'Manrope', sans-serif;
+  letter-spacing: -.065em;
+  margin: 0;
+  max-width: 52rem;
+}
+
+.poster-dialog-intro {
+  color: rgba(8, 53, 129, .72);
+  font-size: clamp(1.05rem, 1.8vw, 1.3rem);
+  line-height: 1.65;
+  margin: 1.5rem 0 0;
+  max-width: 49rem;
+}
+
+.poster-dialog-facts {
+  display: grid;
+  gap: 1px;
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: 3rem;
+  overflow: hidden;
+}
+
+.poster-dialog-facts article {
+  background: #e7f0f3;
+  padding: 1.5rem;
+}
+
+.poster-dialog-facts article:first-child {
+  border-radius: 1rem 0 0 1rem;
+}
+
+.poster-dialog-facts article:last-child {
+  border-radius: 0 1rem 1rem 0;
+}
+
+.poster-dialog-facts span {
+  color: var(--orange);
+  font-size: .68rem;
+  font-weight: 800;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.poster-dialog-facts p {
+  line-height: 1.55;
+  margin: .75rem 0 0;
+}
+
+.poster-dialog-section {
+  border-top: 1px solid rgba(8, 53, 129, .18);
+  margin-top: 3rem;
+  padding-top: 2.5rem;
+}
+
+.poster-dialog-section h3,
+.poster-submit-panel h3 {
+  font: 600 clamp(1.5rem, 2.7vw, 2.4rem)/1.15 'Manrope', sans-serif;
+  letter-spacing: -.04em;
+  margin: 0;
+}
+
+.poster-topic-list {
+  display: grid;
+  gap: .75rem 2rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  list-style: none;
+  margin: 1.75rem 0 0;
+  padding: 0;
+}
+
+.poster-topic-list li {
+  border-left: 3px solid var(--orange);
+  line-height: 1.45;
+  padding: .3rem 0 .3rem 1rem;
+}
+
+.poster-prizes {
+  align-items: end;
+  display: grid;
+  gap: 3rem;
+  grid-template-columns: 1.3fr .7fr;
+}
+
+.poster-prizes .poster-dialog-kicker {
+  margin-bottom: .75rem;
+}
+
+.poster-prizes > p {
+  color: rgba(8, 53, 129, .68);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.poster-submit-panel {
+  align-items: center;
+  background: var(--ink);
+  border-radius: 1.5rem;
+  color: white;
+  display: grid;
+  gap: 2.5rem;
+  grid-template-columns: 1fr auto;
+  margin-top: 3rem;
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+}
+
+.poster-submit-panel > div:first-child > p {
+  color: rgba(255, 255, 255, .68);
+  line-height: 1.55;
+  margin: .75rem 0 0;
+  max-width: 34rem;
+}
+
 /* Participants that are also partners link down to their card, flagged by the icon. */
 .participant-link {
   align-items: center;
@@ -870,12 +1185,194 @@ footer {
 }
 
 @media (max-width: 800px) {
-  .conference-nav {
-    grid-template-columns: 1fr auto;
+  .poster-callout {
+    grid-template-columns: 1fr;
   }
 
-  .conference-nav nav {
+  .poster-callout-actions {
+    align-items: stretch;
+  }
+
+  .poster-callout-actions .poster-button,
+  .poster-callout-actions .poster-submit-action {
+    max-width: none;
+    width: 100%;
+  }
+
+  .poster-dialog-facts,
+  .poster-topic-list,
+  .poster-prizes,
+  .poster-submit-panel {
+    grid-template-columns: 1fr;
+  }
+
+  .poster-dialog-facts {
+    gap: 1px;
+  }
+
+  .poster-dialog-facts article:first-child {
+    border-radius: 1rem 1rem 0 0;
+  }
+
+  .poster-dialog-facts article:last-child {
+    border-radius: 0 0 1rem 1rem;
+  }
+
+  .poster-submit-panel .poster-submit-action,
+  .poster-submit-panel .poster-button {
+    max-width: none;
+    width: 100%;
+  }
+}
+
+@media (max-width: 800px) {
+  .conference-nav {
+    grid-template-columns: 1fr auto;
+    padding: .75rem 1rem;
+  }
+
+  .conference-nav > .conference-nav-cta {
     display: none;
+  }
+
+  .conference-menu-toggle {
+    align-items: center;
+    background: var(--acid);
+    border: 0;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    height: 2.8rem;
+    justify-content: center;
+    padding: 0;
+    position: relative;
+    width: 2.8rem;
+    z-index: 2;
+  }
+
+  .conference-menu-toggle:focus-visible {
+    outline: 3px solid white;
+    outline-offset: 3px;
+  }
+
+  .conference-menu-toggle span {
+    background: var(--ink);
+    border-radius: 999px;
+    display: block;
+    height: 2px;
+    transform-origin: center;
+    transition: opacity 180ms ease, transform 220ms ease;
+    width: 1.15rem;
+  }
+
+  .conference-nav-menu-open .conference-menu-toggle span:first-child {
+    transform: translateY(6px) rotate(45deg);
+  }
+
+  .conference-nav-menu-open .conference-menu-toggle span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .conference-nav-menu-open .conference-menu-toggle span:last-child {
+    transform: translateY(-6px) rotate(-45deg);
+  }
+
+  .conference-nav .conference-nav-menu {
+    background:
+      radial-gradient(circle at 95% 5%, rgba(121, 211, 242, .2), transparent 14rem),
+      var(--ink);
+    border-top: 1px solid rgba(255, 255, 255, .12);
+    box-shadow: 0 1.5rem 3rem rgba(4, 22, 58, .28);
+    display: none;
+    gap: 0;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    left: 0;
+    max-height: calc(100vh - 4.5rem);
+    overflow-y: auto;
+    padding: 1rem;
+    position: absolute;
+    right: 0;
+    top: 100%;
+  }
+
+  .conference-nav .conference-nav-menu.is-open {
+    animation: conference-menu-in 220ms ease both;
+    display: grid;
+  }
+
+  .conference-nav .conference-nav-menu > a {
+    align-items: center;
+    border: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, .12);
+    color: white;
+    display: flex;
+    font: 600 clamp(1.05rem, 4vw, 1.35rem) 'Manrope', sans-serif;
+    justify-content: space-between;
+    min-height: 4.25rem;
+    padding: 1rem;
+  }
+
+  .conference-nav .conference-nav-menu > a:nth-child(odd) {
+    border-right: 1px solid rgba(255, 255, 255, .12);
+  }
+
+  .conference-nav .conference-nav-menu > a::after {
+    color: var(--acid);
+    content: '↗';
+    font-size: .9rem;
+  }
+
+  .conference-nav .conference-nav-menu > a[aria-current='page'] {
+    background: rgba(121, 211, 242, .12);
+    color: var(--acid);
+  }
+
+  .conference-nav .conference-nav-menu .conference-mobile-register {
+    background: var(--acid);
+    border: 0;
+    border-radius: 999px;
+    color: var(--ink);
+    display: flex;
+    grid-column: 1 / -1;
+    justify-content: center;
+    margin-top: 1rem;
+    min-height: 3.4rem;
+  }
+
+  .conference-nav .conference-nav-menu .conference-mobile-register::after {
+    content: none;
+  }
+
+  .conference-mobile-register svg {
+    fill: none;
+    height: 1rem;
+    margin-left: .75rem;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 2;
+    width: 1rem;
+  }
+}
+
+@keyframes conference-menu-in {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 480px) {
+  .conference-nav .conference-nav-menu {
+    grid-template-columns: 1fr;
+  }
+
+  .conference-nav .conference-nav-menu > a:nth-child(odd) {
+    border-right: 0;
+  }
+
+  .conference-nav .conference-nav-menu .conference-mobile-register {
+    grid-column: 1;
   }
 }
 

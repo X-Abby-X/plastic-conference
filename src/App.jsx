@@ -3,7 +3,7 @@ import ProblemStatement from './ProblemStatement'
 import ConferenceNav from './ConferenceNav'
 import trashTeamLogo from './assets/Logo-final-trash-team_dark_background.webp'
 import assuLogo from './assets/NewAssuLogo.JPG'
-import torontoClimateWeekLogo from './assets/toronto-climate-week.png'
+import fraserRiver from './assets/frjr_upscaled.png'
 
 // Minimal hash-based "router" (no dependency), and it coexists with the existing
 // in-page anchor links (#about, #program, …) because it only matches the #/problem path.
@@ -120,6 +120,15 @@ const partners = [
     image: assuLogo,
     accent: 'orange',
     url: 'https://assu.ca/wp/',
+  },
+  {
+    name: 'Fraser River Junk Removal',
+    relationship: 'Supported By',
+    description:
+      'Fraser River Junk Removal is a student‑led, locally owned junk removal and moving company serving the Greater Vancouver area. The company has provided services to more than 250 homes across the region and its operations prioritize recycling, donating, and proper waste management, focusing on reducing landfill use and supporting the local community.',
+    image: fraserRiver,
+    accent: 'blue',
+    url: 'https://frjunk.ca/?utm_source=ig&utm_medium=social&utm_content=link_in_bio',
   }
 ]
 

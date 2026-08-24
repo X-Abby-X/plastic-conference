@@ -35,6 +35,7 @@ export default function ConferenceNav({ current = 'home' }) {
         <a href="#about" onClick={closeMenu}>About</a>
         <a href="#/problem" onClick={closeMenu} aria-current={current === 'problem' ? 'page' : undefined}>The Problem</a>
         <a href="#program" onClick={closeMenu}>Program</a>
+        <a href="#speakers" onClick={closeMenu}>Speakers</a>
         <a href="#call-for-abstracts" onClick={closeMenu}>Call for Abstracts</a>
         <a href="#partners" onClick={closeMenu}>Partners</a>
         <a href="#tickets" onClick={closeMenu}>Tickets</a>

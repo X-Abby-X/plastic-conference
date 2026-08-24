@@ -4,6 +4,10 @@ import ConferenceNav from './ConferenceNav'
 import trashTeamLogo from './assets/Logo-final-trash-team_dark_background.webp'
 import assuLogo from './assets/NewAssuLogo.JPG'
 import fraserRiver from './assets/frjr_upscaled.png'
+import chelseaRochman from './assets/speakers/chelsea-rochman.jpg'
+import miriamDiamond from './assets/speakers/miriam-diamond.jpg'
+import madeleineMilne from './assets/speakers/madeleine-milne.png'
+import karenWirsig from './assets/speakers/karen-wirsig.jpg'
 
 // Minimal hash-based "router" (no dependency), and it coexists with the existing
 // in-page anchor links (#about, #program, …) because it only matches the #/problem path.
@@ -132,18 +136,93 @@ const partners = [
   }
 ]
 
-// Anchor-friendly slug so a session participant can deep-link to its partner card.
+const speakers = [
+  {
+    name: 'Dr. Chelsea Rochman',
+    title: 'Associate Professor, Ecology & Evolutionary Biology, University of Toronto',
+    image: chelseaRochman,
+    description:
+      'Chelsea M. Rochman is an internationally recognized leader in microplastic pollution research, advancing monitoring methods and risk assessment frameworks to understand the sources, fate, and impacts of plastic pollution in aquatic ecosystems. She has published extensively in leading journals, including Science, Nature, and PNAS, and collaborates closely with government and industry partners to translate science into policy, contributing to local, national, and regional legislation as well as international efforts toward a global plastics agreement.',
+    link: { label: 'rochmanlab.com', url: 'https://www.rochmanlab.com/' },
+  },
+  {
+    name: 'Dr. Miriam Diamond',
+    title: 'Professor, Earth Sciences and School of the Environment, University of Toronto',
+    image: miriamDiamond,
+    description:
+      'Miriam Diamond researches chemical contaminants from emissions through to human and ecosystem exposure, and is active in promoting sound chemicals management from national to international scales. She has co-chaired Canada’s Chemicals Management Plan Science Committee and Ontario’s Toxic Reduction Scientific Expert Panel, and currently serves on the Scientific and Technical Advisory Panel of the Global Environmental Facility, as a Commissioner of Earth Commission 2.0, and as Vice-Chair of the International Panel on Chemical Pollution. She is a Fellow of the Royal Society of Canada and appears frequently in media stories about harmful chemicals.',
+    link: { label: 'miriamldiamond.com', url: 'https://www.miriamldiamond.com/' },
+  },
+  {
+    name: 'Madeleine Milne',
+    title: 'Manager, Rochman Lab, University of Toronto',
+    image: madeleineMilne,
+    description:
+      'Madeleine Milne began as a research assistant in Dr. Chelsea Rochman’s lab in 2020 and got drawn into plastic pollution research, later joining the U of T Trash Team. Since then she’s earned a master’s at the University of Manitoba, become manager of the Rochman Lab, and continued with the Trash Team through outreach, cleanups, workshops, and volunteer training. Her research has covered microplastics in Lake Ontario fish, grocery-store foods, and a multi-year whole-lake study at the Experimental Lakes Area. She is a recipient of the Arbor Award, U of T’s highest honour for volunteer service.',
+    link: {
+      label: 'Milne et al. 2024 (open PDF)',
+      url: 'https://oceanconservancy.org/wp-content/uploads/2024/01/Milne_Leonard_Mallos_Rochman-et-al_2024_Exposure-of-U.S.-adults-to-microplastics-from-commonly-consumed-proteins_Enviro_Pollution.pdf',
+    },
+  },
+  {
+    name: 'Karen Wirsig',
+    title: 'Senior Program Manager, Plastics, Environmental Defence Canada',
+    image: karenWirsig,
+    focus: 'center',
+    description:
+      'Karen has worked as a journalist and as a labour and community organizer. An active transportation enthusiast who favours walking, cycling, and public transit, Karen has never owned a car. She is a voracious reader and has spent her adult life trying to unlearn the common belief that humans should strive for domination over each other, over other animals, and over nature itself. She’s passionate about helping to get plastics out of the environment.',
+    link: { label: 'environmentaldefence.ca', url: 'https://environmentaldefence.ca/' },
+  },
+  {
+    name: 'Dr. Kara Lavender Law',
+    title: 'Research Professor of Oceanography, Sea Education Association',
+    image: null,
+    description: '',
+    link: { label: 'SEA profile', url: 'https://sea.edu/team/kara-lavender-law/' },
+  },
+]
+
+// Anchor-friendly slug so a session participant can deep-link to its card.
 const slugify = (value) =>
   value
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/(^-|-$)/g, '')
 
-// Map partner names to their in-page card anchors, so participants that ARE
-// partners (e.g. "U of T Trash Team") render as links to their card.
-const partnerAnchors = new Map(
-  partners.map((partner) => [partner.name, `#partner-${slugify(partner.name)}`]),
-)
+// Session participants are named in `sessions` as bare strings. Partners and
+// speakers each have a full record elsewhere on the page, so normalize both
+// into one shape: any participant with a match here renders as a link to its
+// card plus a hover preview. Participants in neither list (e.g. "iGEM Toronto
+// [Petabite]") fall through to plain text.
+const previewsByName = new Map([
+  ...partners.map((partner) => [
+    partner.name,
+    {
+      href: `#partner-${slugify(partner.name)}`,
+      kicker: partner.relationship,
+      name: partner.name,
+      description: partner.description,
+      image: partner.image,
+      // Some partner logos ship with a baked-in coloured background.
+      accent: partner.accent,
+      shape: 'square',
+    },
+  ]),
+  ...speakers
+    .filter((speaker) => speaker.image && speaker.description)
+    .map((speaker) => [
+      speaker.name,
+      {
+        href: `#speaker-${slugify(speaker.name)}`,
+        kicker: speaker.title,
+        name: speaker.name,
+        description: speaker.description,
+        image: speaker.image,
+        focus: speaker.focus,
+        shape: 'portrait',
+      },
+    ]),
+])
 
 const bottleHoles = [
   { x: 156, y: 292, radius: 26 },
@@ -475,6 +554,40 @@ function ShareIcon() {
   )
 }
 
+// Hover/focus preview of a session participant — a partner or a speaker.
+//
+// The image is absolutely positioned into a reserved gutter so its size can't
+// affect the description's width/wrapping. That circularity is what made the
+// image balloon when it was laid out inline: taller image -> narrower text ->
+// taller text -> taller image... Stretching it top/bottom against the
+// description then matches the text block's height exactly, no JS needed.
+//
+// The catch is that the gutter is a fixed width while the image's width is
+// derived from the (text-driven) height, so the two only agree at one text
+// length. `.participant-preview-description` clamps to a fixed line count to
+// pin that height, which keeps every preview on the same geometry regardless
+// of how long the underlying bio is.
+function ParticipantPreview({ participant }) {
+  const { accent, description, focus, image, kicker, name, shape } = participant
+
+  return (
+    <div className={`participant-preview participant-preview-${shape}`} role="tooltip">
+      <p className="participant-preview-kicker">{kicker}</p>
+      <p className="participant-preview-name">{name}</p>
+      <div className="participant-preview-body">
+        <div
+          className={`participant-preview-media participant-preview-media-${shape}${
+            accent ? ` participant-preview-media-${accent}` : ''
+          }`}
+        >
+          <img src={image} alt="" style={focus ? { objectPosition: focus } : undefined} />
+        </div>
+        <p className="participant-preview-description">{description}</p>
+      </div>
+    </div>
+  )
+}
+
 function App() {
   const [copied, setCopied] = useState(false)
   const [bottleDecay, setBottleDecay] = useState(0)
@@ -643,18 +756,24 @@ function App() {
                   {session.participants && (
                     <ul className="session-participants" aria-label={`${session.title} participants`}>
                       {session.participants.map((participant) => {
-                        const partnerHref = partnerAnchors.get(participant)
+                        const preview = previewsByName.get(participant)
                         return (
-                          <li key={participant}>
-                            {partnerHref ? (
-                              <a
-                                className="participant-link"
-                                href={partnerHref}
-                                aria-label={`Jump to the ${participant} partner card`}
-                              >
-                                {participant}
-                                <LinkIcon />
-                              </a>
+                          <li
+                            key={participant}
+                            className={preview ? 'has-participant-preview' : undefined}
+                          >
+                            {preview ? (
+                              <>
+                                <a
+                                  className="participant-link"
+                                  href={preview.href}
+                                  aria-label={`Jump to the ${participant} card`}
+                                >
+                                  {participant}
+                                  <LinkIcon />
+                                </a>
+                                <ParticipantPreview participant={preview} />
+                              </>
                             ) : (
                               participant
                             )}
@@ -687,6 +806,56 @@ function App() {
               </div>
             </div>
           </aside>
+        </section>
+
+        <section className="speakers" id="speakers">
+          <div className="section-heading">
+            <div>
+              <p className="section-label">Who's speaking</p>
+              <h2>Meet our speakers</h2>
+            </div>
+          </div>
+
+          <div className="speaker-list">
+            {speakers.map((speaker) => (
+              <article
+                className={`speaker-row${!speaker.image ? ' speaker-row-empty' : ''}`}
+                id={`speaker-${slugify(speaker.name)}`}
+                key={speaker.name}
+              >
+                <div className="speaker-media">
+                  {speaker.image ? (
+                    <img
+                      src={speaker.image}
+                      alt={speaker.name}
+                      style={speaker.focus ? { objectPosition: speaker.focus } : undefined}
+                    />
+                  ) : (
+                    <span aria-hidden="true">TBA</span>
+                  )}
+                </div>
+                <div className="speaker-content">
+                  <p className="speaker-eyebrow">Speaker</p>
+                  <h3>{speaker.name}</h3>
+                  {speaker.title && <p className="speaker-title">{speaker.title}</p>}
+                  {speaker.description && <p className="speaker-description">{speaker.description}</p>}
+                  {speaker.link && (
+                    <div className="speaker-tags">
+                      <a
+                        className="speaker-tag speaker-link"
+                        href={speaker.link.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <LinkIcon />
+                        {speaker.link.label}
+                      </a>
+                    </div>
+                  )}
+                </div>
+              </article>
+            ))}
+          </div>
         </section>
 
         <section className="partners" id="partners">

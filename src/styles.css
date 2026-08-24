@@ -431,6 +431,14 @@ h1 span {
   padding: clamp(5rem, 10vw, 10rem) clamp(1.25rem, 8vw, 9rem);
 }
 
+/* The program section ends on the dark call-for-abstracts callout, which
+   already reads as a section break. Full padding on both sides of that
+   boundary stacked up to ~256px of dead space before "Meet our speakers",
+   so halve it here and on .speakers' matching top padding. */
+.program {
+  padding-bottom: clamp(2.5rem, 5vw, 5rem);
+}
+
 .statement {
   background: var(--ink);
   color: var(--paper);
@@ -1061,6 +1069,147 @@ h1 span {
   color: var(--orange);
 }
 
+.has-participant-preview {
+  position: relative;
+}
+
+/* Short partner/speaker overview shown on hover/focus of a participant link. */
+.participant-preview {
+  --preview-font-size: 0.88rem;
+  --preview-line-height: 1.55;
+  --preview-lines: 5;
+  --preview-gap: 0.9rem;
+  /* The media is stretched to the description's height, so pinning the text to
+     a whole number of lines pins the media's size too. Everything below is
+     derived from this one value. */
+  --preview-media-height: calc(
+    var(--preview-lines) * var(--preview-font-size) * var(--preview-line-height)
+  );
+
+  background: white;
+  border-radius: 1rem;
+  bottom: calc(100% + 0.65rem);
+  box-shadow: 0 16px 36px rgba(23, 32, 25, 0.2);
+  color: rgba(23, 32, 25, 0.86);
+  left: 0;
+  opacity: 0;
+  padding: 1rem 1.2rem;
+  pointer-events: none;
+  position: absolute;
+  transform: translateY(6px);
+  transition: opacity 160ms ease, transform 160ms ease;
+  width: min(34rem, 85vw);
+  z-index: 20;
+}
+
+.participant-preview::after {
+  border: 7px solid transparent;
+  border-top-color: white;
+  content: '';
+  left: 1.2rem;
+  position: absolute;
+  top: 100%;
+}
+
+.has-participant-preview:hover .participant-preview,
+.has-participant-preview:focus-within .participant-preview {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+/* padding-left reserves a fixed gutter for the media, so the description's
+   width (and therefore its height) never depends on the media's own size. */
+.participant-preview-body {
+  margin-top: 0.75rem;
+  position: relative;
+}
+
+/* Gutter = the media's rendered width, which aspect-ratio derives from the
+   pinned height: 1:1 for logos, 4:5 for portraits. */
+.participant-preview-square .participant-preview-body {
+  padding-left: calc(var(--preview-media-height) + var(--preview-gap));
+}
+
+.participant-preview-portrait .participant-preview-body {
+  padding-left: calc(var(--preview-media-height) * 0.8 + var(--preview-gap));
+}
+
+/* Stretched via top/bottom against the description's pinned height, with the
+   width then derived from that height by aspect-ratio. */
+.participant-preview-media {
+  align-items: center;
+  background: rgba(23, 32, 25, 0.05);
+  border-radius: 0.75rem;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  left: 0;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+}
+
+.participant-preview-media-square {
+  aspect-ratio: 1 / 1;
+  padding: 0.5rem;
+}
+
+.participant-preview-media-portrait {
+  aspect-ratio: 4 / 5;
+}
+
+.participant-preview-media img {
+  height: 100%;
+  width: 100%;
+}
+
+/* Logos are padded artwork that must not crop; portraits should fill. */
+.participant-preview-media-square img {
+  object-fit: contain;
+}
+
+.participant-preview-media-portrait img {
+  object-fit: cover;
+  object-position: top center;
+}
+
+/* Some partner logos ship with a baked-in dark background; match it so it blends. */
+.participant-preview-media-blue {
+  background: var(--ink);
+}
+
+.participant-preview-kicker {
+  color: var(--orange);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.participant-preview-name {
+  font-family: 'Manrope', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin: 0.3rem 0 0;
+}
+
+/* Fixed height (not min-height) so a short bio and a long one produce the
+   same card geometry; overflow is clamped with an ellipsis and the full text
+   lives on the card the link points to. */
+.participant-preview-description {
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: var(--preview-lines);
+  display: -webkit-box;
+  font-size: var(--preview-font-size);
+  height: var(--preview-media-height);
+  line-clamp: var(--preview-lines);
+  line-height: var(--preview-line-height);
+  margin: 0;
+  overflow: hidden;
+}
+
 .session-time,
 .session-type {
   font-size: 0.85rem;
@@ -1075,6 +1224,159 @@ h1 span {
     radial-gradient(circle at 8% 18%, rgba(94, 124, 255, 0.18), transparent 28rem),
     radial-gradient(circle at 88% 75%, rgba(255, 113, 71, 0.18), transparent 26rem),
     #e7f0f3;
+}
+
+.speakers {
+  padding: clamp(2.5rem, 5vw, 5rem) clamp(1.25rem, 8vw, 9rem) clamp(5rem, 10vw, 10rem);
+}
+
+.speaker-list {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(3.5rem, 7vw, 6rem);
+  margin-top: 5rem;
+}
+
+.speaker-row {
+  align-items: flex-start;
+  background: #ffffff;
+  border: 1px solid rgba(23, 32, 25, 0.1);
+  border-radius: 1.75rem;
+  box-shadow: 0 1.5rem 5rem rgba(23, 32, 25, 0.06);
+  display: flex;
+  gap: clamp(2rem, 4vw, 3.5rem);
+  margin: 0 auto;
+  max-width: 80rem;
+  padding: clamp(1.5rem, 3vw, 2.5rem);
+  width: 100%;
+}
+
+.speaker-media {
+  aspect-ratio: 4 / 5;
+  background:
+    linear-gradient(135deg, rgba(23, 32, 25, 0.06), rgba(23, 32, 25, 0.01)),
+    #ffffff;
+  border-radius: 1.25rem;
+  flex: 0 0 clamp(200px, 20vw, 260px);
+  overflow: hidden;
+  position: relative;
+  width: clamp(200px, 20vw, 260px);
+}
+
+.speaker-content {
+  flex: 1 1 0%;
+  min-width: 0;
+}
+
+.speaker-media img {
+  display: block;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  width: 100%;
+}
+
+.speaker-media span {
+  align-items: center;
+  color: rgba(23, 32, 25, 0.22);
+  display: flex;
+  font-family: 'Manrope', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  height: 100%;
+  justify-content: center;
+  letter-spacing: 0.14em;
+  width: 100%;
+}
+
+.speaker-row-empty .speaker-media {
+  background: rgba(23, 32, 25, 0.03);
+  border: 1px dashed rgba(23, 32, 25, 0.18);
+  box-shadow: none;
+}
+
+.speaker-eyebrow {
+  color: var(--orange);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.speaker-content h3 {
+  font-family: 'Manrope', sans-serif;
+  font-size: clamp(1.9rem, 3vw, 2.75rem);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  margin: 0.6rem 0 0;
+}
+
+.speaker-title {
+  color: var(--blue);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  margin: 0.75rem 0 0;
+  text-transform: uppercase;
+}
+
+.speaker-description {
+  color: rgba(23, 32, 25, 0.72);
+  font-size: 1.05rem;
+  line-height: 1.65;
+  margin: 1.25rem 0 0;
+  max-width: 42rem;
+}
+
+.speaker-tags {
+  border-top: 1px solid rgba(23, 32, 25, 0.1);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 1.5rem;
+  padding-top: 1.25rem;
+}
+
+.speaker-tag.speaker-link {
+  align-items: center;
+  background: rgba(23, 32, 25, 0.04);
+  border-radius: 999px;
+  color: var(--blue);
+  display: inline-flex;
+  font-size: 0.88rem;
+  font-weight: 600;
+  gap: 0.45rem;
+  padding: 0.5rem 0.9rem;
+  transition: background 160ms ease;
+}
+
+.speaker-tag.speaker-link:hover,
+.speaker-tag.speaker-link:focus-visible {
+  background: rgba(23, 32, 25, 0.08);
+}
+
+.speaker-link svg {
+  fill: none;
+  height: 0.95rem;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.8;
+  width: 0.95rem;
+}
+
+@media (max-width: 800px) {
+  .speaker-row {
+    flex-direction: column;
+  }
+
+  .speaker-media {
+    aspect-ratio: 4 / 3;
+    flex-basis: auto;
+    width: 100%;
+  }
 }
 
 .partner-intro {

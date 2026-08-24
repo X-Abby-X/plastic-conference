@@ -192,8 +192,10 @@ const slugify = (value) =>
 // Session participants are named in `sessions` as bare strings. Partners and
 // speakers each have a full record elsewhere on the page, so normalize both
 // into one shape: any participant with a match here renders as a link to its
-// card plus a hover preview. Participants in neither list (e.g. "iGEM Toronto
-// [Petabite]") fall through to plain text.
+// card plus a hover preview. Speakers whose photo or bio is still pending get
+// the same link and preview, with a placeholder standing in for the image.
+// Participants in neither list (e.g. "iGEM Toronto [Petabite]") fall through
+// to plain text.
 const previewsByName = new Map([
   ...partners.map((partner) => [
     partner.name,
@@ -208,20 +210,18 @@ const previewsByName = new Map([
       shape: 'square',
     },
   ]),
-  ...speakers
-    .filter((speaker) => speaker.image && speaker.description)
-    .map((speaker) => [
-      speaker.name,
-      {
-        href: `#speaker-${slugify(speaker.name)}`,
-        kicker: speaker.title,
-        name: speaker.name,
-        description: speaker.description,
-        image: speaker.image,
-        focus: speaker.focus,
-        shape: 'portrait',
-      },
-    ]),
+  ...speakers.map((speaker) => [
+    speaker.name,
+    {
+      href: `#speaker-${slugify(speaker.name)}`,
+      kicker: speaker.title,
+      name: speaker.name,
+      description: speaker.description,
+      image: speaker.image,
+      focus: speaker.focus,
+      shape: 'portrait',
+    },
+  ]),
 ])
 
 const bottleHoles = [
@@ -580,7 +580,13 @@ function ParticipantPreview({ participant }) {
             accent ? ` participant-preview-media-${accent}` : ''
           }`}
         >
-          <img src={image} alt="" style={focus ? { objectPosition: focus } : undefined} />
+          {image ? (
+            <img src={image} alt="" style={focus ? { objectPosition: focus } : undefined} />
+          ) : (
+            <span className="participant-preview-placeholder" aria-hidden="true">
+              TBA
+            </span>
+          )}
         </div>
         <p className="participant-preview-description">{description}</p>
       </div>

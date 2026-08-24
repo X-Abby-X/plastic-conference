@@ -11,6 +11,8 @@
   --acid: #ffda78;
   --blue: #326b99;
   --orange: #4d97a9;
+  /* Sticky nav: logo capped at 3.75rem + 1.06rem padding top and bottom + 1px border. */
+  --nav-height: 5.94rem;
 }
 
 * {
@@ -19,6 +21,10 @@
 
 html {
   scroll-behavior: smooth;
+  /* The nav is sticky, so an anchor's target would otherwise land underneath
+     it. Reserve its height (plus a little breathing room) at the top of every
+     scroll-into-view, native hash jump and scrollIntoView alike. */
+  scroll-padding-top: calc(var(--nav-height) + 0.5rem);
 }
 
 body {
@@ -529,7 +535,6 @@ h1 span {
   overflow: hidden;
   padding: clamp(2rem, 5vw, 4rem);
   position: relative;
-  scroll-margin-top: 6rem;
 }
 
 .poster-callout-copy {
@@ -1793,6 +1798,11 @@ footer {
 }
 
 @media (max-width: 800px) {
+  :root {
+    /* Nav padding drops to .75rem here; the logo stays capped at 3.75rem. */
+    --nav-height: 5.31rem;
+  }
+
   .conference-nav {
     grid-template-columns: 1fr auto;
     padding: .75rem 1rem;
@@ -2986,7 +2996,7 @@ footer {
 .story-summary span { color: var(--story-yellow); font-size: .72rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
 .story-summary p { font: 500 clamp(1.25rem, 2.2vw, 2rem)/1.35 'Manrope', sans-serif; letter-spacing: -.03em; margin: 0; max-width: 62rem; }
 
-.story-section { padding: clamp(6rem, 10vw, 10rem) max(5vw, calc((100vw - 1360px) / 2)); scroll-margin-top: 4rem; }
+.story-section { padding: clamp(6rem, 10vw, 10rem) max(5vw, calc((100vw - 1360px) / 2)); }
 .story-heading { display: grid; gap: 1.5rem 4rem; grid-template-columns: .65fr 2fr; margin-bottom: clamp(4rem, 8vw, 7rem); }
 .story-chapter { color: var(--story-blue); font-size: .76rem; font-weight: 800; letter-spacing: .11em; margin: .75rem 0 0; text-transform: uppercase; }
 .story-chapter span { color: var(--story-teal); display: inline-block; margin-right: .8rem; }

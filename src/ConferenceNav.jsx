@@ -33,6 +33,7 @@ export default function ConferenceNav({ current = 'home' }) {
 
       <nav className={`conference-nav-menu ${menuOpen ? 'is-open' : ''}`} id="conference-navigation" aria-label="Main navigation">
         <a href="#about" onClick={closeMenu}>About</a>
+        <a href="#/about" onClick={closeMenu} aria-current={current === 'about' ? 'page' : undefined}>Who We Are</a>
         <a href="#/problem" onClick={closeMenu} aria-current={current === 'problem' ? 'page' : undefined}>The Problem</a>
         <a href="#program" onClick={closeMenu}>Program</a>
         <a href="#speakers" onClick={closeMenu}>Speakers</a>

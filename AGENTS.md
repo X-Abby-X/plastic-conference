@@ -38,7 +38,10 @@ the ecosystem-standard tooling (e.g. Vitest for a Vite project) and wire it into
 index.html              # Vite entry, mounts #root, has site <meta>/<title>
 src/
   main.jsx              # React entry — createRoot, renders <App/> in StrictMode
-  App.jsx               # The entire page (all sections + data arrays)
+  App.jsx               # The homepage (all sections + data arrays) and the hash router
+  ProblemStatement.jsx  # The #/problem page
+  AboutUs.jsx           # The #/about page ("who we are"), plus the shared <IgemLockup>
+  ConferenceNav.jsx     # Shared sticky nav used by every page
   styles.css            # All styling (global)
   assets/               # Imported images (logos, partner art)
 public/
@@ -56,7 +59,24 @@ public/
   `blue` / `orange` / `acid`, matching `.partner-card-<accent>` classes and the CSS color vars.
 
 Page sections (each an anchor target used by the nav): `#top` (hero), `#about` (statement),
-`#program`, `#partners`, `#tickets`. Registration links point to a Google Form.
+`#about-us` (who-we-are block), `#program`, `#speakers`, `#call-for-abstracts`, `#partners`,
+`#tickets`. Registration links point to a Google Form.
+
+### Routing
+
+`useHashRoute` in `App.jsx` is a dependency-free hash router. Anything matching `#/` is a
+separate page rendered instead of the homepage; everything else is an in-page anchor. Two
+routes exist:
+
+- `#/problem` → `<ProblemStatement/>`
+- `#/about` → `<AboutUs/>`
+
+Note the deliberate collision-that-isn't: `#about` is the homepage's "Why we gather"
+statement section, while `#/about` is the separate iGEM Toronto page. The nav links to both
+("About" and "Who We Are"). Keep them distinct when editing.
+
+Pages under `#/` are not separately indexable (crawlers strip fragments), which is why
+`public/sitemap.xml` lists only the homepage.
 
 ## Conventions
 

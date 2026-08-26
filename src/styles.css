@@ -3169,3 +3169,419 @@ footer {
   .story-map img,
   .story-aquatic-gallery img { transition: none; }
 }
+
+/* =====================================================================
+   About us: homepage block (#about-us) and the #/about page
+   ===================================================================== */
+
+/* --- Shared wordmark ------------------------------------------------- */
+.igem-lockup {
+  align-items: center;
+  display: flex;
+  gap: 1rem;
+}
+
+.igem-lockup-mark {
+  align-items: center;
+  background: var(--acid);
+  border-radius: 50%;
+  color: var(--ink);
+  display: flex;
+  flex: 0 0 auto;
+  font-family: 'Manrope', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 800;
+  height: 3.5rem;
+  justify-content: center;
+  letter-spacing: -.05em;
+  width: 3.5rem;
+}
+
+.igem-lockup-words {
+  display: grid;
+  gap: .3rem;
+}
+
+.igem-lockup-words strong {
+  font-family: 'Manrope', sans-serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: -.04em;
+  line-height: 1;
+}
+
+.igem-lockup-words small {
+  font-size: .72rem;
+  font-weight: 600;
+  letter-spacing: .08em;
+  line-height: 1.4;
+  opacity: .68;
+  text-transform: uppercase;
+}
+
+/* --- Homepage block -------------------------------------------------- */
+/* Sits immediately below the dark .statement band, so it stays on paper to
+   break up the two dark sections either side of it. */
+.organiser {
+  align-items: start;
+  display: grid;
+  gap: 3rem;
+  grid-template-columns: 1fr 3fr;
+  padding: clamp(4rem, 8vw, 7rem) clamp(1.25rem, 8vw, 9rem);
+}
+
+.organiser-copy h2 {
+  font-family: 'Manrope', sans-serif;
+  font-size: clamp(1.9rem, 3.6vw, 3.2rem);
+  font-weight: 500;
+  letter-spacing: -.05em;
+  line-height: 1.02;
+  margin: 1rem 0 1.5rem;
+}
+
+.organiser-copy > p:not(.section-label) {
+  color: rgba(16, 39, 68, .78);
+  font-size: 1.08rem;
+  line-height: 1.7;
+  margin: 0 0 1.75rem;
+  max-width: 46rem;
+}
+
+.organiser .text-link {
+  align-items: center;
+  display: inline-flex;
+  gap: .6rem;
+}
+
+.organiser .text-link svg {
+  fill: none;
+  height: 1rem;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2;
+  width: 1rem;
+}
+
+/* --- #/about page ---------------------------------------------------- */
+.about-page {
+  background: var(--paper);
+  color: #102744;
+}
+
+.about-hero {
+  align-items: center;
+  background:
+    radial-gradient(circle at 88% 12%, rgba(121, 211, 242, .22), transparent 26rem),
+    var(--ink);
+  color: var(--paper);
+  display: grid;
+  gap: clamp(2.5rem, 6vw, 5rem);
+  grid-template-columns: 3fr 2fr;
+  padding: clamp(4.5rem, 10vw, 8.5rem) clamp(1.25rem, 8vw, 9rem);
+}
+
+.about-hero .section-label {
+  color: var(--acid);
+}
+
+.about-hero h1 {
+  display: grid;
+  font-family: 'Manrope', sans-serif;
+  font-size: clamp(3.2rem, 8vw, 7rem);
+  font-weight: 500;
+  letter-spacing: -.06em;
+  line-height: .93;
+  margin: 1.5rem 0 0;
+}
+
+.about-hero h1 span {
+  color: var(--acid);
+}
+
+.about-hero-lead {
+  color: rgba(247, 251, 252, .74);
+  font-size: clamp(1.05rem, 1.6vw, 1.3rem);
+  line-height: 1.65;
+  margin: 2rem 0 0;
+  max-width: 38rem;
+}
+
+.about-hero-figure {
+  border-radius: 1.75rem;
+  margin: 0;
+  overflow: hidden;
+}
+
+.about-hero-figure img {
+  aspect-ratio: 4 / 3;
+  display: block;
+  height: auto;
+  object-fit: cover;
+  width: 100%;
+}
+
+/* Stand-in for the team photo: the wordmark, boxed so it reads as a
+   deliberate panel rather than an empty image frame. */
+.about-hero-lockup {
+  background: rgba(247, 251, 252, .06);
+  border: 1px solid rgba(247, 251, 252, .16);
+  border-radius: 1.75rem;
+  justify-content: center;
+  justify-self: center;
+  padding: clamp(2rem, 4vw, 3rem);
+}
+
+.about-section {
+  display: grid;
+  gap: clamp(2rem, 5vw, 4.5rem);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.9fr);
+  padding: clamp(4.5rem, 9vw, 8rem) clamp(1.25rem, 8vw, 9rem);
+}
+
+.about-work {
+  background: #eef5f7;
+}
+
+.about-heading h2 {
+  font-family: 'Manrope', sans-serif;
+  font-size: clamp(1.75rem, 2.6vw, 2.45rem);
+  font-weight: 500;
+  letter-spacing: -.05em;
+  line-height: 1.06;
+  margin: 1rem 0 0;
+  max-width: 22rem;
+}
+
+.about-body > p {
+  color: rgba(16, 39, 68, .82);
+  font-size: 1.08rem;
+  line-height: 1.75;
+  margin: 0 0 1.35rem;
+  max-width: 44rem;
+}
+
+.about-body > p:last-child {
+  margin-bottom: 0;
+}
+
+.about-subteams {
+  border-top: 1px solid rgba(8, 53, 129, .18);
+  display: grid;
+  list-style: none;
+  margin: 2rem 0 0;
+  padding: 0;
+}
+
+.about-subteams li {
+  border-bottom: 1px solid rgba(8, 53, 129, .18);
+  display: grid;
+  gap: .35rem 2rem;
+  grid-template-columns: minmax(9rem, 1fr) 2.4fr;
+  padding: 1.25rem 0;
+}
+
+.about-subteams h3 {
+  color: var(--ink);
+  font-family: 'Manrope', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: -.02em;
+  margin: 0;
+}
+
+.about-subteams p {
+  color: rgba(16, 39, 68, .74);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.about-project {
+  margin-bottom: 2.5rem;
+}
+
+.about-project-name {
+  color: var(--orange);
+  font-family: 'Manrope', sans-serif;
+  font-size: .78rem;
+  font-weight: 800;
+  letter-spacing: .14em;
+  margin: 0 0 .9rem;
+  text-transform: uppercase;
+}
+
+.about-project p:not(.about-project-name) {
+  color: rgba(16, 39, 68, .82);
+  font-size: 1.08rem;
+  line-height: 1.75;
+  margin: 0 0 1.35rem;
+  max-width: 44rem;
+}
+
+.about-arc {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.about-arc li {
+  background: var(--paper);
+  border-radius: 1.25rem;
+  padding: 1.5rem 1.35rem;
+}
+
+.about-arc span {
+  color: var(--orange);
+  font-family: 'Manrope', sans-serif;
+  font-size: .74rem;
+  font-weight: 800;
+  letter-spacing: .1em;
+}
+
+.about-arc h3 {
+  color: var(--ink);
+  font-family: 'Manrope', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: -.03em;
+  margin: .8rem 0 .5rem;
+}
+
+.about-arc p {
+  color: rgba(16, 39, 68, .74);
+  font-size: .92rem;
+  line-height: 1.55;
+  margin: 0;
+}
+
+.about-note {
+  color: var(--ink);
+  font-family: 'Manrope', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: -.03em;
+  margin: 2.5rem 0 0;
+}
+
+.about-connect {
+  background: var(--blue);
+  color: white;
+  padding: clamp(4.5rem, 9vw, 8rem) clamp(1.25rem, 8vw, 9rem);
+}
+
+.about-connect .section-label {
+  color: var(--acid);
+}
+
+.about-connect h2 {
+  font-family: 'Manrope', sans-serif;
+  font-size: clamp(2.2rem, 5vw, 4rem);
+  font-weight: 500;
+  letter-spacing: -.05em;
+  line-height: 1;
+  margin: 1rem 0 1.5rem;
+}
+
+.about-connect-lead {
+  font-size: 1.08rem;
+  line-height: 1.7;
+  margin: 0;
+  max-width: 42rem;
+  opacity: .86;
+}
+
+.about-connect-list {
+  display: grid;
+  gap: 1rem;
+  /* Capped track, so the grid stays a row of cards rather than stretching a
+     single link across the full width while the other URLs are still unset. */
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 21rem));
+  list-style: none;
+  margin: 2.75rem 0 0;
+  padding: 0;
+}
+
+.about-connect-list a {
+  background: rgba(255, 255, 255, .09);
+  border: 1px solid rgba(255, 255, 255, .22);
+  border-radius: 1.25rem;
+  display: grid;
+  gap: .5rem;
+  height: 100%;
+  padding: 1.5rem 1.35rem;
+  transition: background 180ms ease, transform 180ms ease;
+}
+
+.about-connect-list a:hover,
+.about-connect-list a:focus-visible {
+  background: rgba(255, 255, 255, .17);
+  transform: translateY(-3px);
+}
+
+.about-connect-list strong {
+  align-items: center;
+  display: flex;
+  font-family: 'Manrope', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  gap: .6rem;
+  letter-spacing: -.02em;
+}
+
+.about-connect-list svg {
+  fill: none;
+  height: 1rem;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2;
+  width: 1rem;
+}
+
+.about-connect-list span {
+  font-size: .92rem;
+  line-height: 1.55;
+  opacity: .82;
+}
+
+.about-back {
+  border-bottom: 1px solid rgba(255, 255, 255, .5);
+  display: inline-block;
+  font-weight: 700;
+  margin-top: 3rem;
+  padding-bottom: .35rem;
+}
+
+@media (max-width: 800px) {
+  .organiser,
+  .about-hero,
+  .about-section {
+    grid-template-columns: 1fr;
+  }
+
+  .about-hero-lockup {
+    justify-self: start;
+  }
+
+  .about-subteams li {
+    grid-template-columns: 1fr;
+  }
+
+  .about-arc {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about-connect-list a {
+    transition: none;
+  }
+
+  .about-connect-list a:hover,
+  .about-connect-list a:focus-visible {
+    transform: none;
+  }
+}

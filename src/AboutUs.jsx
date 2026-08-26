@@ -41,10 +41,25 @@ const arc = [
   ['Iterate', 'The results send us back to the catalogue with better questions.'],
 ]
 
+// Six subteams in two groups. The group label is rendered, so the split
+// between technical and everything else stays legible at a glance.
 const subteams = [
-  ['Wet lab', 'Builds and tests the enzymes at the bench.'],
-  ['Dry lab', 'Handles the computational side: modelling, design, and analysis.'],
-  ['Human practices', 'Keeps the project accountable to the people it claims to serve.'],
+  {
+    group: 'Technical',
+    teams: [
+      ['Wet lab', 'Builds and tests the enzymes at the bench.'],
+      ['Dry lab', 'Handles the computational side: modelling, design, and analysis.'],
+      ['Hardware', 'Builds the physical system the enzymes have to work inside.'],
+    ],
+  },
+  {
+    group: 'Non-technical',
+    teams: [
+      ['Human practices', 'Keeps the project accountable to the people it claims to serve.'],
+      ['Venture', 'Asks what it would take for the work to exist outside a competition.'],
+      ['Outreach', 'Takes the science to people outside the lab, and brings their questions back.'],
+    ],
+  },
 ]
 
 function ArrowIcon() {
@@ -108,17 +123,23 @@ export default function AboutUs() {
               run by students, on a student timeline.
             </p>
             <p>
-              The team splits into three groups that depend on each other.
+              The team runs as six subteams, three technical and three not. They depend
+              on each other more than the split suggests.
             </p>
 
-            <ul className="about-subteams">
-              {subteams.map(([name, text]) => (
-                <li key={name}>
-                  <h3>{name}</h3>
-                  <p>{text}</p>
-                </li>
-              ))}
-            </ul>
+            {subteams.map(({ group, teams }) => (
+              <div className="about-subteam-group" key={group}>
+                <p className="about-subteam-label">{group}</p>
+                <ul className="about-subteams">
+                  {teams.map(([name, text]) => (
+                    <li key={name}>
+                      <h3>{name}</h3>
+                      <p>{text}</p>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
           </div>
         </section>
 

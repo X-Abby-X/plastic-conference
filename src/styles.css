@@ -3365,11 +3365,25 @@ footer {
   margin-bottom: 0;
 }
 
+.about-subteam-group {
+  margin-top: 2.25rem;
+}
+
+.about-subteam-label {
+  color: rgba(16, 39, 68, .5);
+  font-family: 'Manrope', sans-serif;
+  font-size: .72rem;
+  font-weight: 800;
+  letter-spacing: .14em;
+  margin: 0 0 .75rem;
+  text-transform: uppercase;
+}
+
 .about-subteams {
   border-top: 1px solid rgba(8, 53, 129, .18);
   display: grid;
   list-style: none;
-  margin: 2rem 0 0;
+  margin: 0;
   padding: 0;
 }
 

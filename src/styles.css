@@ -3585,7 +3585,17 @@ footer {
   color: rgba(247, 251, 252, .78);
 }
 
-/* The first group's rule should line up with the top of the copy. */
+/* The title takes the top of the column, so the first group drops its
+   spacing and sits directly beneath it. */
+.about-groups-title {
+  color: rgba(247, 251, 252, .95);
+  font-family: 'Manrope', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 600;
+  letter-spacing: -.03em;
+  margin: 0 0 1.1rem;
+}
+
 .about-body-groups .about-subteam-group:first-of-type {
   margin-top: 0;
 }

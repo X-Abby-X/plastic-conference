@@ -113,10 +113,10 @@ export default function AboutUs() {
                 <p>
                   We are students at the University of Toronto,
                   around forty of us in a given year, drawn from life sciences,
-                  engineering, computer science, and further afield.
+                  engineering, computer science, among other disciplines.
                 </p>
                 <p>
-                  iGEM itself is an annual international competition: student teams spend a
+                  iGEM itself is an annual international competition: Student teams spend a
                   year designing a biological system to address a real problem, then present
                   it to a global community of researchers each fall. The work is genuine
                   research, run by students, on a student timeline.
@@ -132,6 +132,7 @@ export default function AboutUs() {
               </div>
 
               <div className="about-body-groups">
+                <h2 className="about-groups-title">Our subteams</h2>
                 {subteams.map(({ group, summary, teams }) => (
                   <details className="about-subteam-group" key={group}>
                     <summary>

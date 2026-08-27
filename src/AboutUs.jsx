@@ -29,8 +29,8 @@ const CONNECT = [
 ]
 
 // A team photo or lab shot for the page header. Import one into src/assets/about/
-// and assign it here; while it is null the header renders as type only, which is
-// a finished look rather than an empty frame.
+// and assign it here. While it is null the header is a single column of type with
+// the logo beside the title; setting it adds a second column for the image.
 const TEAM_PHOTO = null
 
 // The project loop described in "What we do". Kept as data so the steps stay
@@ -83,26 +83,25 @@ export default function AboutUs() {
       <ConferenceNav current="about" />
 
       <main>
-        <header className="about-hero">
+        <header className={`about-hero${TEAM_PHOTO ? '' : ' about-hero-solo'}`}>
           <div className="about-hero-copy">
             <p className="section-label">The team behind the conference</p>
-            <h1>
-              iGEM
-              <span>Toronto.</span>
-            </h1>
+            <div className="about-hero-title">
+              <h1>
+                iGEM
+                <span>Toronto.</span>
+              </h1>
+              <img className="about-hero-mark" src={igemLogo} alt="iGEM Toronto" />
+            </div>
             <p className="about-hero-lead">
               Undergraduates at the University of Toronto engineering enzymes that break
               down plastic, and the people who convened this conference.
             </p>
           </div>
 
-          {TEAM_PHOTO ? (
+          {TEAM_PHOTO && (
             <figure className="about-hero-figure">
               <img src={TEAM_PHOTO} alt="The iGEM Toronto team" />
-            </figure>
-          ) : (
-            <figure className="about-hero-logo">
-              <img src={igemLogo} alt="iGEM Toronto" />
             </figure>
           )}
         </header>

@@ -3326,27 +3326,26 @@ footer {
   width: 100%;
 }
 
-/* Stand-in for the team photo: the logo, boxed so it reads as a deliberate
-   panel rather than an empty image frame. The light asset's white wordmark
-   sits directly on the navy hero, so no tile is needed here. */
-.about-hero-logo {
-  align-items: center;
-  background: rgba(247, 251, 252, .06);
-  border: 1px solid rgba(247, 251, 252, .16);
-  border-radius: 1.75rem;
-  display: flex;
-  justify-content: center;
-  justify-self: center;
-  margin: 0;
-  padding: clamp(2.5rem, 5vw, 4rem);
-  width: 100%;
+/* With no team photo the header is a single column, so the title lockup can
+   use the full width rather than being squeezed into a 3fr track. */
+.about-hero-solo {
+  grid-template-columns: 1fr;
 }
 
-.about-hero-logo img {
+/* The logo sits beside the title rather than in a panel of its own. The light
+   asset's white wordmark reads directly on the navy hero, so it needs no tile. */
+.about-hero-title {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(1.25rem, 3vw, 2.75rem);
+}
+
+.about-hero-mark {
   display: block;
+  flex: 0 0 auto;
   height: auto;
-  max-width: 15rem;
-  width: 100%;
+  width: clamp(6rem, 11vw, 10rem);
 }
 
 .about-section {
@@ -3593,8 +3592,8 @@ footer {
     grid-template-columns: 1fr;
   }
 
-  .about-hero-logo {
-    justify-self: start;
+  .about-hero-mark {
+    width: clamp(5rem, 22vw, 7.5rem);
   }
 
   .about-subteams li {

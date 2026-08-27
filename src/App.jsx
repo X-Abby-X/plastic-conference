@@ -64,6 +64,10 @@ const sessions = [
     time: '12:15–1:45',
     title: 'Lunch + Student Poster Session and Judging',
     type: 'Break + Exhibition',
+    // Longo's sponsors the lunch itself rather than speaking, so the list gets
+    // a lead-in to say so.
+    participantsLead: 'Supported by',
+    participants: ['Longo’s'],
   },
   {
     time: '1:45–2:30',
@@ -771,13 +775,18 @@ function App() {
                   <h3>{session.title}</h3>
                   {session.participants && (
                     <ul className="session-participants" aria-label={`${session.title} participants`}>
-                      {session.participants.map((participant) => {
+                      {session.participants.map((participant, participantIndex) => {
                         const preview = previewsByName.get(participant)
                         return (
                           <li
                             key={participant}
                             className={preview ? 'has-participant-preview' : undefined}
                           >
+                            {participantIndex === 0 && session.participantsLead && (
+                              <span className="participant-lead">
+                                {session.participantsLead}{' '}
+                              </span>
+                            )}
                             {preview ? (
                               <>
                                 <a

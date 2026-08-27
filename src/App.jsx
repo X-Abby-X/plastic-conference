@@ -768,6 +768,9 @@ function App() {
               Meet students, researchers, and community members moving
               beyond small fixes toward a grand solution.
             </p>
+            <a className="text-link" href="#/problem">
+              Read the full problem statement <ArrowIcon />
+            </a>
           </div>
         </section>
 

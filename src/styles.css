@@ -440,17 +440,40 @@ h1 span {
 /* The program section ends on the dark call-for-abstracts callout, which
    already reads as a section break. Full padding on both sides of that
    boundary stacked up to ~256px of dead space before "Meet our speakers",
-   so halve it here and on .speakers' matching top padding. */
+   so halve it here and on .speakers' matching top padding.
+
+   The top is halved for the opposite reason: .organiser above it is also on
+   paper, so there was no colour change to carry the boundary, just ~272px of
+   gap. The rule below does that work instead, inset to the section gutter so
+   it lines up with the copy rather than running edge to edge. */
 .program {
   padding-bottom: clamp(2.5rem, 5vw, 5rem);
+  padding-top: clamp(2.5rem, 5vw, 5rem);
+  position: relative;
 }
 
+.program::before {
+  background: rgba(8, 53, 129, .18);
+  content: '';
+  height: 1px;
+  left: clamp(1.25rem, 8vw, 9rem);
+  position: absolute;
+  right: clamp(1.25rem, 8vw, 9rem);
+  top: 0;
+}
+
+/* The band ends on a link rather than a trailing line of copy, and the colour
+   change carries the boundary at both edges on its own, so the full section
+   padding read as dead space on the dark ground. Kept even top and bottom so
+   the band reads as one block rather than sitting low in its own ground. */
 .statement {
   background: var(--ink);
   color: var(--paper);
   display: grid;
   gap: 3rem;
   grid-template-columns: 1fr 3fr;
+  padding-bottom: clamp(3rem, 6vw, 5.5rem);
+  padding-top: clamp(3rem, 6vw, 5.5rem);
 }
 
 .statement h2,
@@ -3237,7 +3260,9 @@ footer {
   display: grid;
   gap: 3rem;
   grid-template-columns: 1fr 3fr;
-  padding: clamp(4rem, 8vw, 7rem) clamp(1.25rem, 8vw, 9rem);
+  /* Tight top to close the gap under the .statement band, and a short bottom
+     to sit close to the rule that opens .program. */
+  padding: clamp(2.5rem, 5vw, 4.5rem) clamp(1.25rem, 8vw, 9rem) clamp(2.5rem, 5vw, 4.5rem);
 }
 
 .organiser-copy h2 {
@@ -3257,13 +3282,21 @@ footer {
   max-width: 46rem;
 }
 
-.organiser .text-link {
+.organiser .text-link,
+.statement .text-link {
   align-items: center;
   display: inline-flex;
   gap: .6rem;
 }
 
-.organiser .text-link svg {
+/* The band's own copy is muted, so the link keeps the full --paper it
+   inherits and sits clear of the paragraph above it. */
+.statement .text-link {
+  margin-top: 1.75rem;
+}
+
+.organiser .text-link svg,
+.statement .text-link svg {
   fill: none;
   height: 1rem;
   stroke: currentColor;

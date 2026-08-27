@@ -136,8 +136,11 @@ export default function AboutUs() {
               run by students, on a student timeline.
             </p>
             <p>
-              The team runs as six subteams, three technical and three not. They depend
-              on each other more than the split suggests.
+              Six subteams, one project. The constraints human practices surfaces become
+              design targets for dry lab; the candidates dry lab designs become assays for
+              wet lab and bioreactors for hardware; what comes back out sends everyone
+              upstream again. Venture and outreach carry the result beyond the lab. The
+              split below is how we divide the work, not how we think about it.
             </p>
 
             {subteams.map(({ group, summary, teams }) => (

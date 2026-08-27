@@ -763,12 +763,11 @@ function App() {
             <p className="section-label">Who we are</p>
             <h2 id="organiser-title">The team behind the conference.</h2>
             <p>
-              iGEM Toronto is a student-led undergraduate team at the University of
-              Toronto. We engineer enzymes that break down PET plastic, pairing
-              computational design with wet lab testing to find candidates that hold up
-              outside ideal conditions. We convened this conference because our work sits
-              upstream of the microplastics problem, and the people working downstream of
-              it did not yet have a shared room in Toronto.
+              iGEM Toronto is a student-led synthetic biology team at the University of
+              Toronto. This year, we are building enzymes that break down PET plastic, pairing
+              computational design with experimental validation to find candidates that hold up
+              outside ideal conditions. We convened this conference to gather the people working
+              on tackling the microplastics problem to build real, systemic solutions beyond the lab.
             </p>
             <a className="text-link" href="#/about">
               More about iGEM Toronto <ArrowIcon />

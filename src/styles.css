@@ -3332,20 +3332,29 @@ footer {
   grid-template-columns: 1fr;
 }
 
-/* The logo sits beside the title rather than in a panel of its own. The light
-   asset's white wordmark reads directly on the navy hero, so it needs no tile. */
+/* The logo sits to the left of the title rather than in a panel of its own. The
+   light asset's white wordmark reads directly on the navy hero, so no tile. */
 .about-hero-title {
   align-items: center;
   display: flex;
   flex-wrap: wrap;
-  gap: clamp(1.25rem, 3vw, 2.75rem);
+  gap: clamp(1rem, 2.5vw, 2.25rem);
+  margin-top: 1.5rem;
+}
+
+/* The margin moves to the flex row above, so both items share a top edge. */
+.about-hero-title h1 {
+  margin: 0;
 }
 
 .about-hero-mark {
   display: block;
   flex: 0 0 auto;
-  height: auto;
-  width: clamp(6rem, 11vw, 10rem);
+  /* Matches the h1's rendered height. The h1 is a two-row grid at
+     line-height .93, so its height is 2 x .93 = 1.86 of its own font size,
+     and reusing that clamp keeps the logo locked to the type as it scales. */
+  height: calc(1.86 * clamp(3.2rem, 8vw, 7rem));
+  width: auto;
 }
 
 .about-section {
@@ -3654,9 +3663,7 @@ footer {
     grid-template-columns: 1fr;
   }
 
-  .about-hero-mark {
-    width: clamp(5rem, 22vw, 7.5rem);
-  }
+
 
   .about-subteams li {
     grid-template-columns: 1fr;

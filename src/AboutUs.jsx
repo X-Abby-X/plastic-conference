@@ -95,17 +95,18 @@ export default function AboutUs() {
       <main>
         <header className={`about-hero${TEAM_PHOTO ? '' : ' about-hero-solo'}`}>
           <div className="about-hero-copy">
-            <p className="section-label">The team behind the conference</p>
+            <p className="section-label">The organization behind the conference</p>
             <div className="about-hero-title">
+              {/* Decorative: the h1 beside it already reads "iGEM Toronto", so an
+                  alt here would make screen readers announce the name twice. */}
+              <img className="about-hero-mark" src={igemLogo} alt="" />
               <h1>
                 iGEM
                 <span>Toronto.</span>
               </h1>
-              <img className="about-hero-mark" src={igemLogo} alt="iGEM Toronto" />
             </div>
             <p className="about-hero-lead">
-              Undergraduates at the University of Toronto engineering enzymes that break
-              down plastic, and the people who convened this conference.
+              Students at the University of Toronto passionate about tackling the microplastics crisis, and the people who convened this conference.
             </p>
           </div>
 
@@ -125,9 +126,9 @@ export default function AboutUs() {
           <div className="about-body">
             <p>
               We are a synthetic-biology student research team, studying plastic-degrading
-              enzymes. We are undergraduates at the University of Toronto, around forty of
-              us in a given year, drawn from life sciences, engineering, computer science,
-              and further afield.
+              enzymes. We are students at the University of Toronto, around forty of us in
+              a given year, drawn from life sciences, engineering, computer science, and
+              further afield.
             </p>
             <p>
               iGEM itself is an annual international competition: student teams spend a year
@@ -237,8 +238,8 @@ export default function AboutUs() {
               conversations happen in departments, in parallel, and mostly stay there.
             </p>
             <p>
-              So we made the room. The poster session takes open abstracts on purpose: an
-              undergraduate presenting a first project stands alongside established
+              So we made the room. The poster session takes open abstracts on purpose: a
+              student presenting a first project stands alongside established
               researchers, and both get read. We hope people leave with a more complete
               picture of the problem than the one they walked in with, and with a few names
               they did not have before.
@@ -250,7 +251,7 @@ export default function AboutUs() {
           <p className="section-label">Get involved</p>
           <h2 id="about-connect-title">Come work on it with us.</h2>
           <p className="about-connect-lead">
-            We are always recruiting undergraduates, and you do not need a biology
+            We are always recruiting students, and you do not need a biology
             background to be useful to us. If you would rather just follow along, that
             works too. And if you want to talk about the work, we would like that.
           </p>

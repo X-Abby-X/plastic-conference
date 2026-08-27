@@ -3312,7 +3312,10 @@ footer {
   letter-spacing: -.04em;
   line-height: 1.12;
   margin: 1.75rem 0 0;
-  max-width: 26rem;
+  /* Runs the full width of the header rather than being boxed into a narrow
+     column. The cap only bites on very wide viewports, where the section's
+     padding stops growing and the line would otherwise get unreadably long. */
+  max-width: 60rem;
 }
 
 .about-hero-figure {

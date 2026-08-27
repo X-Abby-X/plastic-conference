@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import ProblemStatement from './ProblemStatement'
+import AboutUs, { IgemLockup } from './AboutUs'
 import ConferenceNav from './ConferenceNav'
 import trashTeamLogo from './assets/Logo-final-trash-team_dark_background.webp'
 import assuLogo from './assets/NewAssuLogo.JPG'
@@ -11,7 +12,7 @@ import madeleineMilne from './assets/speakers/madeleine-milne.png'
 import karenWirsig from './assets/speakers/karen-wirsig.jpg'
 
 // Minimal hash-based "router" (no dependency), and it coexists with the existing
-// in-page anchor links (#about, #program, …) because it only matches the #/problem path.
+// in-page anchor links (#about, #program, …) because it only matches #/-prefixed paths.
 function useHashRoute() {
   const [hash, setHash] = useState(() =>
     typeof window === 'undefined' ? '' : window.location.hash,
@@ -684,6 +685,17 @@ function App() {
     )
   }
 
+  // Dedicated "who we are" page lives at #/about, kept distinct from the
+  // homepage's #about anchor (the "Why we gather" statement).
+  if (route.startsWith('#/about')) {
+    return (
+      <>
+        <AboutUs />
+        {welcomeOpen && <ConferenceWelcomeDialog setOpen={setWelcomeOpen} />}
+      </>
+    )
+  }
+
   const handleShare = async () => {
     // The link to the conference info is simply this page.
     const shareUrl = 'https://igem.skule.ca/plastic-conference/'
@@ -756,6 +768,24 @@ function App() {
               Meet students, researchers, and community members moving
               beyond small fixes toward a grand solution.
             </p>
+          </div>
+        </section>
+
+        <section className="organiser" id="about-us" aria-labelledby="organiser-title">
+          <IgemLockup className="organiser-lockup" onLight />
+          <div className="organiser-copy">
+            <p className="section-label">Who we are</p>
+            <h2 id="organiser-title">The team behind the conference.</h2>
+            <p>
+              iGEM Toronto is a student-led synthetic biology team at the University of
+              Toronto. This year, we are building enzymes that break down PET plastic, pairing
+              computational design with experimental validation to find candidates that hold up
+              outside ideal conditions. We convened this conference to gather the people working
+              on tackling the microplastics problem to build real, systemic solutions beyond the lab.
+            </p>
+            <a className="text-link" href="#/about">
+              More about iGEM Toronto <ArrowIcon />
+            </a>
           </div>
         </section>
 

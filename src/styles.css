@@ -3174,3 +3174,545 @@ footer {
   .story-map img,
   .story-aquatic-gallery img { transition: none; }
 }
+
+/* =====================================================================
+   About us: homepage block (#about-us) and the #/about page
+   ===================================================================== */
+
+/* --- Shared wordmark ------------------------------------------------- */
+.igem-lockup {
+  align-items: center;
+  display: flex;
+  gap: 1rem;
+}
+
+.igem-lockup-mark {
+  align-items: center;
+  display: flex;
+  flex: 0 0 auto;
+  justify-content: center;
+}
+
+.igem-lockup-mark img {
+  display: block;
+  height: 2.75rem;
+  width: auto;
+}
+
+/* The logo's wordmark is white, so against the paper background it needs an
+   ink tile to sit on. Only required for the light variant of the asset. */
+.igem-lockup-on-light .igem-lockup-mark {
+  background: var(--ink);
+  border-radius: .9rem;
+  padding: .7rem .9rem;
+}
+
+.igem-lockup-words {
+  display: grid;
+  gap: .3rem;
+}
+
+.igem-lockup-words strong {
+  font-family: 'Manrope', sans-serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: -.04em;
+  line-height: 1;
+}
+
+.igem-lockup-words small {
+  font-size: .72rem;
+  font-weight: 600;
+  letter-spacing: .08em;
+  line-height: 1.4;
+  opacity: .68;
+  text-transform: uppercase;
+}
+
+/* --- Homepage block -------------------------------------------------- */
+/* Sits immediately below the dark .statement band, so it stays on paper to
+   break up the two dark sections either side of it. */
+.organiser {
+  align-items: start;
+  display: grid;
+  gap: 3rem;
+  grid-template-columns: 1fr 3fr;
+  padding: clamp(4rem, 8vw, 7rem) clamp(1.25rem, 8vw, 9rem);
+}
+
+.organiser-copy h2 {
+  font-family: 'Manrope', sans-serif;
+  font-size: clamp(1.9rem, 3.6vw, 3.2rem);
+  font-weight: 500;
+  letter-spacing: -.05em;
+  line-height: 1.02;
+  margin: 1rem 0 1.5rem;
+}
+
+.organiser-copy > p:not(.section-label) {
+  color: rgba(16, 39, 68, .78);
+  font-size: 1.08rem;
+  line-height: 1.7;
+  margin: 0 0 1.75rem;
+  max-width: 46rem;
+}
+
+.organiser .text-link {
+  align-items: center;
+  display: inline-flex;
+  gap: .6rem;
+}
+
+.organiser .text-link svg {
+  fill: none;
+  height: 1rem;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2;
+  width: 1rem;
+}
+
+/* --- #/about page ---------------------------------------------------- */
+.about-page {
+  background: var(--paper);
+  color: #102744;
+}
+
+.about-hero {
+  align-items: center;
+  background:
+    radial-gradient(circle at 88% 12%, rgba(121, 211, 242, .22), transparent 26rem),
+    var(--ink);
+  color: var(--paper);
+  display: grid;
+  gap: clamp(2.5rem, 6vw, 5rem);
+  grid-template-columns: 3fr 2fr;
+  padding: clamp(4.5rem, 10vw, 8.5rem) clamp(1.25rem, 8vw, 9rem);
+}
+
+.about-hero .section-label {
+  color: var(--acid);
+}
+
+.about-hero h1 {
+  display: grid;
+  font-family: 'Manrope', sans-serif;
+  font-size: clamp(3.2rem, 8vw, 7rem);
+  font-weight: 500;
+  letter-spacing: -.06em;
+  line-height: .93;
+  margin: 1.5rem 0 0;
+}
+
+.about-hero h1 span {
+  color: var(--acid);
+}
+
+.about-hero-lead {
+  color: rgba(247, 251, 252, .92);
+  font-family: 'Manrope', sans-serif;
+  font-size: clamp(1.5rem, 3vw, 2.6rem);
+  font-weight: 500;
+  letter-spacing: -.04em;
+  line-height: 1.12;
+  margin: 1.75rem 0 0;
+  /* Runs the full width of the header rather than being boxed into a narrow
+     column. The cap only bites on very wide viewports, where the section's
+     padding stops growing and the line would otherwise get unreadably long. */
+  max-width: 60rem;
+}
+
+.about-hero-figure {
+  border-radius: 1.75rem;
+  margin: 0;
+  overflow: hidden;
+}
+
+.about-hero-figure img {
+  aspect-ratio: 4 / 3;
+  display: block;
+  height: auto;
+  object-fit: cover;
+  width: 100%;
+}
+
+/* With no team photo the header is a single column, so the title lockup can
+   use the full width rather than being squeezed into a 3fr track. */
+.about-hero-solo {
+  grid-template-columns: 1fr;
+}
+
+/* The title is the artwork itself, so the h1 is just a wrapper for it. The
+   asset is white on transparent, which reads directly on the navy hero. */
+.about-hero-title {
+  display: block;
+  margin: 1.5rem 0 0;
+}
+
+.about-hero-mark {
+  display: block;
+  height: auto;
+  /* The source is 608px square, so this ceiling is still a downscale and
+     stays crisp on standard and retina displays alike. */
+  width: clamp(9rem, 18vw, 15rem);
+}
+
+.about-section {
+  display: grid;
+  gap: clamp(2rem, 5vw, 4.5rem);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.9fr);
+  padding: clamp(4.5rem, 9vw, 8rem) clamp(1.25rem, 8vw, 9rem);
+}
+
+
+.about-heading h2 {
+  font-family: 'Manrope', sans-serif;
+  font-size: clamp(1.75rem, 2.6vw, 2.45rem);
+  font-weight: 500;
+  letter-spacing: -.05em;
+  line-height: 1.06;
+  margin: 1rem 0 0;
+  max-width: 22rem;
+}
+
+.about-body > p,
+.about-body-copy > p {
+  color: rgba(16, 39, 68, .82);
+  font-size: 1.08rem;
+  line-height: 1.75;
+  margin: 0 0 1.35rem;
+  max-width: 44rem;
+}
+
+.about-body > p:last-child,
+.about-body-copy > p:last-child {
+  margin-bottom: 0;
+}
+
+/* Each group is a disclosure: collapsed it is an overview line, opened it
+   reveals that group's roster. */
+.about-subteam-group {
+  border-top: 1px solid rgba(8, 53, 129, .18);
+}
+
+.about-subteam-group:first-of-type {
+  margin-top: 2.25rem;
+}
+
+.about-subteam-group:last-of-type {
+  border-bottom: 1px solid rgba(8, 53, 129, .18);
+}
+
+.about-subteam-group summary {
+  align-items: center;
+  cursor: pointer;
+  display: grid;
+  gap: .5rem 2rem;
+  grid-template-columns: minmax(9rem, 1fr) 2.4fr auto;
+  list-style: none;
+  padding: 1.4rem 0;
+}
+
+/* Suppress the native disclosure triangle in both engines. */
+.about-subteam-group summary::-webkit-details-marker {
+  display: none;
+}
+
+.about-subteam-group summary:focus-visible {
+  outline: 2px solid var(--orange);
+  outline-offset: 4px;
+}
+
+.about-subteam-label {
+  color: rgba(16, 39, 68, .5);
+  font-family: 'Manrope', sans-serif;
+  font-size: .72rem;
+  font-weight: 800;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+.about-subteam-overview {
+  color: rgba(16, 39, 68, .82);
+  line-height: 1.6;
+}
+
+.about-subteam-toggle {
+  align-items: center;
+  color: var(--blue);
+  display: flex;
+  font-size: .8rem;
+  font-weight: 700;
+  gap: .5rem;
+  white-space: nowrap;
+}
+
+.about-subteam-toggle svg {
+  fill: none;
+  height: 1.1rem;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2;
+  transition: transform 200ms ease;
+  width: 1.1rem;
+}
+
+.about-subteam-group[open] .about-subteam-toggle svg {
+  transform: rotate(180deg);
+}
+
+.about-subteams {
+  border-top: 1px solid rgba(8, 53, 129, .12);
+  display: grid;
+  list-style: none;
+  margin: 0 0 1.25rem;
+  padding: 0;
+}
+
+.about-subteams li:not(:last-child) {
+  border-bottom: 1px solid rgba(8, 53, 129, .18);
+}
+
+.about-subteams li {
+  display: grid;
+  gap: .35rem 2rem;
+  grid-template-columns: minmax(9rem, 1fr) 2.4fr;
+  padding: 1.25rem 0;
+}
+
+.about-subteams h3 {
+  color: var(--ink);
+  font-family: 'Manrope', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: -.02em;
+  margin: 0;
+}
+
+.about-subteams p {
+  color: rgba(16, 39, 68, .74);
+  line-height: 1.6;
+  margin: 0;
+}
+
+
+/* ---------------------------------------------------------------------
+   Who we are now sits inside the navy header, so its body and disclosures
+   are recoloured for the dark ground. Everything here mirrors a rule in
+   the light-ground block above.
+   --------------------------------------------------------------------- */
+/* Copy on the left, the subteam groups alongside it on the right. */
+.about-body-on-dark {
+  align-items: start;
+  display: grid;
+  gap: clamp(2rem, 4vw, 4.5rem);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+  margin-top: clamp(2.5rem, 5vw, 4rem);
+}
+
+.about-body-on-dark .about-body-copy > p {
+  color: rgba(247, 251, 252, .78);
+}
+
+/* The title takes the top of the column, so the first group drops its
+   spacing and sits directly beneath it. */
+.about-groups-title {
+  color: rgba(247, 251, 252, .95);
+  font-family: 'Manrope', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 600;
+  letter-spacing: -.03em;
+  margin: 0 0 1.1rem;
+}
+
+.about-body-groups .about-subteam-group:first-of-type {
+  margin-top: 0;
+}
+
+/* In a column this narrow the three-across summary squeezes the overview to
+   a few words per line, so the label and toggle share a row and the overview
+   takes the one beneath. */
+.about-body-groups .about-subteam-group summary {
+  grid-template-areas:
+    "label toggle"
+    "overview overview";
+  grid-template-columns: 1fr auto;
+}
+
+.about-body-groups .about-subteam-label {
+  grid-area: label;
+}
+
+.about-body-groups .about-subteam-overview {
+  grid-area: overview;
+}
+
+.about-body-groups .about-subteam-toggle {
+  grid-area: toggle;
+}
+
+.about-body-on-dark .about-subteam-group,
+.about-body-on-dark .about-subteam-group:last-of-type {
+  border-color: rgba(247, 251, 252, .22);
+}
+
+.about-body-on-dark .about-subteam-label {
+  color: rgba(247, 251, 252, .55);
+}
+
+.about-body-on-dark .about-subteam-overview {
+  color: rgba(247, 251, 252, .82);
+}
+
+.about-body-on-dark .about-subteam-toggle {
+  color: var(--acid);
+}
+
+.about-body-on-dark .about-subteam-group summary:focus-visible {
+  outline-color: var(--acid);
+}
+
+.about-body-on-dark .about-subteams {
+  border-top-color: rgba(247, 251, 252, .14);
+}
+
+.about-body-on-dark .about-subteams li:not(:last-child) {
+  border-bottom-color: rgba(247, 251, 252, .14);
+}
+
+.about-body-on-dark .about-subteams h3 {
+  color: var(--acid);
+}
+
+.about-body-on-dark .about-subteams p {
+  color: rgba(247, 251, 252, .74);
+}
+
+.about-connect {
+  background: var(--blue);
+  color: white;
+  padding: clamp(4.5rem, 9vw, 8rem) clamp(1.25rem, 8vw, 9rem);
+}
+
+.about-connect .section-label {
+  color: var(--acid);
+}
+
+.about-connect h2 {
+  font-family: 'Manrope', sans-serif;
+  font-size: clamp(2.2rem, 5vw, 4rem);
+  font-weight: 500;
+  letter-spacing: -.05em;
+  line-height: 1;
+  margin: 1rem 0 1.5rem;
+}
+
+.about-connect-lead {
+  font-size: 1.08rem;
+  line-height: 1.7;
+  margin: 0;
+  max-width: 42rem;
+  opacity: .86;
+}
+
+.about-connect-list {
+  display: grid;
+  gap: 1rem;
+  /* Capped track, so the grid stays a row of cards rather than stretching a
+     single link across the full width while the other URLs are still unset. */
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 21rem));
+  list-style: none;
+  margin: 2.75rem 0 0;
+  padding: 0;
+}
+
+.about-connect-list a {
+  background: rgba(255, 255, 255, .09);
+  border: 1px solid rgba(255, 255, 255, .22);
+  border-radius: 1.25rem;
+  display: grid;
+  gap: .5rem;
+  height: 100%;
+  padding: 1.5rem 1.35rem;
+  transition: background 180ms ease, transform 180ms ease;
+}
+
+.about-connect-list a:hover,
+.about-connect-list a:focus-visible {
+  background: rgba(255, 255, 255, .17);
+  transform: translateY(-3px);
+}
+
+.about-connect-list strong {
+  align-items: center;
+  display: flex;
+  font-family: 'Manrope', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  gap: .6rem;
+  letter-spacing: -.02em;
+}
+
+.about-connect-list svg {
+  fill: none;
+  height: 1rem;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2;
+  width: 1rem;
+}
+
+.about-connect-list span {
+  font-size: .92rem;
+  line-height: 1.55;
+  opacity: .82;
+}
+
+.about-back {
+  border-bottom: 1px solid rgba(255, 255, 255, .5);
+  display: inline-block;
+  font-weight: 700;
+  margin-top: 3rem;
+  padding-bottom: .35rem;
+}
+
+@media (max-width: 1080px) {
+  .about-body-on-dark {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 800px) {
+  .organiser,
+  .about-hero,
+  .about-section {
+    grid-template-columns: 1fr;
+  }
+
+  .about-subteams li {
+    grid-template-columns: 1fr;
+  }
+
+  .about-subteam-group summary {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about-subteam-toggle svg {
+    transition: none;
+  }
+
+  .about-connect-list a {
+    transition: none;
+  }
+
+  .about-connect-list a:hover,
+  .about-connect-list a:focus-visible {
+    transform: none;
+  }
+}

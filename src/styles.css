@@ -3345,9 +3345,9 @@ footer {
 .about-hero-mark {
   display: block;
   height: auto;
-  /* The source is 152px square, so the ceiling is kept close to that to
-     avoid upscaling it into softness. A 2x asset could go larger. */
-  width: clamp(8rem, 15vw, 11rem);
+  /* The source is 608px square, so this ceiling is still a downscale and
+     stays crisp on standard and retina displays alike. */
+  width: clamp(9rem, 18vw, 15rem);
 }
 
 .about-section {

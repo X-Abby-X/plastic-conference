@@ -47,17 +47,17 @@ const subteams = [
   {
     group: 'Technical',
     teams: [
-      ['Wet lab', 'Builds and tests the enzymes at the bench.'],
-      ['Dry lab', 'Handles the computational side: modelling, design, and analysis.'],
-      ['Hardware', 'Builds the physical system the enzymes have to work inside.'],
+      ['Dry lab', 'Mines the PETadex database and trains machine learning models to design condition-specific, room-temperature PETases.'],
+      ['Wet lab', 'Develops high-throughput assays to recombine enzyme fragments and test plastic degradation activity.'],
+      ['Hardware', 'Builds an array of low-cost, open-source bioreactors to measure enzyme activity under varying environmental conditions.'],
     ],
   },
   {
     group: 'Non-technical',
     teams: [
-      ['Human practices', 'Keeps the project accountable to the people it claims to serve.'],
-      ['Venture', 'Asks what it would take for the work to exist outside a competition.'],
-      ['Outreach', 'Takes the science to people outside the lab, and brings their questions back.'],
+      ['Human practices', 'Maps regulatory pathways and engages stakeholders to translate real-world constraints into technical project decisions.'],
+      ['Venture', 'Validates market verticals, builds commercial strategies, and secures fundraising for real-world deployment.'],
+      ['Outreach', 'Drives public communication, external branding, and internal team culture.'],
     ],
   },
 ]

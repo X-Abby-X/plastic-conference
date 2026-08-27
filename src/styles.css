@@ -3332,29 +3332,19 @@ footer {
   grid-template-columns: 1fr;
 }
 
-/* The logo sits to the left of the title rather than in a panel of its own. The
-   light asset's white wordmark reads directly on the navy hero, so no tile. */
+/* The title is the artwork itself, so the h1 is just a wrapper for it. The
+   asset is white on transparent, which reads directly on the navy hero. */
 .about-hero-title {
-  align-items: center;
-  display: flex;
-  flex-wrap: wrap;
-  gap: clamp(1rem, 2.5vw, 2.25rem);
-  margin-top: 1.5rem;
-}
-
-/* The margin moves to the flex row above, so both items share a top edge. */
-.about-hero-title h1 {
-  margin: 0;
+  display: block;
+  margin: 1.5rem 0 0;
 }
 
 .about-hero-mark {
   display: block;
-  flex: 0 0 auto;
-  /* Matches the h1's rendered height. The h1 is a two-row grid at
-     line-height .93, so its height is 2 x .93 = 1.86 of its own font size,
-     and reusing that clamp keeps the logo locked to the type as it scales. */
-  height: calc(1.86 * clamp(3.2rem, 8vw, 7rem));
-  width: auto;
+  height: auto;
+  /* The source is 152px square, so the ceiling is kept close to that to
+     avoid upscaling it into softness. A 2x asset could go larger. */
+  width: clamp(8rem, 15vw, 11rem);
 }
 
 .about-section {

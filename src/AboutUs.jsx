@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import ConferenceNav from './ConferenceNav'
 import igemLogo from './assets/igem-logo-light.svg'
+import igemToronto from './assets/igem-toronto.png'
 
 // Outbound links for the "Get involved" block. Each entry only renders if its
 // `url` is set, so an unknown destination is simply absent rather than broken.
@@ -96,15 +97,10 @@ export default function AboutUs() {
         <header className={`about-hero${TEAM_PHOTO ? '' : ' about-hero-solo'}`}>
           <div className="about-hero-copy">
             <p className="section-label">The organization behind the conference</p>
-            <div className="about-hero-title">
-              {/* Decorative: the h1 beside it already reads "iGEM Toronto", so an
-                  alt here would make screen readers announce the name twice. */}
-              <img className="about-hero-mark" src={igemLogo} alt="" />
-              <h1>
-                iGEM
-                <span>Toronto.</span>
-              </h1>
-            </div>
+            {/* The artwork is the title, so its alt carries the h1's text. */}
+            <h1 className="about-hero-title">
+              <img className="about-hero-mark" src={igemToronto} alt="iGEM Toronto" />
+            </h1>
             <p className="about-hero-lead">
               Students at the University of Toronto passionate about tackling the microplastics crisis, and the people who convened this conference.
             </p>

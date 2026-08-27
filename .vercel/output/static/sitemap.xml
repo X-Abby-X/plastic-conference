@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Only the homepage is listed. The problem-statement page lives at the fragment URL
+  "#/problem", and crawlers strip fragments, so it is not separately indexable and must
+  not be listed here. Add it once it moves to a real path (/problem).
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://www.uoftmicroplastics.ca/</loc>
+    <lastmod>2026-07-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+</urlset>

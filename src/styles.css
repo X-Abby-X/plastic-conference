@@ -3372,7 +3372,8 @@ footer {
   max-width: 22rem;
 }
 
-.about-body > p {
+.about-body > p,
+.about-body-copy > p {
   color: rgba(16, 39, 68, .82);
   font-size: 1.08rem;
   line-height: 1.75;
@@ -3380,7 +3381,8 @@ footer {
   max-width: 44rem;
 }
 
-.about-body > p:last-child {
+.about-body > p:last-child,
+.about-body-copy > p:last-child {
   margin-bottom: 0;
 }
 
@@ -3567,13 +3569,44 @@ footer {
    are recoloured for the dark ground. Everything here mirrors a rule in
    the light-ground block above.
    --------------------------------------------------------------------- */
+/* Copy on the left, the subteam groups alongside it on the right. */
 .about-body-on-dark {
+  align-items: start;
+  display: grid;
+  gap: clamp(2rem, 4vw, 4.5rem);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
   margin-top: clamp(2.5rem, 5vw, 4rem);
-  max-width: 58rem;
 }
 
-.about-body-on-dark > p {
+.about-body-on-dark .about-body-copy > p {
   color: rgba(247, 251, 252, .78);
+}
+
+/* The first group's rule should line up with the top of the copy. */
+.about-body-groups .about-subteam-group:first-of-type {
+  margin-top: 0;
+}
+
+/* In a column this narrow the three-across summary squeezes the overview to
+   a few words per line, so the label and toggle share a row and the overview
+   takes the one beneath. */
+.about-body-groups .about-subteam-group summary {
+  grid-template-areas:
+    "label toggle"
+    "overview overview";
+  grid-template-columns: 1fr auto;
+}
+
+.about-body-groups .about-subteam-label {
+  grid-area: label;
+}
+
+.about-body-groups .about-subteam-overview {
+  grid-area: overview;
+}
+
+.about-body-groups .about-subteam-toggle {
+  grid-area: toggle;
 }
 
 .about-body-on-dark .about-subteam-group,
@@ -3700,6 +3733,12 @@ footer {
   font-weight: 700;
   margin-top: 3rem;
   padding-bottom: .35rem;
+}
+
+@media (max-width: 1080px) {
+  .about-body-on-dark {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 800px) {

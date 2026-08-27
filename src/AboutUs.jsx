@@ -105,50 +105,54 @@ export default function AboutUs() {
               <img className="about-hero-mark" src={igemToronto} alt="iGEM Toronto" />
             </h1>
             <p className="about-hero-lead">
-              A student team, doing real research on a student timeline.
+              We are a synthetic-biology student research team, studying plastic-degrading enzymes.
             </p>
 
             <div className="about-body about-body-on-dark">
-            <p>
-              We are a synthetic-biology student research team, studying plastic-degrading
-              enzymes. We are students at the University of Toronto, around forty of us in
-              a given year, drawn from life sciences, engineering, computer science, and
-              further afield.
-            </p>
-            <p>
-              iGEM itself is an annual international competition: student teams spend a year
-              designing a biological system to address a real problem, then present it to
-              a global community of researchers each fall. The work is genuine research,
-              run by students, on a student timeline.
-            </p>
-            <p>
-              Six subteams, one project. The constraints human practices surfaces become
-              design targets for dry lab; the candidates dry lab designs become assays for
-              wet lab and bioreactors for hardware; what comes back out sends everyone
-              upstream again. Venture and outreach carry the result beyond the lab. The
-              split below is how we divide the work, not how we think about it.
-            </p>
+              <div className="about-body-copy">
+                <p>
+                  We are students at the University of Toronto,
+                  around forty of us in a given year, drawn from life sciences,
+                  engineering, computer science, and further afield.
+                </p>
+                <p>
+                  iGEM itself is an annual international competition: student teams spend a
+                  year designing a biological system to address a real problem, then present
+                  it to a global community of researchers each fall. The work is genuine
+                  research, run by students, on a student timeline.
+                </p>
+                <p>
+                  Six subteams, one project. The constraints human practices surfaces
+                  become design targets for dry lab; the candidates dry lab designs become
+                  assays for wet lab and bioreactors for hardware; what comes back out
+                  sends everyone upstream again. Venture and outreach carry the result
+                  beyond the lab. The split here is how we divide the work, not how we
+                  think about it.
+                </p>
+              </div>
 
-            {subteams.map(({ group, summary, teams }) => (
-              <details className="about-subteam-group" key={group}>
-                <summary>
-                  <span className="about-subteam-label">{group}</span>
-                  <span className="about-subteam-overview">{summary}</span>
-                  <span className="about-subteam-toggle">
-                    <span>{`${teams.length} subteams`}</span>
-                    <ChevronIcon />
-                  </span>
-                </summary>
-                <ul className="about-subteams">
-                  {teams.map(([name, text]) => (
-                    <li key={name}>
-                      <h3>{name}</h3>
-                      <p>{text}</p>
-                    </li>
-                  ))}
-                </ul>
-              </details>
-            ))}
+              <div className="about-body-groups">
+                {subteams.map(({ group, summary, teams }) => (
+                  <details className="about-subteam-group" key={group}>
+                    <summary>
+                      <span className="about-subteam-label">{group}</span>
+                      <span className="about-subteam-overview">{summary}</span>
+                      <span className="about-subteam-toggle">
+                        <span>{`${teams.length} subteams`}</span>
+                        <ChevronIcon />
+                      </span>
+                    </summary>
+                    <ul className="about-subteams">
+                      {teams.map(([name, text]) => (
+                        <li key={name}>
+                          <h3>{name}</h3>
+                          <p>{text}</p>
+                        </li>
+                      ))}
+                    </ul>
+                  </details>
+                ))}
+              </div>
             </div>
           </div>
 

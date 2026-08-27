@@ -3381,8 +3381,38 @@ footer {
   margin-bottom: 0;
 }
 
+/* Each group is a disclosure: collapsed it is an overview line, opened it
+   reveals that group's roster. */
 .about-subteam-group {
+  border-top: 1px solid rgba(8, 53, 129, .18);
+}
+
+.about-subteam-group:first-of-type {
   margin-top: 2.25rem;
+}
+
+.about-subteam-group:last-of-type {
+  border-bottom: 1px solid rgba(8, 53, 129, .18);
+}
+
+.about-subteam-group summary {
+  align-items: center;
+  cursor: pointer;
+  display: grid;
+  gap: .5rem 2rem;
+  grid-template-columns: minmax(9rem, 1fr) 2.4fr auto;
+  list-style: none;
+  padding: 1.4rem 0;
+}
+
+/* Suppress the native disclosure triangle in both engines. */
+.about-subteam-group summary::-webkit-details-marker {
+  display: none;
+}
+
+.about-subteam-group summary:focus-visible {
+  outline: 2px solid var(--orange);
+  outline-offset: 4px;
 }
 
 .about-subteam-label {
@@ -3391,20 +3421,52 @@ footer {
   font-size: .72rem;
   font-weight: 800;
   letter-spacing: .14em;
-  margin: 0 0 .75rem;
   text-transform: uppercase;
 }
 
+.about-subteam-overview {
+  color: rgba(16, 39, 68, .82);
+  line-height: 1.6;
+}
+
+.about-subteam-toggle {
+  align-items: center;
+  color: var(--blue);
+  display: flex;
+  font-size: .8rem;
+  font-weight: 700;
+  gap: .5rem;
+  white-space: nowrap;
+}
+
+.about-subteam-toggle svg {
+  fill: none;
+  height: 1.1rem;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2;
+  transition: transform 200ms ease;
+  width: 1.1rem;
+}
+
+.about-subteam-group[open] .about-subteam-toggle svg {
+  transform: rotate(180deg);
+}
+
 .about-subteams {
-  border-top: 1px solid rgba(8, 53, 129, .18);
+  border-top: 1px solid rgba(8, 53, 129, .12);
   display: grid;
   list-style: none;
-  margin: 0;
+  margin: 0 0 1.25rem;
   padding: 0;
 }
 
-.about-subteams li {
+.about-subteams li:not(:last-child) {
   border-bottom: 1px solid rgba(8, 53, 129, .18);
+}
+
+.about-subteams li {
   display: grid;
   gap: .35rem 2rem;
   grid-template-columns: minmax(9rem, 1fr) 2.4fr;
@@ -3600,12 +3662,20 @@ footer {
     grid-template-columns: 1fr;
   }
 
+  .about-subteam-group summary {
+    grid-template-columns: 1fr;
+  }
+
   .about-arc {
     grid-template-columns: 1fr;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .about-subteam-toggle svg {
+    transition: none;
+  }
+
   .about-connect-list a {
     transition: none;
   }

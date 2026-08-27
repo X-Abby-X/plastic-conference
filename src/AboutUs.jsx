@@ -42,11 +42,12 @@ const arc = [
   ['Iterate', 'The results send us back to the catalogue with better questions.'],
 ]
 
-// Six subteams in two groups. The group label is rendered, so the split
-// between technical and everything else stays legible at a glance.
+// Six subteams in two groups. Each group collapses to its `summary` line, so
+// the page reads as an overview until someone opens a group for the roster.
 const subteams = [
   {
     group: 'Technical',
+    summary: 'Designs the enzyme, tests it at the bench, and builds the hardware it runs in.',
     teams: [
       ['Dry lab', 'Mines the PETadex database and trains machine learning models to design condition-specific, room-temperature PETases.'],
       ['Wet lab', 'Develops high-throughput assays to recombine enzyme fragments and test plastic degradation activity.'],
@@ -55,6 +56,7 @@ const subteams = [
   },
   {
     group: 'Non-technical',
+    summary: 'Handles regulation and stakeholders, commercial strategy, and public communication.',
     teams: [
       ['Human practices', 'Maps regulatory pathways and engages stakeholders to translate real-world constraints into technical project decisions.'],
       ['Venture', 'Validates market verticals, builds commercial strategies, and secures fundraising for real-world deployment.'],
@@ -67,6 +69,14 @@ function ArrowIcon() {
   return (
     <svg viewBox="0 0 24 24" aria-hidden="true">
       <path d="M5 12h14M13 6l6 6-6 6" />
+    </svg>
+  )
+}
+
+function ChevronIcon() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M6 9l6 6 6-6" />
     </svg>
   )
 }
@@ -114,9 +124,10 @@ export default function AboutUs() {
 
           <div className="about-body">
             <p>
-              iGEM Toronto is a student-led synthetic biology team at the University of
-              Toronto. We are undergraduates, around forty of us in a given year, drawn
-              from life sciences, engineering, computer science, and further afield.
+              We are a synthetic-biology student research team, studying plastic-degrading
+              enzymes. We are undergraduates at the University of Toronto, around forty of
+              us in a given year, drawn from life sciences, engineering, computer science,
+              and further afield.
             </p>
             <p>
               iGEM itself is an annual international competition: student teams spend a year
@@ -129,9 +140,16 @@ export default function AboutUs() {
               on each other more than the split suggests.
             </p>
 
-            {subteams.map(({ group, teams }) => (
-              <div className="about-subteam-group" key={group}>
-                <p className="about-subteam-label">{group}</p>
+            {subteams.map(({ group, summary, teams }) => (
+              <details className="about-subteam-group" key={group}>
+                <summary>
+                  <span className="about-subteam-label">{group}</span>
+                  <span className="about-subteam-overview">{summary}</span>
+                  <span className="about-subteam-toggle">
+                    <span>{`${teams.length} subteams`}</span>
+                    <ChevronIcon />
+                  </span>
+                </summary>
                 <ul className="about-subteams">
                   {teams.map(([name, text]) => (
                     <li key={name}>
@@ -140,7 +158,7 @@ export default function AboutUs() {
                     </li>
                   ))}
                 </ul>
-              </div>
+              </details>
             ))}
           </div>
         </section>

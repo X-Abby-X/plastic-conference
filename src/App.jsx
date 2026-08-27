@@ -758,7 +758,7 @@ function App() {
         </section>
 
         <section className="organiser" id="about-us" aria-labelledby="organiser-title">
-          <IgemLockup className="organiser-lockup" />
+          <IgemLockup className="organiser-lockup" onLight />
           <div className="organiser-copy">
             <p className="section-label">Who we are</p>
             <h2 id="organiser-title">The team behind the conference.</h2>

@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import ConferenceNav from './ConferenceNav'
+import igemLogo from './assets/igem-logo-light.svg'
 
 // Outbound links for the "Get involved" block. Each entry only renders if its
 // `url` is set, so an unknown destination is simply absent rather than broken.
@@ -100,7 +101,9 @@ export default function AboutUs() {
               <img src={TEAM_PHOTO} alt="The iGEM Toronto team" />
             </figure>
           ) : (
-            <IgemLockup className="about-hero-lockup" />
+            <figure className="about-hero-logo">
+              <img src={igemLogo} alt="iGEM Toronto" />
+            </figure>
           )}
         </header>
 
@@ -117,7 +120,7 @@ export default function AboutUs() {
               from life sciences, engineering, computer science, and further afield.
             </p>
             <p>
-              iGEM itself is an international competition: student teams spend a year
+              iGEM itself is an annual international competition: student teams spend a year
               designing a biological system to address a real problem, then present it to
               a global community of researchers each fall. The work is genuine research,
               run by students, on a student timeline.
@@ -261,17 +264,21 @@ export default function AboutUs() {
   )
 }
 
-// Wordmark used on the homepage block and as the page header's stand-in until a
-// team photo exists. Drawn in CSS rather than shipped as an image so it stays
-// crisp and inherits the surrounding colour.
-export function IgemLockup({ className = '' }) {
+// Logo lockup used on the homepage block and as the page header's stand-in until
+// a team photo exists. The artwork already contains the "iGEM" wordmark, so the
+// text beside it reads "Toronto" only; together they say "iGEM Toronto".
+//
+// The asset is the light variant: a green mark plus a WHITE wordmark. It only
+// reads on a dark ground, so `onLight` puts it on an ink tile for use against
+// the paper background. Swap in a dark variant and that tile can go away.
+export function IgemLockup({ className = '', onLight = false }) {
   return (
-    <div className={`igem-lockup ${className}`.trim()}>
-      <span className="igem-lockup-mark" aria-hidden="true">
-        iG
+    <div className={`igem-lockup ${onLight ? 'igem-lockup-on-light' : ''} ${className}`.trim()}>
+      <span className="igem-lockup-mark">
+        <img src={igemLogo} alt="iGEM" />
       </span>
       <span className="igem-lockup-words">
-        <strong>iGEM Toronto</strong>
+        <strong>Toronto</strong>
         <small>University of Toronto · Synthetic Biology</small>
       </span>
     </div>

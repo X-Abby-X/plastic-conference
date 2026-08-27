@@ -13,5 +13,7 @@ src/problem-statement/*.png
 !src/problem-statement/toronto.png
 !src/problem-statement/conf_logo_text.png
 docs/seo-deployment-handoff.md
-.vercel
+# Vercel CLI state and prebuilt output must never be committed. If
+# `.vercel/output` is tracked, Vercel skips `npm run build` and deploys it as-is.
+.vercel/
 .env*

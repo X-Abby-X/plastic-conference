@@ -34,15 +34,6 @@ const CONNECT = [
 // the logo beside the title; setting it adds a second column for the image.
 const TEAM_PHOTO = null
 
-// The project loop described in "What we do". Kept as data so the steps stay
-// parallel in length and tone.
-const arc = [
-  ['Search', 'We look through the catalogue for enzyme sequences that might do what we need.'],
-  ['Narrow', 'We model the promising ones and cut the list down to what is worth building.'],
-  ['Test', 'Wet lab makes the survivors and measures what they actually do to plastic.'],
-  ['Iterate', 'The results send us back to the catalogue with better questions.'],
-]
-
 // Six subteams in two groups. Each group collapses to its `summary` line, so
 // the page reads as an overview until someone opens a group for the roster.
 const subteams = [
@@ -112,22 +103,17 @@ export default function AboutUs() {
               <div className="about-body-copy">
                 <p>
                   We are students at the University of Toronto,
-                  around forty of us in a given year, drawn from life sciences,
+                  around sixty of us in a given year, drawn from life sciences,
                   engineering, computer science, among other disciplines.
                 </p>
                 <p>
                   iGEM itself is an annual international competition: Student teams spend a
-                  year designing a biological system to address a real problem, then present
-                  it to a global community of researchers each fall. The work is genuine
-                  research, run by students, on a student timeline.
+                  year designing a synthetic biology solution to a real-world problem, then present
+                  it to a global community of researchers each fall.
                 </p>
                 <p>
-                  Six subteams, one project. The constraints human practices surfaces
-                  become design targets for dry lab; the candidates dry lab designs become
-                  assays for wet lab and bioreactors for hardware; what comes back out
-                  sends everyone upstream again. Venture and outreach carry the result
-                  beyond the lab. The split here is how we divide the work, not how we
-                  think about it.
+                  We've built six subteams, working on one project, working together to tackle the problem of
+                  microplastics along six distinct dimensions.
                 </p>
               </div>
 
@@ -163,54 +149,6 @@ export default function AboutUs() {
             </figure>
           )}
         </header>
-
-        <section className="about-section about-work" aria-labelledby="about-work-title">
-          <div className="about-heading">
-            <p className="section-label">What we do</p>
-            <h2 id="about-work-title">Teaching an enzyme to work outside the lab.</h2>
-          </div>
-
-          <div className="about-body">
-            <div className="about-project">
-              <p className="about-project-name">PetaBite</p>
-              <p>
-                Our project starts with a stubborn material. PET is the plastic in water
-                bottles, food packaging, and polyester textiles. It is durable by design,
-                which is exactly what makes it a problem once it fragments into the
-                environment.
-              </p>
-              <p>
-                There is a family of enzymes, PETases, that can cut PET apart. The catch is
-                that most of them work well only in narrow, carefully controlled
-                conditions: the right temperature, the right chemistry, nothing like a
-                river or a wastewater outflow. We are engineering PETases that hold up
-                outside those conditions.
-              </p>
-            </div>
-
-            <div className="about-project">
-              <p className="about-project-name">PETadex</p>
-              <p>
-                Doing that means knowing what is already out there. So we built a catalogue
-                of plastic-degrading enzyme sequences, assembled and organized so that we
-                can actually search it, and so that a candidate can be chosen for a reason
-                rather than by chance.
-              </p>
-            </div>
-
-            <ol className="about-arc" aria-label="How the project moves">
-              {arc.map(([step, text], index) => (
-                <li key={step}>
-                  <span aria-hidden="true">{`0${index + 1}`}</span>
-                  <h3>{step}</h3>
-                  <p>{text}</p>
-                </li>
-              ))}
-            </ol>
-
-            <p className="about-note">Then we go again.</p>
-          </div>
-        </section>
 
         <section className="about-section about-why" aria-labelledby="about-why-title">
           <div className="about-heading">

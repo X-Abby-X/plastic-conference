@@ -3360,10 +3360,6 @@ footer {
   padding: clamp(4.5rem, 9vw, 8rem) clamp(1.25rem, 8vw, 9rem);
 }
 
-.about-work {
-  background: #eef5f7;
-}
-
 
 .about-heading h2 {
   font-family: 'Manrope', sans-serif;
@@ -3494,76 +3490,6 @@ footer {
   color: rgba(16, 39, 68, .74);
   line-height: 1.6;
   margin: 0;
-}
-
-.about-project {
-  margin-bottom: 2.5rem;
-}
-
-.about-project-name {
-  color: var(--orange);
-  font-family: 'Manrope', sans-serif;
-  font-size: .78rem;
-  font-weight: 800;
-  letter-spacing: .14em;
-  margin: 0 0 .9rem;
-  text-transform: uppercase;
-}
-
-.about-project p:not(.about-project-name) {
-  color: rgba(16, 39, 68, .82);
-  font-size: 1.08rem;
-  line-height: 1.75;
-  margin: 0 0 1.35rem;
-  max-width: 44rem;
-}
-
-.about-arc {
-  display: grid;
-  gap: 1rem;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.about-arc li {
-  background: var(--paper);
-  border-radius: 1.25rem;
-  padding: 1.5rem 1.35rem;
-}
-
-.about-arc span {
-  color: var(--orange);
-  font-family: 'Manrope', sans-serif;
-  font-size: .74rem;
-  font-weight: 800;
-  letter-spacing: .1em;
-}
-
-.about-arc h3 {
-  color: var(--ink);
-  font-family: 'Manrope', sans-serif;
-  font-size: 1.15rem;
-  font-weight: 700;
-  letter-spacing: -.03em;
-  margin: .8rem 0 .5rem;
-}
-
-.about-arc p {
-  color: rgba(16, 39, 68, .74);
-  font-size: .92rem;
-  line-height: 1.55;
-  margin: 0;
-}
-
-.about-note {
-  color: var(--ink);
-  font-family: 'Manrope', sans-serif;
-  font-size: 1.25rem;
-  font-weight: 600;
-  letter-spacing: -.03em;
-  margin: 2.5rem 0 0;
 }
 
 
@@ -3761,8 +3687,6 @@ footer {
     grid-template-columns: 1fr;
   }
 
-
-
   .about-subteams li {
     grid-template-columns: 1fr;
   }
@@ -3771,10 +3695,6 @@ footer {
     grid-template-columns: 1fr;
   }
 
-
-  .about-arc {
-    grid-template-columns: 1fr;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {

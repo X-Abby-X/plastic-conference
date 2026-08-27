@@ -3361,9 +3361,6 @@ footer {
   background: #eef5f7;
 }
 
-.about-who .about-body {
-  grid-column: 2;
-}
 
 .about-heading h2 {
   font-family: 'Manrope', sans-serif;
@@ -3564,6 +3561,58 @@ footer {
   margin: 2.5rem 0 0;
 }
 
+
+/* ---------------------------------------------------------------------
+   Who we are now sits inside the navy header, so its body and disclosures
+   are recoloured for the dark ground. Everything here mirrors a rule in
+   the light-ground block above.
+   --------------------------------------------------------------------- */
+.about-body-on-dark {
+  margin-top: clamp(2.5rem, 5vw, 4rem);
+  max-width: 58rem;
+}
+
+.about-body-on-dark > p {
+  color: rgba(247, 251, 252, .78);
+}
+
+.about-body-on-dark .about-subteam-group,
+.about-body-on-dark .about-subteam-group:last-of-type {
+  border-color: rgba(247, 251, 252, .22);
+}
+
+.about-body-on-dark .about-subteam-label {
+  color: rgba(247, 251, 252, .55);
+}
+
+.about-body-on-dark .about-subteam-overview {
+  color: rgba(247, 251, 252, .82);
+}
+
+.about-body-on-dark .about-subteam-toggle {
+  color: var(--acid);
+}
+
+.about-body-on-dark .about-subteam-group summary:focus-visible {
+  outline-color: var(--acid);
+}
+
+.about-body-on-dark .about-subteams {
+  border-top-color: rgba(247, 251, 252, .14);
+}
+
+.about-body-on-dark .about-subteams li:not(:last-child) {
+  border-bottom-color: rgba(247, 251, 252, .14);
+}
+
+.about-body-on-dark .about-subteams h3 {
+  color: var(--acid);
+}
+
+.about-body-on-dark .about-subteams p {
+  color: rgba(247, 251, 252, .74);
+}
+
 .about-connect {
   background: var(--blue);
   color: white;
@@ -3670,10 +3719,6 @@ footer {
     grid-template-columns: 1fr;
   }
 
-  /* Single column, so the pinned track no longer applies. */
-  .about-who .about-body {
-    grid-column: auto;
-  }
 
   .about-arc {
     grid-template-columns: 1fr;

@@ -94,7 +94,10 @@ export default function AboutUs() {
       <ConferenceNav current="about" />
 
       <main>
-        <header className={`about-hero${TEAM_PHOTO ? '' : ' about-hero-solo'}`}>
+        <header
+          className={`about-hero${TEAM_PHOTO ? '' : ' about-hero-solo'}`}
+          aria-label="Who we are"
+        >
           <div className="about-hero-copy">
             <p className="section-label">The organization behind the conference</p>
             {/* The artwork is the title, so its alt carries the h1's text. */}
@@ -104,17 +107,8 @@ export default function AboutUs() {
             <p className="about-hero-lead">
               A student team, doing real research on a student timeline.
             </p>
-          </div>
 
-          {TEAM_PHOTO && (
-            <figure className="about-hero-figure">
-              <img src={TEAM_PHOTO} alt="The iGEM Toronto team" />
-            </figure>
-          )}
-        </header>
-
-        <section className="about-section about-who" aria-label="Who we are">
-          <div className="about-body">
+            <div className="about-body about-body-on-dark">
             <p>
               We are a synthetic-biology student research team, studying plastic-degrading
               enzymes. We are students at the University of Toronto, around forty of us in
@@ -155,8 +149,15 @@ export default function AboutUs() {
                 </ul>
               </details>
             ))}
+            </div>
           </div>
-        </section>
+
+          {TEAM_PHOTO && (
+            <figure className="about-hero-figure">
+              <img src={TEAM_PHOTO} alt="The iGEM Toronto team" />
+            </figure>
+          )}
+        </header>
 
         <section className="about-section about-work" aria-labelledby="about-work-title">
           <div className="about-heading">

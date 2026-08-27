@@ -102,7 +102,7 @@ export default function AboutUs() {
               <img className="about-hero-mark" src={igemToronto} alt="iGEM Toronto" />
             </h1>
             <p className="about-hero-lead">
-              Students at the University of Toronto passionate about tackling the microplastics crisis, and the people who convened this conference.
+              A student team, doing real research on a student timeline.
             </p>
           </div>
 
@@ -113,12 +113,7 @@ export default function AboutUs() {
           )}
         </header>
 
-        <section className="about-section about-who" aria-labelledby="about-who-title">
-          <div className="about-heading">
-            <p className="section-label">Who we are</p>
-            <h2 id="about-who-title">A student team, doing real research on a student timeline.</h2>
-          </div>
-
+        <section className="about-section about-who" aria-label="Who we are">
           <div className="about-body">
             <p>
               We are a synthetic-biology student research team, studying plastic-degrading

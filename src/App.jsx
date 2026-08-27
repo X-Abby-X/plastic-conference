@@ -5,6 +5,7 @@ import ConferenceNav from './ConferenceNav'
 import trashTeamLogo from './assets/Logo-final-trash-team_dark_background.webp'
 import assuLogo from './assets/NewAssuLogo.JPG'
 import fraserRiver from './assets/frjr_upscaled.png'
+import longos from './assets/Longos_70th_Horiz_Logo_Colour.png'
 import chelseaRochman from './assets/speakers/chelsea-rochman.jpg'
 import miriamDiamond from './assets/speakers/miriam-diamond.jpg'
 import madeleineMilne from './assets/speakers/madeleine-milne.png'
@@ -64,6 +65,10 @@ const sessions = [
     time: '12:15–1:45',
     title: 'Lunch + Student Poster Session and Judging',
     type: 'Break + Exhibition',
+    // Longo's sponsors the lunch itself rather than speaking, so the list gets
+    // a lead-in to say so.
+    participantsLead: 'Supported by',
+    participants: ['Longo’s'],
   },
   {
     time: '1:45–2:30',
@@ -134,7 +139,16 @@ const partners = [
     image: fraserRiver,
     accent: 'blue',
     url: 'https://frjunk.ca/?utm_source=ig&utm_medium=social&utm_content=link_in_bio',
-  }
+  },
+  {
+    name: 'Longo’s',
+    relationship: 'Supported By',
+    description:
+      'Longo’s is an Ontario-based grocery retailer that has been fueling happier and healthier lives for nearly 70 years. Guided by its “Treating You Like Family” culture, Longo’s is committed to delivering exceptional food and service. Through support for local organizations, community partnerships, and sustainability initiatives, Longo’s is proud to work with groups that share its values of Environmental Stewardship, Responsible Sourcing, and Healthy, Happy People!',
+    image: longos,
+    accent: 'orange',
+    url: 'https://www.longos.com/',
+  },
 ]
 
 const speakers = [
@@ -791,13 +805,18 @@ function App() {
                   <h3>{session.title}</h3>
                   {session.participants && (
                     <ul className="session-participants" aria-label={`${session.title} participants`}>
-                      {session.participants.map((participant) => {
+                      {session.participants.map((participant, participantIndex) => {
                         const preview = previewsByName.get(participant)
                         return (
                           <li
                             key={participant}
                             className={preview ? 'has-participant-preview' : undefined}
                           >
+                            {participantIndex === 0 && session.participantsLead && (
+                              <span className="participant-lead">
+                                {session.participantsLead}{' '}
+                              </span>
+                            )}
                             {preview ? (
                               <>
                                 <a
@@ -901,7 +920,7 @@ function App() {
               <h2>Our Partners</h2>
             </div>
             <p className="partner-intro">
-              Three collaborators helping turn research, awareness, and action
+              Four collaborators helping turn research, awareness, and action
               into something people can actually build on.
             </p>
           </div>

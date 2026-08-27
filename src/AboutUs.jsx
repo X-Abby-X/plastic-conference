@@ -57,6 +57,134 @@ const subteams = [
   },
 ]
 
+// The confluence figure in "Why we hosted". Every field at U of T already
+// working on plastics is a tributary; ours is first, and reads thinner than
+// the rest on purpose — a useful place to stand, but a narrow one.
+const strands = [
+  { label: 'Polymer chemistry', note: '(where we stand)', color: 'var(--ink)', width: 2.2 },
+  { label: 'Ecology', color: 'var(--blue)' },
+  { label: 'Earth science', color: 'var(--orange)' },
+  { label: 'Engineering', color: 'rgba(8, 53, 129, .62)' },
+  { label: 'Public health', color: 'rgba(50, 107, 153, .78)' },
+  { label: 'Policy', color: 'rgba(77, 151, 169, .85)' },
+  { label: 'Communities', color: 'rgba(16, 39, 68, .5)' },
+]
+
+// Geometry in viewBox units. Strands run straight and separate as far as
+// `split`, bend between `split` and `join`, then run as one braid to `end`.
+const flow = {
+  label: 222,
+  start: 240,
+  split: 600,
+  join: 860,
+  end: 1055,
+  top: 90,
+  gap: 65,
+  centre: 285,
+  spread: 6,
+}
+
+// A strand's lane on the left, and the path from that lane into the braid.
+function strandGeometry(index) {
+  const y = flow.top + index * flow.gap
+  const merged = flow.centre + (index - (strands.length - 1) / 2) * flow.spread
+  return {
+    y,
+    d: `M${flow.start} ${y}H${flow.split}C${flow.split + 130} ${y} ${flow.join - 130} ${merged} ${flow.join} ${merged}H${flow.end}`,
+  }
+}
+
+function ConfluenceDiagram() {
+  return (
+    <figure className="confluence">
+      <div className="confluence-frame">
+        <svg
+          viewBox="0 0 1300 560"
+          role="img"
+          aria-label="Seven strands — polymer chemistry, ecology, earth science, engineering, public health, policy and community organizations — running in parallel and separate, then converging into a single channel that enters one room in September 2026."
+        >
+          {/* The room the braid runs into, as a wash behind it. */}
+          <rect
+            className="confluence-room"
+            x={flow.join - 24}
+            y={flow.centre - 48}
+            width={flow.end - flow.join + 72}
+            height="96"
+            rx="48"
+          />
+
+          <line className="confluence-guide" x1={flow.split} y1="62" x2={flow.split} y2="518" />
+          <line className="confluence-guide" x1={flow.join} y1="62" x2={flow.join} y2="518" />
+
+          <text className="confluence-zone" x={flow.start} y="46">In parallel, in departments</text>
+          <text className="confluence-zone" x={flow.split + 18} y="46">Where they meet</text>
+          <text className="confluence-zone" x={flow.join + 18} y="46">In one room</text>
+
+          {strands.map((strand, index) => (
+            <path
+              key={strand.label}
+              className="confluence-strand"
+              d={strandGeometry(index).d}
+              stroke={strand.color}
+              strokeWidth={strand.width ?? 3}
+            />
+          ))}
+
+          {/* One bright pulse per strand, travelling downstream into the room.
+              `pathLength` normalises the strands so they all keep the same
+              pace whatever route they took to get there. */}
+          {strands.map((strand, index) => (
+            <path
+              key={`${strand.label}-pulse`}
+              className="confluence-pulse"
+              d={strandGeometry(index).d}
+              pathLength="1000"
+              style={{ animationDelay: `${index * 0.85}s` }}
+            />
+          ))}
+
+          {strands.map((strand, index) => {
+            const { y } = strandGeometry(index)
+            return (
+              <g key={`${strand.label}-label`}>
+                {strand.note && <circle className="confluence-source-ring" cx={flow.start} cy={y} r="9" />}
+                <circle cx={flow.start} cy={y} r="4" fill={strand.color} />
+                <text className="confluence-label" x={flow.label} y={y + 5}>
+                  {strand.label}
+                </text>
+                {strand.note && (
+                  <text className="confluence-note" x={flow.label} y={y + 24}>
+                    {strand.note}
+                  </text>
+                )}
+              </g>
+            )
+          })}
+
+          <rect
+            className="confluence-gate"
+            x={flow.end + 12}
+            y={flow.centre - 34}
+            width="9"
+            height="68"
+            rx="4.5"
+          />
+          <text className="confluence-room-title" x={flow.end + 38} y={flow.centre - 4}>
+            One room
+          </text>
+          <text className="confluence-room-note" x={flow.end + 38} y={flow.centre + 22}>
+            September 2026
+          </text>
+        </svg>
+      </div>
+      <figcaption>
+        Seven strands of the same problem. The poster session takes open abstracts on
+        purpose, so a first project stands beside an established one and both get read.
+      </figcaption>
+    </figure>
+  )
+}
+
 function ArrowIcon() {
   return (
     <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -180,6 +308,8 @@ export default function AboutUs() {
               they did not have before.
             </p>
           </div>
+
+          <ConfluenceDiagram />
         </section>
 
         <section className="about-connect" aria-labelledby="about-connect-title">

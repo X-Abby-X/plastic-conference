@@ -10,6 +10,8 @@ import chelseaRochman from './assets/speakers/chelsea-rochman.jpg'
 import miriamDiamond from './assets/speakers/miriam-diamond.jpg'
 import madeleineMilne from './assets/speakers/madeleine-milne.png'
 import karenWirsig from './assets/speakers/karen-wirsig.jpg'
+import karaLavenderLaw from './assets/speakers/kara-lavender-law.jpeg'
+import igemToronto from './assets/igem-toronto.png'
 
 // Minimal hash-based "router" (no dependency), and it coexists with the existing
 // in-page anchor links (#about, #program, …) because it only matches #/-prefixed paths.
@@ -152,6 +154,27 @@ const partners = [
 ]
 
 const speakers = [
+
+  {
+    name: 'Dr. Kara Lavender Law',
+    title: 'Research Professor of Oceanography, Sea Education Association',
+    role: 'Keynote Speaker',
+    image: karaLavenderLaw,
+    description:
+      'Kara Lavender Law studies the sources, distribution, transformation and fate of plastic debris in the marine environment. Trained as a physical oceanographer, she has more than 12 months of sea time on oceanographic and sailing research vessels, including in the eastern North Pacific and western North Atlantic Oceans where plastic debris accumulates in regions dubbed “garbage patches”. Her recent work is focused “upstream” on the generation, pathways and treatment of plastic waste, ultimately striving to prevent plastic leakage to the environment.',
+    link: { label: 'SEA profile', url: 'https://sea.edu/team/kara-lavender-law/' },
+  },
+  {
+    name: 'Madeleine Milne',
+    title: 'Manager, Rochman Lab, University of Toronto',
+    image: madeleineMilne,
+    description:
+      'Madeleine Milne began as a research assistant in Dr. Chelsea Rochman’s lab in 2020 and got drawn into plastic pollution research, later joining the U of T Trash Team. Since then she’s earned a master’s at the University of Manitoba, become manager of the Rochman Lab, and continued with the Trash Team through outreach, cleanups, workshops, and volunteer training. Her research has covered microplastics in Lake Ontario fish, grocery-store foods, and a multi-year whole-lake study at the Experimental Lakes Area. She is a recipient of the Arbor Award, U of T’s highest honour for volunteer service.',
+    link: {
+      label: 'Milne et al. 2024 (open PDF)',
+      url: 'https://oceanconservancy.org/wp-content/uploads/2024/01/Milne_Leonard_Mallos_Rochman-et-al_2024_Exposure-of-U.S.-adults-to-microplastics-from-commonly-consumed-proteins_Enviro_Pollution.pdf',
+    },
+  },
   {
     name: 'Dr. Chelsea Rochman',
     title: 'Associate Professor, Ecology & Evolutionary Biology, University of Toronto',
@@ -169,17 +192,6 @@ const speakers = [
     link: { label: 'miriamldiamond.com', url: 'https://www.miriamldiamond.com/' },
   },
   {
-    name: 'Madeleine Milne',
-    title: 'Manager, Rochman Lab, University of Toronto',
-    image: madeleineMilne,
-    description:
-      'Madeleine Milne began as a research assistant in Dr. Chelsea Rochman’s lab in 2020 and got drawn into plastic pollution research, later joining the U of T Trash Team. Since then she’s earned a master’s at the University of Manitoba, become manager of the Rochman Lab, and continued with the Trash Team through outreach, cleanups, workshops, and volunteer training. Her research has covered microplastics in Lake Ontario fish, grocery-store foods, and a multi-year whole-lake study at the Experimental Lakes Area. She is a recipient of the Arbor Award, U of T’s highest honour for volunteer service.',
-    link: {
-      label: 'Milne et al. 2024 (open PDF)',
-      url: 'https://oceanconservancy.org/wp-content/uploads/2024/01/Milne_Leonard_Mallos_Rochman-et-al_2024_Exposure-of-U.S.-adults-to-microplastics-from-commonly-consumed-proteins_Enviro_Pollution.pdf',
-    },
-  },
-  {
     name: 'Karen Wirsig',
     title: 'Senior Program Manager, Plastics, Environmental Defence Canada',
     image: karenWirsig,
@@ -187,13 +199,6 @@ const speakers = [
     description:
       'Karen has worked as a journalist and as a labour and community organizer. An active transportation enthusiast who favours walking, cycling, and public transit, Karen has never owned a car. She is a voracious reader and has spent her adult life trying to unlearn the common belief that humans should strive for domination over each other, over other animals, and over nature itself. She’s passionate about helping to get plastics out of the environment.',
     link: { label: 'environmentaldefence.ca', url: 'https://environmentaldefence.ca/' },
-  },
-  {
-    name: 'Dr. Kara Lavender Law',
-    title: 'Research Professor of Oceanography, Sea Education Association',
-    image: null,
-    description: '',
-    link: { label: 'SEA profile', url: 'https://sea.edu/team/kara-lavender-law/' },
   },
 ]
 
@@ -209,8 +214,9 @@ const slugify = (value) =>
 // into one shape: any participant with a match here renders as a link to its
 // card plus a hover preview. Speakers whose photo or bio is still pending get
 // the same link and preview, with a placeholder standing in for the image.
-// Participants in neither list (e.g. "iGEM Toronto [Petabite]") fall through
-// to plain text.
+// iGEM Toronto is in neither list — it is the organiser, and its "card" is the
+// #about-us section — so it gets the hand-written entry at the end of the map.
+// Any participant with no entry at all falls through to plain text.
 const previewsByName = new Map([
   ...partners.map((partner) => [
     partner.name,
@@ -237,6 +243,19 @@ const previewsByName = new Map([
       shape: 'portrait',
     },
   ]),
+  [
+    'iGEM Toronto [Petabite]',
+    {
+      href: '#about-us',
+      kicker: 'Conference Organiser',
+      name: 'iGEM Toronto',
+      description:
+        'iGEM Toronto is a student-led synthetic biology team at the University of Toronto. This year the team is building enzymes that break down PET plastic, pairing computational design with experimental validation to find candidates that hold up outside ideal conditions.',
+      image: igemToronto,
+      accent: 'blue',
+      shape: 'square',
+    },
+  ],
 ])
 
 const bottleHoles = [
@@ -893,7 +912,7 @@ function App() {
                   )}
                 </div>
                 <div className="speaker-content">
-                  <p className="speaker-eyebrow">Speaker</p>
+                  <p className="speaker-eyebrow">{speaker.role ?? 'Speaker'}</p>
                   <h3>{speaker.name}</h3>
                   {speaker.title && <p className="speaker-title">{speaker.title}</p>}
                   {speaker.description && <p className="speaker-description">{speaker.description}</p>}

@@ -6,6 +6,7 @@ import trashTeamLogo from './assets/Logo-final-trash-team_dark_background.webp'
 import assuLogo from './assets/NewAssuLogo.JPG'
 import fraserRiver from './assets/frjr_upscaled.png'
 import longos from './assets/Longos_70th_Horiz_Logo_Colour.png'
+import studentInitiativeFund from './assets/student-initiative-fund-logo.png'
 import chelseaRochman from './assets/speakers/chelsea-rochman.jpg'
 import miriamDiamond from './assets/speakers/miriam-diamond.jpg'
 import madeleineMilne from './assets/speakers/madeleine-milne.png'
@@ -150,6 +151,15 @@ const partners = [
     image: longos,
     accent: 'orange',
     url: 'https://www.longos.com/',
+  },
+  {
+    name: 'Student Initiative Fund',
+    relationship: 'Supported By',
+    description:
+      'Run by Clubs & Leadership Development in the Division of Student Life, the Student Initiative Fund backs student ideas that enrich campus life and build community at U of T, awarding up to $3,000 per project. Past recipients range from an Art and Mindfulness Exhibition and Brunch for Breast Health to a How to be a Good Ally workshop and Beyond the Brain, a multi-disciplinary conference on neurodegeneration.',
+    image: studentInitiativeFund,
+    accent: 'acid',
+    url: 'https://studentlife.utoronto.ca/program/student-initiative-fund/',
   },
 ]
 
@@ -942,7 +952,7 @@ function App() {
               <h2>Our Partners</h2>
             </div>
             <p className="partner-intro">
-              Four collaborators helping turn research, awareness, and action
+              Five collaborators helping turn research, awareness, and action
               into something people can actually build on.
             </p>
           </div>

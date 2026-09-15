@@ -30,42 +30,43 @@ function useHashRoute() {
   return hash
 }
 
+
 const sessions = [
   {
-    time: '8:30–9:00',
+    time: '8:30–9:30',
     title: 'Registration · Refreshments',
     type: 'Registration',
   },
   {
-    time: '9:00–9:30',
+    time: '9:30–10:00',
     title: 'Opening Remarks',
     type: 'Opening',
   },
   {
-    time: '9:30–10:30',
+    time: '10:00–11:00',
     title: 'Keynote: Microplastic Pollution',
     type: 'Keynote',
     participants: ['Dr. Kara Lavender Law'],
   },
   {
-    time: '10:30–10:45',
+    time: '11:00–11:30',
     title: 'Coffee Break',
     type: 'Break',
   },
   {
-    time: '10:45–11:30',
+    time: '11:30–12:00',
     title: 'Effect of Microplastics on Environment',
     type: 'Speaker',
     participants: ['Dr. Chelsea Rochman'],
   },
   {
-    time: '11:30–12:15',
+    time: '12:00–12:30',
     title: 'Microplastic in Health',
     type: 'Speaker',
     participants: ['Madeleine Milne'],
   },
   {
-    time: '12:15–1:45',
+    time: '12:30–2:00',
     title: 'Lunch + Student Poster Session and Judging',
     type: 'Break + Exhibition',
     // Longo's sponsors the lunch itself rather than speaking, so the list gets
@@ -74,13 +75,13 @@ const sessions = [
     participants: ['Longo’s'],
   },
   {
-    time: '1:45–2:30',
+    time: '2:00–2:45',
     title: 'Scientific solutions',
     type: 'Speaker',
     participants: ['iGEM Toronto [Petabite]'],
   },
   {
-    time: '2:30–3:15',
+    time: '2:45–3:15',
     title: 'Community solutions',
     type: 'Speaker',
     participants: ['U of T Trash Team'],
@@ -91,17 +92,18 @@ const sessions = [
     type: 'Break',
   },
   {
-    time: '3:00–3:45',
+    time: '3:30–4:30',
     title: 'The Current Regulatory State of Mitigating Microplastics in the Environment',
     type: 'Panel',
     participants: ['Dr. Miriam Diamond', 'Karen Wirsig', 'Dr. Chelsea Rochman'],
   },
   {
-    time: '4:00–5:00',
+    time: '4:30–5:00',
     title: 'Closing Remarks',
     type: 'Closing',
   },
 ]
+
 
 const posterTopics = [
   'Environmental and human health impacts of microplastics',

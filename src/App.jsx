@@ -3,6 +3,7 @@ import ProblemStatement from './ProblemStatement'
 import AboutUs, { IgemLockup } from './AboutUs'
 import ConferenceNav from './ConferenceNav'
 import trashTeamLogo from './assets/Logo-final-trash-team_dark_background.webp'
+import ecologyEvolutionLogo from './assets/Sig_Dept_EcoEvoBio_KnockedOut.png'
 import assuLogo from './assets/NewAssuLogo.JPG'
 import fraserRiver from './assets/frjr_upscaled.png'
 import longos from './assets/Longos_70th_Horiz_Logo_Colour.png'
@@ -129,6 +130,15 @@ const partners = [
     url: 'https://uofttrashteam.ca/',
   },
   {
+    name: 'University of Toronto Ecology and Evolutionary Biology',
+    relationship: 'Sponsored By',
+    description:
+      ' ',
+    image: ecologyEvolutionLogo,
+    accent: 'blue',
+    url: 'https://eeb.utoronto.ca/',
+  },
+  {
     name: 'Arts & Science Students’ Union',
     relationship: 'Supported By',
     description:
@@ -161,7 +171,7 @@ const partners = [
     description:
       'Run by Clubs & Leadership Development in the Division of Student Life, the Student Initiative Fund backs student ideas that enrich campus life and build community at U of T, awarding up to $3,000 per project. Past recipients range from an Art and Mindfulness Exhibition and Brunch for Breast Health to a How to be a Good Ally workshop and Beyond the Brain, a multi-disciplinary conference on neurodegeneration.',
     image: studentInitiativeFund,
-    accent: 'blue',
+    accent: 'orange',
     url: 'https://studentlife.utoronto.ca/program/student-initiative-fund/',
   },
   {

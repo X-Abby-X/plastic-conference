@@ -7,6 +7,7 @@ import assuLogo from './assets/NewAssuLogo.JPG'
 import fraserRiver from './assets/frjr_upscaled.png'
 import longos from './assets/Longos_70th_Horiz_Logo_Colour.png'
 import studentInitiativeFund from './assets/student-initiative-fund-logo.png'
+import jukeboxLogo from './assets/jukeboxlogo.png'
 import chelseaRochman from './assets/speakers/chelsea-rochman.jpg'
 import miriamDiamond from './assets/speakers/miriam-diamond.jpg'
 import madeleineMilne from './assets/speakers/madeleine-milne.png'
@@ -133,7 +134,7 @@ const partners = [
     description:
       'ASSU is the academic student union for over 27,000 full-time undergraduate students in the Faculty of Arts & Science at the University of Toronto, organizing through more than 60 course unions to hold events, change policies, and support students.',
     image: assuLogo,
-    accent: 'orange',
+    accent: 'acid',
     url: 'https://assu.ca/wp/',
   },
   {
@@ -151,7 +152,7 @@ const partners = [
     description:
       'Longo’s is an Ontario-based grocery retailer that has been fueling happier and healthier lives for nearly 70 years. Guided by its “Treating You Like Family” culture, Longo’s is committed to delivering exceptional food and service. Through support for local organizations, community partnerships, and sustainability initiatives, Longo’s is proud to work with groups that share its values of Environmental Stewardship, Responsible Sourcing, and Healthy, Happy People!',
     image: longos,
-    accent: 'orange',
+    accent: 'acid',
     url: 'https://www.longos.com/',
   },
   {
@@ -160,8 +161,17 @@ const partners = [
     description:
       'Run by Clubs & Leadership Development in the Division of Student Life, the Student Initiative Fund backs student ideas that enrich campus life and build community at U of T, awarding up to $3,000 per project. Past recipients range from an Art and Mindfulness Exhibition and Brunch for Breast Health to a How to be a Good Ally workshop and Beyond the Brain, a multi-disciplinary conference on neurodegeneration.',
     image: studentInitiativeFund,
-    accent: 'acid',
+    accent: 'blue',
     url: 'https://studentlife.utoronto.ca/program/student-initiative-fund/',
+  },
+  {
+    name: 'Jukebox',
+    relationship: 'Supported By',
+    description:
+      'Jukebox is a vibrant and innovative printing company located in the heart of Liberty Village. We specialize in creating unique printed products, from flyers and books to business cards and the coolest stickers.',
+    image: jukeboxLogo,
+    accent: 'acid',
+    url: 'https://www.jukeboxprint.com/',
   },
 ]
 

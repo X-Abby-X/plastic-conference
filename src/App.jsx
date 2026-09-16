@@ -133,7 +133,7 @@ const partners = [
     name: 'University of Toronto Ecology and Evolutionary Biology',
     relationship: 'Sponsored By',
     description:
-      ' ',
+      'The Department of Ecology & Evolutionary Biology (EEB) at the University of Toronto is dedicated to advancing knowledge in ecology and evolution through research, teaching, and community engagement, while preparing students to think critically about the natural world and their place within it. The department’s objectives remain rooted in fostering excellence in research and teaching, promoting interdisciplinary collaboration, and engaging meaningfully with the public, which has made it a powerhouse of biological research, maintaining its standing as the premier unit of its kind in Canada and a top-tier department globally.',
     image: ecologyEvolutionLogo,
     accent: 'blue',
     url: 'https://eeb.utoronto.ca/',

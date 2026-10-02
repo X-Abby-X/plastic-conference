@@ -42,8 +42,12 @@ src/
   ProblemStatement.jsx  # The #/problem page
   AboutUs.jsx           # The #/about page ("who we are"), plus the shared <IgemLockup>
   ConferenceNav.jsx     # Shared sticky nav used by every page
+  Gallery.jsx           # The homepage #gallery section (photo grid + lightbox)
   styles.css            # All styling (global)
   assets/               # Imported images (logos, partner art)
+    gallery/            # Web-sized conference photos + sizes.json (generated, committed)
+scripts/
+  build-gallery.py      # Regenerates src/assets/gallery/ from the raw photos
 public/
   partners/             # Static partner assets (.gitkeep placeholder for now)
 ```
@@ -59,8 +63,9 @@ public/
   `blue` / `orange` / `acid`, matching `.partner-card-<accent>` classes and the CSS color vars.
 
 Page sections (each an anchor target used by the nav): `#top` (hero), `#about` (statement),
-`#about-us` (who-we-are block), `#program`, `#speakers`, `#call-for-abstracts`, `#partners`,
-`#tickets`. Registration links point to a Google Form.
+`#gallery` (post-event photos), `#about-us` (who-we-are block), `#program`, `#speakers`, `#partners`,
+`#next-year` (the closing "stay tuned" block). The conference has taken place, so the site
+is a recap: there are no registration or abstract-submission links.
 
 ### Routing
 
@@ -77,6 +82,17 @@ statement section, while `#/about` is the separate iGEM Toronto page. The nav li
 
 Pages under `#/` are not separately indexable (crawlers strip fragments), which is why
 `public/sitemap.xml` lists only the homepage.
+
+### Gallery
+
+`src/Gallery.jsx` renders two sets: `highlights` (the 13 photos from the iGEM Toronto
+Instagram recap post, shown first in a featured grid) and `morePhotos` (a curated pick from
+the rest). Both open in one shared lightbox.
+
+The raw photos live in `src/assets/Photo Dump/` (~2 GB, gitignored). To add, remove or swap
+a photo, edit `PHOTOS` in `scripts/build-gallery.py`, run `python3 scripts/build-gallery.py`
+(needs Pillow, and macOS `sips` for HEIC), then match the slugs and write alt text in
+`Gallery.jsx`. The script rewrites every `.webp` and `sizes.json` in `src/assets/gallery/`.
 
 ## Conventions
 

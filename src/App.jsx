@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import ProblemStatement from './ProblemStatement'
 import AboutUs, { IgemLockup } from './AboutUs'
 import ConferenceNav from './ConferenceNav'
+import Gallery from './Gallery'
 import trashTeamLogo from './assets/Logo-final-trash-team_dark_background.webp'
 import ecologyEvolutionLogo from './assets/Sig_Dept_EcoEvoBio_KnockedOut.png'
 import assuLogo from './assets/NewAssuLogo.JPG'
@@ -109,17 +110,7 @@ const sessions = [
 ]
 
 
-const posterTopics = [
-  'Environmental and human health impacts of microplastics',
-  'Biodegradation and bioremediation',
-  'Recycling and waste management',
-  'Materials science and sustainable alternatives',
-  'Engineering and technological solutions',
-  'Policy, regulation, and social dimensions of plastics',
-]
-
-const REGISTRATION_URL = 'https://forms.gle/rAeggWcDE7nuEp6QA'
-const POSTER_SUBMISSION_URL = REGISTRATION_URL
+const INSTAGRAM_URL = 'https://www.instagram.com/igemtoronto/'
 
 const partners = [
   {
@@ -382,124 +373,48 @@ function DegradingBottle({ progress, className = '' }) {
   )
 }
 
-function PosterSessionDialog({ setOpen }) {
-  const closeButtonRef = useRef(null)
-  const dialogRef = useRef(null)
+// A small one-off burst for the thank-you dialog. The values come from a
+// seeded hash rather than Math.random() so the pieces are identical on every
+// render (StrictMode renders twice) and the burst always looks the same.
+const CONFETTI_COLORS = ['var(--acid)', 'var(--orange)', 'var(--blue)', 'var(--ink)']
+const confettiNoise = (index, salt) => {
+  const value = Math.sin(index * 12.9898 + salt * 78.233) * 43758.5453
+  return value - Math.floor(value)
+}
+const confettiPieces = Array.from({ length: 36 }, (_, index) => ({
+  // -1…1; the stylesheet scales it by the burst width for the viewport.
+  x: (confettiNoise(index, 1) * 2 - 1).toFixed(3),
+  rise: `${-(4 + confettiNoise(index, 2) * 10).toFixed(1)}rem`,
+  spin: `${Math.round((confettiNoise(index, 3) - 0.5) * 1080)}deg`,
+  delay: `${Math.round(confettiNoise(index, 4) * 220)}ms`,
+  color: CONFETTI_COLORS[index % CONFETTI_COLORS.length],
+  round: index % 3 === 0,
+}))
 
-  useEffect(() => {
-    const previouslyFocused = document.activeElement
-    const previousOverflow = document.body.style.overflow
-    document.body.style.overflow = 'hidden'
-    closeButtonRef.current?.focus()
-
-    const closeOnEscape = (event) => {
-      if (event.key === 'Escape') setOpen(false)
-      if (event.key !== 'Tab') return
-
-      const focusable = dialogRef.current?.querySelectorAll(
-        'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])',
-      )
-      if (!focusable?.length) return
-      const first = focusable[0]
-      const last = focusable[focusable.length - 1]
-
-      if (event.shiftKey && document.activeElement === first) {
-        event.preventDefault()
-        last.focus()
-      } else if (!event.shiftKey && document.activeElement === last) {
-        event.preventDefault()
-        first.focus()
-      }
-    }
-
-    window.addEventListener('keydown', closeOnEscape)
-    return () => {
-      window.removeEventListener('keydown', closeOnEscape)
-      document.body.style.overflow = previousOverflow
-      previouslyFocused?.focus()
-    }
-  }, [setOpen])
-
+function ThanksConfetti() {
   return (
-    <div
-      className="poster-dialog-backdrop"
-      onMouseDown={(event) => {
-        if (event.target === event.currentTarget) setOpen(false)
-      }}
-    >
-      <section
-        className="poster-dialog"
-        ref={dialogRef}
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="poster-dialog-title"
-        aria-describedby="poster-dialog-intro"
-      >
-        <button
-          className="poster-dialog-close"
-          onClick={() => setOpen(false)}
-          ref={closeButtonRef}
-          type="button"
-          aria-label="Close poster session details"
+    <div className="thanks-confetti" aria-hidden="true">
+      {confettiPieces.map((piece, index) => (
+        <span
+          className="thanks-confetti-piece"
+          key={index}
+          style={{
+            '--confetti-x': piece.x,
+            '--confetti-rise': piece.rise,
+            '--confetti-spin': piece.spin,
+            '--confetti-delay': piece.delay,
+          }}
         >
-          <span aria-hidden="true">×</span>
-        </button>
-
-        <p className="poster-dialog-kicker">Call for abstracts</p>
-        <h2 id="poster-dialog-title">Research Poster Session</h2>
-        <p className="poster-dialog-intro" id="poster-dialog-intro">
-          Undergraduate and graduate students across disciplines are invited to submit
-          plastics-related research for the opportunity to present at the conference.
-        </p>
-
-        <div className="poster-dialog-facts">
-          <article>
-            <span>Who</span>
-            <p>Undergraduate and graduate students from any discipline.</p>
-          </article>
-          <article>
-            <span>Research stage</span>
-            <p>Ongoing projects, preliminary findings, and completed work are all welcome.</p>
-          </article>
-          <article>
-            <span>Audience</span>
-            <p>Students, researchers, industry professionals, and members of the public.</p>
-          </article>
-        </div>
-
-        <div className="poster-dialog-section">
-          <h3>Topics may include but not limited to</h3>
-          <ul className="poster-topic-list">
-            {posterTopics.map((topic) => <li key={topic}>{topic}</li>)}
-          </ul>
-        </div>
-
-        <div className="poster-dialog-section poster-prizes">
-          <div>
-            <p className="poster-dialog-kicker">Recognition</p>
-            <h3>Attendees will vote for the top three posters.</h3>
-          </div>
-          <p>Additional special community prizes will recognize standout presentations.</p>
-        </div>
-
-        <div className="poster-submit-panel">
-          <div>
-            <h3>Ready to submit?</h3>
-            <p>Selected presenters will receive further details on poster format, presentation logistics, prizes, and next steps.</p>
-          </div>
-          <div className="poster-submit-action">
-            <a className="poster-button poster-button-primary" href={POSTER_SUBMISSION_URL} target="_blank" rel="noopener noreferrer">
-              Submit an abstract <ArrowIcon />
-            </a>
-            <p><strong>Have ready:</strong> a title, author name(s), and 3–5 sentences about your work.</p>
-          </div>
-        </div>
-      </section>
+          <i style={{ background: piece.color, borderRadius: piece.round ? '50%' : undefined }} />
+        </span>
+      ))}
     </div>
   )
 }
 
-function ConferenceWelcomeDialog({ setOpen }) {
+// Post-event replacement for the sign-up dialog that used to open on load: same
+// shell, but it thanks people and points them at the photos and what comes next.
+function ConferenceThanksDialog({ setOpen }) {
   const dialogRef = useRef(null)
   const dismissButtonRef = useRef(null)
 
@@ -507,7 +422,9 @@ function ConferenceWelcomeDialog({ setOpen }) {
     const previouslyFocused = document.activeElement
     const previousOverflow = document.body.style.overflow
     document.body.style.overflow = 'hidden'
-    dismissButtonRef.current?.focus()
+    // The dismiss button sits at the foot of the dialog. On a phone the dialog
+    // scrolls, and a plain focus() would open it scrolled past the heading.
+    dismissButtonRef.current?.focus({ preventScroll: true })
 
     const handleKeyDown = (event) => {
       if (event.key === 'Escape') setOpen(false)
@@ -558,47 +475,50 @@ function ConferenceWelcomeDialog({ setOpen }) {
           className="welcome-dialog-close"
           type="button"
           onClick={closeDialog}
-          aria-label="Close welcome message"
+          aria-label="Close thank-you message"
         >
           ×
         </button>
 
         <div className="welcome-dialog-heading">
-          <p>September 19, 2026 · Free to attend</p>
-          <h2 id="welcome-dialog-title"> Get Involved!</h2>
+          <p>September 19, 2026 · That’s a wrap</p>
+          <h2 id="welcome-dialog-title">Thank you!</h2>
           <p id="welcome-dialog-description">
-            Registration and student poster submissions are open. Attend, present, or do both.
+            More than 200 people registered and 15 posters were presented at the UofT
+            Microplastics Conference. Thank you to everyone who came, spoke, presented and
+            volunteered.
           </p>
-          <address className="welcome-dialog-location">
-            <strong>University of Toronto · Bahen Centre for Information Technology</strong>
-            <span>40 St George St, Toronto, ON M5S 2E4</span>
-          </address>
+          <div className="welcome-dialog-location">
+            <strong>With thanks to the U of T Trash Team, our speakers and our sponsors</strong>
+            <span>For their mentorship, partnership and support throughout.</span>
+          </div>
         </div>
 
         <div className="welcome-dialog-options">
           <article>
-            <span>01 · Attend</span>
-            <h3>Register for the conference</h3>
-            <p>Meet researchers, students, community groups, and professionals working across the plastics problem.</p>
-            <a href={REGISTRATION_URL} target="_blank" rel="noopener noreferrer" onClick={closeDialog}>
-              Register <ArrowIcon />
+            <span>01 · Look back</span>
+            <h3>See the day in photos</h3>
+            <p>Talks, the keynote, the panel and the student poster session, as they happened.</p>
+            <a href="#gallery" onClick={closeDialog}>
+              Open the gallery <ArrowIcon />
             </a>
           </article>
           <article>
-            <span>02 · Present</span>
-            <h3>Submit a poster abstract</h3>
-            <p>Share plastics-related research at any stage with a multidisciplinary conference audience.</p>
-            <a href={POSTER_SUBMISSION_URL} target="_blank" rel="noopener noreferrer" onClick={closeDialog}>
-              Submit an abstract <ArrowIcon />
+            <span>02 · Stay tuned</span>
+            <h3>Follow along for next year</h3>
+            <p>Keep up with iGEM Toronto to hear what comes next.</p>
+            <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" onClick={closeDialog}>
+              Follow on Instagram <ArrowIcon />
             </a>
-            <small>Prepare a title, author name(s), and 3–5 sentences about your work.</small>
           </article>
         </div>
 
         <button className="welcome-dialog-explore" onClick={closeDialog} ref={dismissButtonRef} type="button">
-          Explore the website first
+          Explore the website
         </button>
       </section>
+
+      <ThanksConfetti />
     </div>
   )
 }
@@ -673,9 +593,8 @@ function ParticipantPreview({ participant }) {
 
 function App() {
   const [copied, setCopied] = useState(false)
+  const [thanksOpen, setThanksOpen] = useState(true)
   const [bottleDecay, setBottleDecay] = useState(0)
-  const [posterInfoOpen, setPosterInfoOpen] = useState(false)
-  const [welcomeOpen, setWelcomeOpen] = useState(true)
   const route = useHashRoute()
   const initialRouteHandled = useRef(false)
 
@@ -742,7 +661,7 @@ function App() {
     return (
       <>
         <ProblemStatement />
-        {welcomeOpen && <ConferenceWelcomeDialog setOpen={setWelcomeOpen} />}
+        {thanksOpen && <ConferenceThanksDialog setOpen={setThanksOpen} />}
       </>
     )
   }
@@ -753,7 +672,7 @@ function App() {
     return (
       <>
         <AboutUs />
-        {welcomeOpen && <ConferenceWelcomeDialog setOpen={setWelcomeOpen} />}
+        {thanksOpen && <ConferenceThanksDialog setOpen={setThanksOpen} />}
       </>
     )
   }
@@ -788,7 +707,7 @@ function App() {
       <main id="top">
         <section className="hero">
           <div className="hero-copy">
-            <p className="eyebrow">September 19, 2026 · Free to attend</p>
+            <p className="eyebrow">September 19, 2026 · That’s a wrap</p>
             <address className="hero-location">
               <strong>University of Toronto · Bahen Centre for Information Technology</strong>
               <span>40 St George St, Toronto, ON M5S 2E4</span>
@@ -798,19 +717,15 @@ function App() {
               <span>plastic.</span>
             </h1>
             <p className="hero-intro">
-              Bridging the gap between research, public awareness, and action. 
+              Thank you to everyone who joined us to bridge the gap between research,
+              public awareness, and action.
             </p>
             <div className="hero-actions">
-              <a
-                className="button button-dark"
-                href={REGISTRATION_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Register <ArrowIcon />
+              <a className="button button-dark" href="#gallery">
+                See the photos <ArrowIcon />
               </a>
               <a className="text-link" href="#program">
-                Explore the program
+                Look back at the program
               </a>
             </div>
           </div>
@@ -835,6 +750,8 @@ function App() {
             </a>
           </div>
         </section>
+
+        <Gallery />
 
         <section className="organiser" id="about-us" aria-labelledby="organiser-title">
           <IgemLockup className="organiser-lockup" onLight />
@@ -907,25 +824,6 @@ function App() {
               </article>
             ))}
           </div>
-
-          <aside className="poster-callout" id="call-for-abstracts" aria-labelledby="poster-callout-title">
-            <div className="poster-callout-copy">
-              <p className="section-label">Call for abstracts</p>
-              <h3 id="poster-callout-title">Bring your plastics research into the conversation.</h3>
-              <p>Undergraduate and graduate students across disciplines are invited to present during our Research Poster Session.</p>
-            </div>
-            <div className="poster-callout-actions">
-              <button className="poster-button poster-button-secondary" onClick={() => setPosterInfoOpen(true)} type="button">
-                Learn more
-              </button>
-              <div className="poster-submit-action">
-                <a className="poster-button poster-button-primary" href={POSTER_SUBMISSION_URL} target="_blank" rel="noopener noreferrer">
-                  Submit an abstract <ArrowIcon />
-                </a>
-                <p><strong>Have ready:</strong> a title, author name(s), and 3–5 sentences about your work.</p>
-              </div>
-            </div>
-          </aside>
         </section>
 
         <section className="speakers" id="speakers">
@@ -1021,17 +919,17 @@ function App() {
           </div>
         </section>
 
-        <section className="ticket-block" id="tickets">
-          <p className="section-label">Join the conversation</p>
-          <h2>Build what comes next.</h2>
-          <p>Free to attend, let us know your interest in the event!</p>
+        <section className="ticket-block" id="next-year">
+          <p className="section-label">Until next time</p>
+          <h2>Stay tuned for next year.</h2>
+          <p>Follow iGEM Toronto to hear what comes next.</p>
           <a
             className="button button-light"
-            href={REGISTRATION_URL}
+            href={INSTAGRAM_URL}
             target="_blank"
             rel="noopener noreferrer"
           >
-            Register <ArrowIcon />
+            Follow on Instagram <ArrowIcon />
           </a>
           <button
             type="button"
@@ -1050,8 +948,8 @@ function App() {
         <span>Toronto, Canada</span>
       </footer>
 
-      {posterInfoOpen && <PosterSessionDialog setOpen={setPosterInfoOpen} />}
-      {welcomeOpen && <ConferenceWelcomeDialog setOpen={setWelcomeOpen} />}
+      {thanksOpen && <ConferenceThanksDialog setOpen={setThanksOpen} />}
+
     </div>
   )
 }

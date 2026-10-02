@@ -12,6 +12,9 @@ src/problem-statement/*.png
 !src/problem-statement/glwqa-archive.png
 !src/problem-statement/toronto.png
 !src/problem-statement/conf_logo_text.png
+# Raw conference photos (~2 GB). The web-sized copies in src/assets/gallery/ are
+# committed and are what the site imports (see scripts/build-gallery.py).
+src/assets/Photo Dump/
 docs/seo-deployment-handoff.md
 # Vercel CLI state and prebuilt output must never be committed. If
 # `.vercel/output` is tracked, Vercel skips `npm run build` and deploys it as-is.

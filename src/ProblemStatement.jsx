@@ -8,7 +8,6 @@ import exposurePathways from './problem-statement/exposure-pathways.png'
 import glwqaArchive from './problem-statement/glwqa-archive.png'
 import conferenceLogo from './problem-statement/conf_logo_text.png'
 
-const REGISTRATION_URL = 'https://forms.gle/rAeggWcDE7nuEp6QA'
 
 const pathways = [
   {
@@ -192,9 +191,9 @@ export default function ProblemStatement() {
         <section className="story-cta">
           <p className="story-kicker">Students, researchers and community members are welcome</p>
           <h2>Complex problem.<br /><em>One shared room.</em></h2>
-          <p>Join us to learn how we can work together toward solutions.</p>
+          <p>On September 19, 2026, the conference brought that room together.</p>
           <div className="story-actions">
-            <a className="story-button story-button-primary" href={REGISTRATION_URL} target="_blank" rel="noreferrer">I’m interested <ArrowIcon /></a>
+            <a className="story-button story-button-primary" href="#gallery">See the photos <ArrowIcon /></a>
             <a className="story-button story-button-ghost" href="#top">Back to conference home</a>
           </div>
         </section>

@@ -94,7 +94,9 @@ a {
 .conference-nav nav {
   display: flex;
   font-size: 1.02rem;
-  gap: clamp(1.25rem, 2.5vw, 2.25rem);
+  /* Nine links: any wider than this and they push the CTA off the right edge
+     below ~1500px. */
+  gap: clamp(1rem, 1.6vw, 2.25rem);
 }
 
 .conference-nav nav a {
@@ -1068,6 +1070,76 @@ h1 span {
   font-weight: 700;
   margin: 1.75rem auto 0;
   padding: .35rem 0;
+}
+
+/* Thank-you confetti: a single small burst from behind the dialog's heading,
+   held back until the dialog has finished animating in. Each piece is two
+   nested boxes so the sideways drift (ease-out) and the rise-then-fall
+   (its own keyframes) can run on different curves, which is what makes the
+   path read as an arc rather than a straight line. */
+.thanks-confetti {
+  left: 50%;
+  pointer-events: none;
+  position: fixed;
+  top: 32%;
+  z-index: 1;
+}
+
+.thanks-confetti-piece {
+  animation: thanks-confetti-drift 1900ms cubic-bezier(.12, .7, .3, 1) both;
+  animation-delay: calc(520ms + var(--confetti-delay));
+  left: 0;
+  position: absolute;
+  top: 0;
+}
+
+.thanks-confetti-piece i {
+  animation: thanks-confetti-arc 1900ms linear both;
+  animation-delay: calc(520ms + var(--confetti-delay));
+  border-radius: 2px;
+  display: block;
+  height: .5rem;
+  width: .8rem;
+}
+
+@keyframes thanks-confetti-drift {
+  to {
+    /* --confetti-x is -1…1; the burst is narrower on a phone. */
+    transform: translateX(calc(var(--confetti-x) * min(20rem, 44vw)));
+  }
+}
+
+@keyframes thanks-confetti-arc {
+  0% {
+    animation-timing-function: cubic-bezier(.2, .7, .4, 1);
+    opacity: 0;
+    transform: translateY(0) rotate(0deg) scale(.4);
+  }
+
+  8% {
+    opacity: 1;
+  }
+
+  35% {
+    animation-timing-function: cubic-bezier(.5, 0, .9, .6);
+    opacity: 1;
+    transform: translateY(var(--confetti-rise)) rotate(calc(var(--confetti-spin) * .4)) scale(1);
+  }
+
+  80% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(16rem) rotate(var(--confetti-spin)) scale(.9);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .thanks-confetti {
+    display: none;
+  }
 }
 
 @keyframes welcome-dialog-in {
@@ -3758,6 +3830,379 @@ footer {
 
   .about-connect-list a:hover,
   .about-connect-list a:focus-visible {
+    transform: none;
+  }
+}
+
+/* --- Photo gallery ---------------------------------------------------- */
+/* Sits between the dark .statement band and .organiser, both of which it
+   shares a gutter with. It stays on paper, so the rule at its foot carries
+   the boundary with .organiser the same way .program::before does. */
+.gallery {
+  padding: clamp(3.5rem, 7vw, 6.5rem) clamp(1.25rem, 8vw, 9rem);
+  position: relative;
+}
+
+.gallery::after {
+  background: rgba(8, 53, 129, .18);
+  bottom: 0;
+  content: '';
+  height: 1px;
+  left: clamp(1.25rem, 8vw, 9rem);
+  position: absolute;
+  right: clamp(1.25rem, 8vw, 9rem);
+}
+
+.gallery .section-heading {
+  gap: 3rem;
+}
+
+.gallery h2 {
+  color: var(--ink);
+  font-size: clamp(2.6rem, 6vw, 5.5rem);
+  font-weight: 500;
+  line-height: .95;
+  margin-bottom: 0;
+}
+
+.gallery-intro {
+  color: rgba(16, 39, 68, .78);
+  font-size: 1.08rem;
+  line-height: 1.7;
+  margin: 0;
+  max-width: 30rem;
+}
+
+.gallery-stats {
+  border-top: 1px solid rgba(8, 53, 129, .18);
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(3, 1fr);
+  margin: clamp(2rem, 4vw, 3.5rem) 0 0;
+  padding-top: 1.5rem;
+}
+
+.gallery-stats div {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: .35rem;
+}
+
+.gallery-stats dt {
+  color: rgba(16, 39, 68, .7);
+  font-size: .95rem;
+}
+
+.gallery-stats dd {
+  color: var(--ink);
+  font-family: 'Manrope', sans-serif;
+  font-size: clamp(2rem, 4vw, 3.25rem);
+  font-weight: 700;
+  letter-spacing: -.04em;
+  line-height: 1;
+  margin: 0;
+}
+
+.gallery-highlights,
+.gallery-more {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Thirteen photos, all 3:2. The first spans a 2×2 block, which leaves exactly
+   twelve cells to fill out a four-column grid with no ragged last row. */
+.gallery-highlights {
+  display: grid;
+  gap: .75rem;
+  grid-template-columns: repeat(4, 1fr);
+  margin-top: clamp(2rem, 4vw, 3.5rem);
+}
+
+.gallery-highlights li:first-child {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+
+.gallery-tile {
+  aspect-ratio: var(--ratio);
+  background: rgba(8, 53, 129, .08);
+  border: 0;
+  border-radius: .9rem;
+  cursor: zoom-in;
+  display: block;
+  overflow: hidden;
+  padding: 0;
+  width: 100%;
+}
+
+/* The featured tile's height comes from the two rows it spans, not its ratio. */
+.gallery-highlights li:first-child .gallery-tile {
+  aspect-ratio: auto;
+  height: 100%;
+}
+
+.gallery-tile img {
+  display: block;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 320ms ease;
+  width: 100%;
+}
+
+.gallery-tile:hover img,
+.gallery-tile:focus-visible img {
+  transform: scale(1.04);
+}
+
+.gallery-tile:focus-visible,
+.gallery-lightbox-button:focus-visible {
+  outline: 3px solid var(--acid);
+  outline-offset: 3px;
+}
+
+.gallery-more-heading {
+  align-items: baseline;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 2rem;
+  justify-content: space-between;
+  margin: clamp(2.5rem, 5vw, 4rem) 0 1.25rem;
+}
+
+.gallery-more-heading h3 {
+  color: var(--ink);
+  font-family: 'Manrope', sans-serif;
+  font-size: clamp(1.4rem, 2.4vw, 2rem);
+  font-weight: 500;
+  letter-spacing: -.03em;
+  margin: 0;
+}
+
+.gallery-more-heading .text-link {
+  align-items: center;
+  color: var(--ink);
+  display: inline-flex;
+  font-weight: 600;
+  gap: .5rem;
+}
+
+.gallery-more-heading .text-link svg {
+  fill: none;
+  height: 1.1rem;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2;
+  width: 1.1rem;
+}
+
+/* Justified rows without JavaScript: each item grows and takes its basis in
+   proportion to its aspect ratio, so every photo in a row lands on the same
+   height while portrait and landscape shots keep their own shape. */
+.gallery-more {
+  --row-height: 13rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .75rem;
+}
+
+.gallery-more li {
+  flex: var(--ratio) 1 calc(var(--ratio) * var(--row-height));
+}
+
+/* Soaks up the spare width in the last row so its photos are not stretched. */
+.gallery-more::after {
+  content: '';
+  flex: 1000 1 0;
+}
+
+.gallery-lightbox-backdrop {
+  align-items: center;
+  background: rgba(4, 22, 58, .94);
+  display: flex;
+  inset: 0;
+  justify-content: center;
+  position: fixed;
+  z-index: 200;
+}
+
+.gallery-lightbox {
+  align-items: center;
+  display: grid;
+  gap: clamp(.5rem, 2vw, 1.5rem);
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  height: 100%;
+  padding: clamp(.75rem, 3vw, 2rem);
+  /* Lets a click in the gutters around the photo fall through to the backdrop. */
+  pointer-events: none;
+  width: 100%;
+}
+
+.gallery-lightbox > * {
+  pointer-events: auto;
+}
+
+.gallery-lightbox-figure {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  justify-self: center;
+  margin: 0;
+  max-height: 100%;
+  min-width: 0;
+}
+
+.gallery-lightbox-figure img {
+  border-radius: .75rem;
+  height: auto;
+  max-height: calc(100vh - 9rem);
+  max-height: calc(100dvh - 9rem);
+  max-width: 100%;
+  object-fit: contain;
+  width: auto;
+}
+
+.gallery-lightbox-figure figcaption {
+  color: rgba(255, 255, 255, .86);
+  display: flex;
+  font-size: .95rem;
+  gap: 1.5rem;
+  justify-content: space-between;
+  line-height: 1.5;
+  max-width: 60rem;
+  width: 100%;
+}
+
+.gallery-lightbox-count {
+  color: rgba(255, 255, 255, .6);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.gallery-lightbox-button {
+  align-items: center;
+  background: rgba(255, 255, 255, .12);
+  border: 0;
+  border-radius: 50%;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  height: 3rem;
+  justify-content: center;
+  transition: background 180ms ease;
+  width: 3rem;
+}
+
+.gallery-lightbox-button:hover {
+  background: rgba(255, 255, 255, .24);
+}
+
+.gallery-lightbox-button svg {
+  fill: none;
+  height: 1.4rem;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2;
+  width: 1.4rem;
+}
+
+.gallery-lightbox-close {
+  font-size: 1.7rem;
+  position: absolute;
+  right: clamp(.75rem, 3vw, 2rem);
+  top: clamp(.75rem, 3vw, 2rem);
+  z-index: 1;
+}
+
+.gallery-lightbox-close span {
+  line-height: 1;
+  transform: translateY(-1px);
+}
+
+@media (max-width: 800px) {
+  .gallery .section-heading {
+    align-items: start;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .gallery-highlights {
+    gap: .5rem;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* One row tall here, so the featured tile goes back to its own 3:2 shape. */
+  .gallery-highlights li:first-child {
+    grid-row: auto;
+  }
+
+  .gallery-highlights li:first-child .gallery-tile {
+    aspect-ratio: var(--ratio);
+    height: auto;
+  }
+
+  /* Low enough that two landscape photos share a row on a phone. */
+  .gallery-more {
+    --row-height: 6rem;
+    gap: .5rem;
+  }
+
+  .gallery-tile {
+    border-radius: .6rem;
+  }
+
+  /* No room for arrows beside the photo, so they drop below it, either side
+     of the caption. */
+  .gallery-lightbox {
+    align-content: center;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .gallery-lightbox-figure {
+    grid-column: 1 / -1;
+  }
+
+  .gallery-lightbox-figure img {
+    max-height: calc(100vh - 14rem);
+    max-height: calc(100dvh - 14rem);
+  }
+
+  .gallery-lightbox-figure figcaption {
+    flex-direction: column;
+    gap: .25rem;
+  }
+
+  .gallery-lightbox-previous {
+    grid-row: 2;
+    justify-self: end;
+  }
+
+  .gallery-lightbox-next {
+    grid-row: 2;
+    justify-self: start;
+  }
+}
+
+@media (max-width: 520px) {
+  .gallery-stats {
+    gap: 1rem;
+  }
+
+  .gallery-stats dt {
+    font-size: .8rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gallery-tile img {
+    transition: none;
+  }
+
+  .gallery-tile:hover img,
+  .gallery-tile:focus-visible img {
     transform: none;
   }
 }

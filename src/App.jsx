@@ -9,6 +9,7 @@ import fraserRiver from './assets/frjr_upscaled.png'
 import longos from './assets/Longos_70th_Horiz_Logo_Colour.png'
 import studentInitiativeFund from './assets/student-initiative-fund-logo.png'
 import jukeboxLogo from './assets/jukeboxlogo.png'
+import rnaLabLogo from './assets/RNAlab.png'
 import chelseaRochman from './assets/speakers/chelsea-rochman.jpg'
 import miriamDiamond from './assets/speakers/miriam-diamond.jpg'
 import madeleineMilne from './assets/speakers/madeleine-milne.png'
@@ -43,6 +44,7 @@ const sessions = [
     time: '9:30–10:00',
     title: 'Opening Remarks',
     type: 'Opening',
+    participants: ['Dr. Artem Babaian', 'Dr. Chelsea Rochman'],
   },
   {
     time: '10:00–11:00',
@@ -137,6 +139,15 @@ const partners = [
     image: ecologyEvolutionLogo,
     accent: 'blue',
     url: 'https://eeb.utoronto.ca/',
+  },
+  {
+    name: 'RNAlab',
+    relationship: 'iGEM Toronto’s Supervising Lab',
+    description:
+      'The Laboratory for RNA-Based Lifeforms (RNAlab) at the University of Toronto, led by Dr. Artem Babaian, is a combined computational and molecular research team and the supervising lab of iGEM Toronto. The lab explores the evolution and biodiversity of Earth’s RNA viruses, and builds ultra-high-throughput computational and molecular platforms to discover enzymes that can degrade or upcycle plastic waste.',
+    image: rnaLabLogo,
+    accent: 'orange',
+    url: 'https://www.rnalab.ca/',
   },
   {
     name: 'Arts & Science Students’ Union',
@@ -974,7 +985,7 @@ function App() {
               <h2>Our Partners</h2>
             </div>
             <p className="partner-intro">
-              Five collaborators helping turn research, awareness, and action
+              Eight collaborators helping turn research, awareness, and action
               into something people can actually build on.
             </p>
           </div>

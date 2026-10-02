@@ -35,6 +35,8 @@ function useHashRoute() {
 }
 
 
+const PETABITE_RECORDING_URL = 'https://www.youtube.com/watch?v=XUABk52v078'
+
 const sessions = [
   {
     time: '8:30–9:30',
@@ -85,7 +87,7 @@ const sessions = [
     type: 'Speaker',
     participants: ['iGEM Toronto [Petabite]'],
     // Only this session was recorded.
-    recording: 'https://www.youtube.com/watch?v=XUABk52v078',
+    recording: PETABITE_RECORDING_URL,
   },
   {
     time: '2:45–3:15',
@@ -186,6 +188,34 @@ const partners = [
     image: jukeboxLogo,
     accent: 'acid',
     url: 'https://www.jukeboxprint.com/',
+  },
+]
+
+// Where to go next, shown above the partner cards in the thank-you section.
+const nextSteps = [
+  {
+    kicker: 'The organisers',
+    title: 'iGEM Toronto',
+    description:
+      'The student synthetic biology team behind the conference. See our projects, past seasons, and how to get involved.',
+    label: 'Visit igem.skule.ca',
+    url: 'https://igem.skule.ca/',
+  },
+  {
+    kicker: 'Our partner',
+    title: 'U of T Trash Team',
+    description:
+      'Our mentors and partners throughout. Join their cleanups, workshops and waste-literacy work across Toronto.',
+    label: 'Visit uofttrashteam.ca',
+    url: 'https://uofttrashteam.ca/',
+  },
+  {
+    kicker: 'Watch',
+    title: 'The PetaBite talk',
+    description:
+      'A recording of iGEM Toronto presenting PetaBite, our project tackling the microplastics problem.',
+    label: 'Watch on YouTube',
+    url: PETABITE_RECORDING_URL,
   },
 ]
 
@@ -901,14 +931,39 @@ function App() {
         <section className="partners" id="partners">
           <div className="section-heading">
             <div>
-              <p className="section-label">More in our community</p>
-              <h2>Our Partners</h2>
+              <p className="section-label">Partners and sponsors</p>
+              <h2>Thank you</h2>
             </div>
             <p className="partner-intro">
-              Eight collaborators helping turn research, awareness, and action
-              into something people can actually build on.
+              To the U of T Trash Team for their mentorship and partnership, to our
+              speakers, and to the sponsors and supporters below who made the day possible.
             </p>
           </div>
+
+          <ul className="thanks-links" aria-label="Where to go next">
+            {nextSteps.map((step) => (
+              <li key={step.title}>
+                <a
+                  href={step.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${step.title}: ${step.label} (opens in a new tab)`}
+                >
+                  <p className="partner-kicker">{step.kicker}</p>
+                  <h3>{step.title}</h3>
+                  <p>{step.description}</p>
+                  <span className="thanks-link-label">
+                    {step.label} <ArrowIcon />
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ul>
+
+          <p className="thanks-acknowledgement">
+            We’d also like to recognize the advice and support of Chem Eng at UofT and
+            University of Toronto Engineering, and in particular Chris Yip.
+          </p>
 
           <div className="partner-grid" aria-label="Conference partners">
             {partners.map((partner, index) => (

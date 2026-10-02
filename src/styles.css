@@ -1533,6 +1533,119 @@ h1 span {
   max-width: 24rem;
 }
 
+/* "Where to go next" row at the top of the thank-you section. Dark cards, so
+   they read as calls to action against the pale partner cards below, and
+   capped to the same width as .partner-grid so the two line up. */
+.thanks-links {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: repeat(3, 1fr);
+  list-style: none;
+  margin: 4rem auto 0;
+  max-width: 72rem;
+  padding: 0;
+}
+
+.thanks-links a {
+  background: var(--ink);
+  border-radius: 1.75rem;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: clamp(1.5rem, 2.4vw, 2.25rem);
+  transition:
+    box-shadow 180ms ease,
+    transform 180ms ease;
+}
+
+.thanks-links a:hover {
+  box-shadow: 0 1.35rem 3.5rem rgba(8, 53, 129, .28);
+  transform: translateY(-3px);
+}
+
+.thanks-links a:focus-visible {
+  outline: 3px solid var(--orange);
+  outline-offset: 3px;
+}
+
+.thanks-links .partner-kicker {
+  color: var(--acid);
+}
+
+.thanks-links h3 {
+  font-family: 'Manrope', sans-serif;
+  font-size: clamp(1.35rem, 1.75vw, 1.85rem);
+  font-weight: 500;
+  letter-spacing: -.035em;
+  line-height: 1.05;
+  margin: 0;
+}
+
+.thanks-links a > p:not(.partner-kicker) {
+  color: rgba(255, 255, 255, .76);
+  font-size: .98rem;
+  line-height: 1.6;
+  margin: .9rem 0 1.5rem;
+}
+
+.thanks-link-label {
+  align-items: center;
+  color: var(--acid);
+  display: inline-flex;
+  font-size: .9rem;
+  font-weight: 600;
+  gap: .5rem;
+  margin-top: auto;
+}
+
+.thanks-link-label svg {
+  fill: none;
+  height: 1.1rem;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2;
+  transition: transform 180ms ease;
+  width: 1.1rem;
+}
+
+.thanks-links a:hover .thanks-link-label svg,
+.thanks-links a:focus-visible .thanks-link-label svg {
+  transform: translateX(3px);
+}
+
+.thanks-acknowledgement {
+  color: rgba(23, 32, 25, .72);
+  font-size: .98rem;
+  line-height: 1.6;
+  margin: 2rem auto 0;
+  max-width: 72rem;
+}
+
+/* The row above now opens the section, so the grid no longer needs the full
+   gap it had when it followed the heading directly. */
+.thanks-acknowledgement + .partner-grid {
+  margin-top: 2.5rem;
+}
+
+@media (max-width: 900px) {
+  .thanks-links {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .thanks-links a,
+  .thanks-link-label svg {
+    transition: none;
+  }
+
+  .thanks-links a:hover {
+    transform: none;
+  }
+}
+
 .partner-grid {
   --partner-gap: 1.25rem;
   --partner-columns: 3;

@@ -84,6 +84,8 @@ const sessions = [
     title: 'Scientific solutions',
     type: 'Speaker',
     participants: ['iGEM Toronto [Petabite]'],
+    // Only this session was recorded.
+    recording: 'https://www.youtube.com/watch?v=XUABk52v078',
   },
   {
     time: '2:45–3:15',
@@ -531,6 +533,14 @@ function ArrowIcon() {
   )
 }
 
+function PlayIcon() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M8 5.5v13l11-6.5z" />
+    </svg>
+  )
+}
+
 function LinkIcon() {
   return (
     <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -818,6 +828,18 @@ function App() {
                         )
                       })}
                     </ul>
+                  )}
+                  {session.recording && (
+                    <a
+                      className="session-recording"
+                      href={session.recording}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`Watch the recording of ${session.title} on YouTube (opens in a new tab)`}
+                    >
+                      <PlayIcon />
+                      Watch the recording
+                    </a>
                   )}
                 </div>
                 <span className="session-type">{session.type}</span>
